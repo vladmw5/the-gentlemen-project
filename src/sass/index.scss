@@ -1,2 +1,10 @@
-@import './common';
-@import './example';
+@import '.utils/reset';
+@import './utils/mixins';
+@import '.utils/vars';
+
+@import './components/header/header-nav';
+@import './components/header/header-home';
+@import './components/header/header-lib';
+@import './components/gallery/filters-sorts';
+@import './components/gallery/gallery';
+@import './components/footer/footer';
