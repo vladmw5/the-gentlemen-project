@@ -1,0 +1,65 @@
+.gallery {
+  margin-top: 20px;
+  margin-bottom: 40px;
+
+  @include tablet {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+}
+
+.gallery__list {
+  @include tablet {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -16px;
+  }
+
+  @include desktop {
+    margin: -16px -8px;
+  }
+}
+
+.card {
+  margin-bottom: 20px;
+
+  @include tablet {
+    margin: 16px;
+    width: calc((100% - 64px) / 2);
+  }
+
+  @include desktop {
+    margin: 16px 8px;
+    width: calc((100% - 48px) / 3);
+  }
+}
+
+.card__img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.card__name {
+  margin-bottom: 2px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+
+  color: #000000;
+
+  @include tablet {
+    line-height: 1.33;
+  }
+}
+
+.card__description {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+
+  color: #ff6b08;
+}
