@@ -1,9 +1,11 @@
+import axios from 'axios';
+
 export async function makeMarkupGallery(array) {
-  const genres = await fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=83315ca553e38676f05e28ed10d08b23&language=en-US`
-  )
-    .then(r => r.json())
-    .then(r => r.genres);
+  const genres = await axios
+    .get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=83315ca553e38676f05e28ed10d08b23&language=en-US`
+    )
+    .then(r => r.data.genres);
 
   return array
     .map(

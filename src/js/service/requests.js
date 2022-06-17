@@ -14,7 +14,7 @@ async function getMoviesByKeyword(keyword, page) {
   const response = await axios.get(
     `${URL}/search/movie?api_key=${KEY}&language=en-US&query=${keyword}&page=${page}&include_adult=false`
   );
-  return response.data;
+  return response.data.results;
 }
 
 async function getMoviesByID(id) {
