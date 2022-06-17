@@ -13,39 +13,25 @@
   &-logo {
     flex-grow: 1;
     height: 24px;
-  }
-
-  &-nav {
     display: flex;
     align-items: center;
-  }
 
-  &-nav__link {
-    position: relative;
-    margin-right: 40px;
+    &__text {
+      margin-left: 8px;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 1.16;
+      color: $primary-color-text;
+    }
   }
-
-  &-nav__current::after {
-    content: ' ';
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background-color: $warning-color;
-    display: block;
-  }
-
-  &-nav__text {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.16;
-    text-transform: uppercase;
-    color: $primary-color-text;
-  }
-
   &-btn {
     width: 24px;
     height: 24px;
     background-color: transparent;
+
+    @include tablet {
+      display: none;
+    }
   }
 
   &-btn__icon {
@@ -53,3 +39,44 @@
     cursor: pointer;
   }
 }
+.nav-list {
+  display: none;
+
+  @include tablet {
+    display: flex;
+    align-content: center;
+
+    &__item {
+      display: flex;
+      align-items: center;
+    }
+
+    &__item:not(:last-child) {
+      margin-right: 40px;
+    }
+
+    &__text {
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.16;
+      text-transform: uppercase;
+      color: $primary-color-text;
+    }
+    &__btn {
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+}
+.nav__link--after {
+  position: relative;
+  &::after {
+      content: ' ';
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background-color: $warning-color;
+      display: block;
+    }
+}
+
