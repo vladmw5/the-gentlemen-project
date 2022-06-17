@@ -32,9 +32,16 @@
     margin-right: 5px;
   }
 
-  &__link {
+  &__btn {
+    font-size: 14px;
     text-decoration-line: underline;
+    cursor: pointer;
 
+    background-color: transparent;
     color: $primary-color-text-footer;
+
+    @media screen and(min-width:768px) {
+      font-size: 16px;
+    }
   }
 }
