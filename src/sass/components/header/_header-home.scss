@@ -1,28 +1,75 @@
 .hero {
   min-width: 320px;
   height: 230px;
-  padding: 118px 20px 92px 20px;
+  padding-top: 118px;
+  padding-bottom: 92px;
   background-position: center;
   background-size: cover;
-  background-image: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.56),
-      rgba(0, 0, 0, 0.56)
-    ),
-    url(../images/abstract-background-with-red-lines_mobile_1x-min.png);
+  background-image: url(../images/abstract-background-with-red-lines_mobile_1x-min.png);
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url(../images/abstract-background-with-red-lines_mobile_2x-min.png);
+  }
+
   background-repeat: no-repeat;
+
+  @include tablet {
+    min-width: 768px;
+    height: 216px;
+    padding-top: 115px;
+    padding-bottom: 81px;
+    background-image: url(../images/background-photo_tablet_1x-min.png);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/background-photo_tablet_2x-min.png);
+    }
+  }
+
+  @include desktop {
+    min-width: 1280px;
+    padding-top: 115px;
+    padding-bottom: 80px;
+    background-image: url(../images/abstract-background-with-red-lines_desktop_1x-min.png);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/abstract-background-with-red-lines_desktop_2x-min.png);
+    }
+  }
 
   &-form {
     width: 280px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
+
+    @include tablet {
+      width: 393px;
+      display: flex;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    @include desktop {
+      width: 394px;
+    }
+
+    // &::after {
+    //   content: 'Search result not successful. Enter the correct movie name and';
+    //   font-weight: 400;
+    //   font-size: 14px;
+    //   line-height: 1.14;
+    //   color: $warning-color;
+    //   margin-top: 16px;
+    // }
   }
   &-form__input {
     outline: none;
     color: $primary-color-text;
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.14;
@@ -32,6 +79,14 @@
     border: none;
     border-bottom: 0.5px solid #ffffff;
     padding-right: 15px;
+
+    @include tablet {
+      width: 336px;
+    }
+
+    @include desktop {
+      width: 394px;
+    }
   }
 
   &-form__btn {
@@ -39,15 +94,27 @@
     border: none;
     position: absolute;
     right: 0;
-    margin-top: 4px;
+    top: 1px;
     cursor: pointer;
-  }
 
-  &-form__text {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.14;
-    color: $warning-color;
-    margin-top: 16px;
+    @include tablet {
+      right: 30px;
+    }
+
+    @include desktop {
+      right: 1px;
+    }
+  }
+}
+
+.hero-form__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  color: $warning-color;
+  margin-top: 16px;
+
+  @include tablet{
+    margin-top: 20px;
   }
 }

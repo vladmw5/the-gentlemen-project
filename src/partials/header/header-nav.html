@@ -4,17 +4,43 @@
             <svg width="24" height="24">
                 <use href="../src/images/symbol-defs.svg#icon-film"></use>
             </svg>
+            <p class="header-logo__text">Filmoteka</p>
         </a>
-        <div class="header-nav">
-            <a href="./my-library.html" class="header-nav__link link header-nav__current">
-                <p class="header-nav__text">Home</p>
-            </a>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-list__item">
+                     <a href="./index.html" class="nav-list__link nav__link--after">
+                        <p class="nav-list__text">Home</p>
+                    </a>
+                </li>
+                <li class="nav-list__item">
+                    <a href="./my-library.html" class="nav-list__link">
+                        <p class="nav-list__text">my library</p>
+                    </a>
+                </li>
+                <li class="nav-list__item">
+                    <button class="nav-list__btn">
+                        <p class="nav-list__text">log out</p>
+                    </button>
+                </li>
+                <li class="nav-list__item">
+                    <button class="nav-list__btn">
+                        <p class="nav-list__text">login</p>
+                    </button>
+                </li>
+                <li class="nav-list__item">
+                    <button class="nav-list__btn">
+                        <p class="nav-list__text">signup</p>
+                    </button>
+                </li>
+            </ul>
+           
             <button type="button" class="header-btn">
                 <svg width="24" height="24" class="header-btn__icon">
                     <use href="../src/images/symbol-defs.svg#icon-menu""></use>
                 </svg>
             </button>
-        </div>
+        </nav>
     </div>
     <include src="./partials/header/modal-auth.html"></include>
 </header>
