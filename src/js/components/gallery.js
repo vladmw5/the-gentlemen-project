@@ -1,6 +1,6 @@
 import { Spinner } from 'spin.js';
 
-import { makeMarkupGallery } from '../service/markup';
+import { makeMarkupGallery, makeMarkupMovie } from '../service/markup';
 import {
   getPopularMovies,
   getMoviesByKeyword,
@@ -31,6 +31,8 @@ const optsForSpinner = {
 // refs
 const form = document.querySelector('.hero-form');
 const gallery = document.querySelector('.gallery__list');
+const movieModal = document.querySelector('.filmcard-modal');
+const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
 
 // event Listener
 form.addEventListener('submit', onFormSubmit);
@@ -72,5 +74,9 @@ function onMovieClick(e) {
   }
 
   const movieId = e.target.parentElement.dataset.id;
-  getMoviesByID(movieId).then(console.log);
+
+  getMoviesByID(movieId).then(r => {
+    movieModal.innerHTML = makeMarkupMovie(r);
+    modalBackdrop.classList.remove('is-hidden');
+  });
 }
