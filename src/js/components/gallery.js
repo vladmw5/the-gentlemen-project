@@ -1,7 +1,11 @@
 import { Spinner } from 'spin.js';
 
 import { makeMarkupGallery } from '../service/markup';
-import { getPopularMovies, getMoviesByKeyword } from '../service/requests';
+import {
+  getPopularMovies,
+  getMoviesByKeyword,
+  getMoviesByID,
+} from '../service/requests';
 
 const optsForSpinner = {
   lines: 8, // The number of lines to draw
@@ -24,17 +28,24 @@ const optsForSpinner = {
   position: 'absolute', // Element positioning
 };
 
-const gallery = document.querySelector('.gallery__list');
+// refs
 const form = document.querySelector('.hero-form');
+const gallery = document.querySelector('.gallery__list');
 
-form / addEventListener('submit', onFormSubmit);
+// event Listener
+form.addEventListener('submit', onFormSubmit);
+gallery.addEventListener('click', onMovieClick);
 
+// init
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
 getPopularMovies(1).then(r => {
-  makeMarkupGallery(r).then(r => (gallery.innerHTML = r));
+  makeMarkupGallery(r).then(r => {
+    gallery.innerHTML = r;
+  });
 });
 
+// functions
 function onFormSubmit(e) {
   e.preventDefault();
 
@@ -51,4 +62,15 @@ function onFormSubmit(e) {
   });
 
   e.target.reset();
+}
+
+function onMovieClick(e) {
+  e.preventDefault();
+
+  if (!e.target.parentElement.classList.contains('card__link')) {
+    return;
+  }
+
+  const movieId = e.target.parentElement.dataset.id;
+  getMoviesByID(movieId).then(console.log);
 }
