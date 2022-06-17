@@ -1,6 +1,6 @@
 //-- Реєстрація та авторизація
 
-import { createUser, signInUser } from '../service/index.js'
+import { createUser, signInUser } from './firebase/service'
 
 export const registration = document.querySelector('#registration');
 export const authorization = document.querySelector('#authorization');
