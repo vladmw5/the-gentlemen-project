@@ -1,5 +1,5 @@
 .header-modal {
-  position: absolute;
+  position: fixed;
   padding: 235px 20px 20px 20px;
   top: 0%;
   right: 0%;
@@ -15,40 +15,46 @@
   background-repeat: no-repeat;
   background-color: $primary-color-text;
   box-shadow: 10px 0 8px #04030396;
-  transition: transform 300ms ease-in-out;
   transform: translateX(100%);
+  transition: transform 300ms ease-in-out;
+
+  &-btn {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 42px;
+    right: 22px;
+    z-index: 5;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &-btn__icon {
+    fill: #000000;
+  }
 
   @include tablet {
     display: none;
   }
 }
 
+.body-mobile-window {
+  overflow: hidden;
+}
+
 .is-open {
   z-index: 3;
-  transition: transform 600ms ease-in-out;
   transform: translateX(0%);
+  transition: transform 600ms ease-in-out;
   box-shadow: -46px 0 8px #04030396;
-}
-
-.header-modal-btn {
-  position: absolute;
-  top: 42px;
-  right: 22px;
-  z-index: 5;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.header-modal-btn__icon {
-  fill: #000000;
 }
 .modal-nav-list__item {
   display: flex;
   justify-content: flex-end;
-}
 
-.modal-nav-list__item:not(:last-child) {
-  margin-bottom: 20px;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
 
 .modal-nav-list__text {
