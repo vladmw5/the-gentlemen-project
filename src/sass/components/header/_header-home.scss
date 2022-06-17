@@ -34,10 +34,13 @@
     padding-right: 15px;
   }
 
-  &-form__icon {
+  &-form__btn {
+    background-color: transparent;
+    border: none;
     position: absolute;
     right: 0;
     margin-top: 4px;
+    cursor: pointer;
   }
 
   &-form__text {
