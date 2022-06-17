@@ -17,7 +17,6 @@
   @include tablet {
     min-width: 768px;
     height: 216px;
-    padding: 115px;
     padding-top: 115px;
     padding-bottom: 81px;
     background-image: url(../images/background-photo_tablet_1x-min.png);
@@ -25,6 +24,18 @@
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
       background-image: url(../images/background-photo_tablet_2x-min.png);
+    }
+  }
+
+  @include desktop {
+    min-width: 1280px;
+    padding-top: 115px;
+    padding-bottom: 80px;
+    background-image: url(../images/abstract-background-with-red-lines_desktop_1x-min.png);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/abstract-background-with-red-lines_desktop_2x-min.png);
     }
   }
 
@@ -43,6 +54,10 @@
       flex-direction: column;
     }
 
+    @include desktop {
+      width: 394px;
+    }
+
     // &::after {
     //   content: 'Search result not successful. Enter the correct movie name and';
     //   font-weight: 400;
@@ -55,8 +70,6 @@
   &-form__input {
     outline: none;
     color: $primary-color-text;
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.14;
@@ -69,6 +82,10 @@
 
     @include tablet {
       width: 336px;
+    }
+
+    @include desktop {
+      width: 394px;
     }
   }
 
@@ -83,6 +100,10 @@
     @include tablet {
       right: 30px;
     }
+
+    @include desktop {
+      right: 1px;
+    }
   }
 }
 
@@ -92,4 +113,8 @@
   line-height: 1.14;
   color: $warning-color;
   margin-top: 16px;
+
+  @include tablet{
+    margin-top: 20px;
+  }
 }
