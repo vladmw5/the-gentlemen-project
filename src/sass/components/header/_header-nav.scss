@@ -22,6 +22,10 @@
       font-size: 30px;
       line-height: 1.16;
       color: $primary-color-text;
+
+      @include desktop{
+        margin-left: 10px;
+      }
     }
   }
   &-btn {
