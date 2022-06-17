@@ -1,0 +1,40 @@
+.footer {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  //   min-width: 320px;
+
+  background-color: $background-color-footer;
+
+  &__text {
+    max-width: 275px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.8;
+
+    color: $primary-color-text-footer;
+
+    @media screen and(min-width:768px) {
+      font-size: 16px;
+      line-height: 1.18;
+      min-width: 515px;
+    }
+  }
+
+  &__svg {
+    width: 14px;
+    height: 13px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  &__link {
+    text-decoration-line: underline;
+
+    color: $primary-color-text-footer;
+  }
+}
