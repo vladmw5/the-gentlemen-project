@@ -23,7 +23,7 @@
       line-height: 1.16;
       color: $primary-color-text;
 
-      @include desktop{
+      @include desktop {
         margin-left: 10px;
       }
     }
@@ -75,12 +75,11 @@
 .nav__link--after {
   position: relative;
   &::after {
-      content: ' ';
-      position: absolute;
-      height: 3px;
-      width: 100%;
-      background-color: $warning-color;
-      display: block;
-    }
+    content: ' ';
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: $warning-color;
+    display: block;
+  }
 }
-
