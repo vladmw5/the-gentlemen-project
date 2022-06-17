@@ -1,0 +1,54 @@
+<!-- Модальне вікно авторизації-->
+
+<div class="backdrop">
+  <div class="modal">
+    <button type="button" class="modal-button">
+      <svg class="modal-btn__icon" width="14" height="14">
+        <use href="./images/symbol-defs.svg#icon-cross"></use>
+      </svg>
+    </button>
+    <div>
+      <form class="modal__form" id="registration">
+        <label class="modal__form--label">
+          Email
+          <input class="modal__form--input" type="email" name="email" />
+        </label>
+        <label class="modal__form--label">
+          Password
+          <input
+            class="modal__form--input"
+            type="password"
+            name="password"
+            minlength="5"
+            maxlength="12"
+          />
+        </label>
+        <div class="modal__form--container">
+          <button class="modal__form--btn" type="submit">sign up</button>
+        </div>
+      </form>
+    </div>
+
+    <div>
+      <form class="modal__form" id="authorization">
+        <label class="modal__form--label">
+          Email
+          <input class="modal__form--input" type="email" name="email" />
+        </label>
+        <label class="modal__form--label">
+          Password
+          <input
+            class="modal__form--input"
+            type="password"
+            name="password"
+            minlength="5"
+            maxlength="12"
+          />
+        </label>
+        <div class="modal__form--container">
+          <button class="modal__form--btn" type="submit">log in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

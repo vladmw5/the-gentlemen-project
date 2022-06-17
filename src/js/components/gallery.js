@@ -44,7 +44,7 @@ function onFormSubmit(e) {
     return;
   }
 
-  const spinner = new Spinner(opts).spin(gallery);
+  const spinner = new Spinner(optsForSpinner).spin(gallery);
 
   getMoviesByKeyword(keyword, 1).then(r => {
     makeMarkupGallery(r).then(r => (gallery.innerHTML = r));
