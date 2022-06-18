@@ -49,7 +49,7 @@ function makeMarkupMovie(array) {
   } = array;
   return `
         <svg class="filmcard-modal__close-icon">
-          <use href="./images/symbol-defs.svg#icon-close"></use>
+          <use href="./symbol-defs.a8b2e413.svg#icon-cross"></use>
         </svg>
         <img
           data-id="${id}"
