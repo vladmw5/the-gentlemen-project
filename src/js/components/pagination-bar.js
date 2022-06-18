@@ -14,18 +14,42 @@ const rightArrowRef = document.querySelector('.pagination-bar__right');
 let currentPage = 1;
 
 paginationBarRef.addEventListener('click', onPaginationBarClick);
-// leftArrowRef.addEventListener('click', onLeftArrowClick);
-// rightArrowRef.addEventListener('click', onRightArrowClick);
+leftArrowRef.addEventListener('click', onLeftArrowClick);
+rightArrowRef.addEventListener('click', onRightArrowClick);
+
+function onLeftArrowClick(event) {
+  if (firstTime) {
+    firstRenderPopularMovies(--currentPage);
+  } else {
+    renderMoviesByKeyword(
+      sessionStorage.getItem(SESSION_STORAGE_USER_KEYWORD_KEY),
+      --currentPage
+    );
+  }
+}
+
+function onRightArrowClick(event) {
+  if (firstTime) {
+    firstRenderPopularMovies(++currentPage);
+  } else {
+    renderMoviesByKeyword(
+      sessionStorage.getItem(SESSION_STORAGE_USER_KEYWORD_KEY),
+      ++currentPage
+    );
+  }
+}
 
 function onPaginationBarClick(event) {
   if (event.target.nodeName !== 'LI') return;
 
   if (firstTime) {
-    firstRenderPopularMovies(Number(event.target.dataset.page));
+    currentPage = Number(event.target.dataset.page);
+    firstRenderPopularMovies(currentPage);
   } else {
+    currentPage = Number(event.target.dataset.page);
     renderMoviesByKeyword(
       sessionStorage.getItem(SESSION_STORAGE_USER_KEYWORD_KEY),
-      Number(event.target.dataset.page)
+      currentPage
     );
   }
 }

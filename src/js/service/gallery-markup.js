@@ -26,7 +26,7 @@ async function makeMarkupGallery(array) {
             <p class="card__description">${genres
               .filter(el => genre_ids.includes(el.id))
               .map(el => el.name)
-              .join(', ')} | ${release_date.slice(0, 4)}
+              .join(', ')} | ${release_date?.slice(0, 4) ?? 'No year'}
             </p>
             <span class="card__vote">${vote_average}</span>
           </a>
