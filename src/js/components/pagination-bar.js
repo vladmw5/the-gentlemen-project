@@ -69,9 +69,9 @@ export function renderPaginationBar(totalPages, currentPage) {
 
   //Отрисовка числа 1 и ... после неё, если надо
   if (currentPage > 2) {
-    toInsert += markupGenerator.number(1);
+    toInsert += markupGenerator.number(1, false, true);
     if (currentPage > 4) {
-      toInsert += markupGenerator.dots();
+      toInsert += markupGenerator.dots(true);
     }
   }
 
@@ -108,9 +108,9 @@ export function renderPaginationBar(totalPages, currentPage) {
   //Отрисовка числа последней страницы и ... до, если надо
   if (currentPage < totalPages - 1) {
     if (currentPage < totalPages - 3) {
-      toInsert += markupGenerator.dots();
+      toInsert += markupGenerator.dots(true);
     }
-    toInsert += markupGenerator.number(totalPages);
+    toInsert += markupGenerator.number(totalPages, false, true);
   }
 
   //Если текущая страница меньше первой, то должна быть отрисована кнопка вперёд

@@ -1,4 +1,5 @@
 $gap: 16px;
+$small-gap: 8px;
 
 .pagination-bar {
   margin-top: 40px;
@@ -11,24 +12,26 @@ $gap: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: $gap;
+  @include tablet {
+    margin-right: $gap;
+  }
 }
 
 .pagination-bar__element {
   &:not(:last-child) {
-    margin-right: $gap;
+    @include tablet {
+      margin-right: $gap;
+    }
+    @include mobile {
+      margin-right: $small-gap;
+    }
   }
-  width: 16px;
-  height: 16px;
+  width: 40px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-
-  @include tablet {
-    width: 40px;
-    height: 40px;
-  }
 }
 
 .pagination-bar__element--active {
@@ -62,6 +65,13 @@ $gap: 16px;
   display: none;
 }
 
+.pagination-bar__element--mobile-hidden {
+  @include mobile {
+    display: none;
+  }
+}
+
 .no-click {
   pointer-events: none;
+  text-align: center;
 }
