@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const IMG_URL = 'https://image.tmdb.org/t/p/w400';
+
 async function makeMarkupGallery(array) {
   const genres = await axios
     .get(
@@ -21,9 +23,11 @@ async function makeMarkupGallery(array) {
         `
         <li class="card">
           <a class="card__link" href="" data-id="${id}">
-            <img class="card__img" src="https://image.tmdb.org/t/p/w400${poster_path}" alt="${
-          overview ?? 'No info!'
-        }" />
+            <img class="card__img" src="${
+              poster_path !== null
+                ? IMG_URL + poster_path
+                : './images/template-poster-movie.jpg'
+            }" alt="${overview !== '' ? overview : 'No info!'}" />
             <p class="card__name">${title ?? 'No info about title!'}</p>
             <p class="card__description">${
               genre_ids != false
@@ -62,8 +66,12 @@ function makeMarkupMovie(array) {
         <img
           data-id="${id}"
           class="filmcard__poster"
-          src="https://image.tmdb.org/t/p/w400${poster_path}"
-          alt="${overview ?? 'No info!'}"
+          src="https://image.tmdb.org/t/p/w400${
+            poster_path !== null
+              ? IMG_URL + poster_path
+              : './images/template-poster-movie.jpg'
+          }"
+          alt="${overview !== '' ? overview : 'No info!'}"
         />
         <div class="filmcard__wrapper">
           <p class="filmcard__title">${title ?? 'No info about title!'}</p>
@@ -74,27 +82,23 @@ function makeMarkupMovie(array) {
                 <span class="votes stats__stat-value--highlighted">${
                   vote_average === '0' ? vote_average : 'No votes!'
                 }</span> /
-                <span class="total-votes">${
-                  vote_count ?? 'No info about votes!'
-                }</span>
+                <span class="total-votes">${vote_count}</span>
               </td>
             </tr>
             <tr class="stats__row">
               <td class="stats__stat-name">Popularity</td>
-              <td class="stats__stat-value">${
-                popularity ?? 'No info about popularity!!'
-              }</td>
+              <td class="stats__stat-value">${popularity}</td>
             </tr>
             <tr class="stats__row">
               <td class="stats__stat-name">Original Title</td>
-              <td class="original-title stats__stat-value">${
-                original_title ?? 'No info about original title!'
-              }</td>
+              <td class="original-title stats__stat-value">${original_title}</td>
             </tr>
             <tr class="stats__row">
               <td class="stats__stat-name">Genre</td>
               <td class="stats__stat-value">${
-                genres.map(el => el.name).join(', ') ?? 'No info about genres!'
+                genres != false
+                  ? genres.map(el => el.name).join(', ')
+                  : 'No info about genres!'
               }</td>
             </tr>
           </table>
