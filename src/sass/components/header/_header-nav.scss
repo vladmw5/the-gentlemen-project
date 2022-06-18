@@ -11,7 +11,7 @@
   }
 
   &-logo {
-    flex-grow: 1;
+    margin-right: auto;
     height: 24px;
     display: flex;
     align-items: center;
@@ -23,7 +23,7 @@
       line-height: 1.16;
       color: $primary-color-text;
 
-      @include desktop{
+      @include desktop {
         margin-left: 10px;
       }
     }

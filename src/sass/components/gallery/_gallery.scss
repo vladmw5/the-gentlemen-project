@@ -45,19 +45,40 @@
   margin-bottom: 2px;
 
   font-size: 12px;
-  line-height: 1.17;
+  line-height: 1.33;
   text-transform: uppercase;
 
   color: #000000;
 
-  @include tablet {
-    line-height: 1.33;
+  @include desktop {
+    font-size: 20px;
+    line-height: 1.2;
   }
 }
 
 .card__description {
+  margin-bottom: 6px;
+
   font-size: 12px;
   line-height: 1.33;
 
   color: #ff6b08;
+
+  @include desktop {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+
+.card__vote {
+  padding: 3px 12px;
+  background-color: #ff6b01;
+  border-radius: 5px;
+
+  font-size: 12px;
+  line-height: 1.17;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #ffffff;
 }
