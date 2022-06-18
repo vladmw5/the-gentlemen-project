@@ -1,17 +1,33 @@
 import markupGenerator from '../service/pagination-bar-markup';
+import {
+  firstTime,
+  firstRenderPopularMovies,
+  renderMoviesByKeyword,
+  SESSION_STORAGE_USER_KEYWORD_KEY,
+} from './gallery';
 
 const BAR_HIDDEN_CLASS = 'pagination-bar__element--hidden';
 
-const paginationWrapperRef = document.querySelector('.pagination-bar');
 const paginationBarRef = document.querySelector('.pagination-bar__list');
 const leftArrowRef = document.querySelector('.pagination-bar__left');
 const rightArrowRef = document.querySelector('.pagination-bar__right');
 let currentPage = 1;
 
-paginationWrapperRef.addEventListener('click', onPaginationBarClick);
+paginationBarRef.addEventListener('click', onPaginationBarClick);
+// leftArrowRef.addEventListener('click', onLeftArrowClick);
+// rightArrowRef.addEventListener('click', onRightArrowClick);
 
 function onPaginationBarClick(event) {
-  console.log(event.target);
+  if (event.target.nodeName !== 'LI') return;
+
+  if (firstTime) {
+    firstRenderPopularMovies(Number(event.target.dataset.page));
+  } else {
+    renderMoviesByKeyword(
+      sessionStorage.getItem(SESSION_STORAGE_USER_KEYWORD_KEY),
+      Number(event.target.dataset.page)
+    );
+  }
 }
 
 export function renderPaginationBar(totalPages, currentPage) {
@@ -19,9 +35,11 @@ export function renderPaginationBar(totalPages, currentPage) {
   let pageBefore = currentPage - 2;
   let pageAfter = currentPage + 2;
 
+  leftArrowRef.classList.add(BAR_HIDDEN_CLASS);
+  rightArrowRef.classList.add(BAR_HIDDEN_CLASS);
+
   //Если текущая страница больше первой, то должна быть отрисована кнопка назад
   if (currentPage > 1) {
-    console.log('here');
     leftArrowRef.classList.remove(BAR_HIDDEN_CLASS);
   }
 
@@ -73,7 +91,6 @@ export function renderPaginationBar(totalPages, currentPage) {
 
   //Если текущая страница меньше первой, то должна быть отрисована кнопка вперёд
   if (currentPage < totalPages) {
-    console.log('there');
     rightArrowRef.classList.remove(BAR_HIDDEN_CLASS);
   }
 

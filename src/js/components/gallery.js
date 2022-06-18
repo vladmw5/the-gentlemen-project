@@ -37,6 +37,9 @@ const form = document.querySelector('.hero-form');
 const gallery = document.querySelector('.gallery__list');
 const movieModal = document.querySelector('.filmcard-modal');
 const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
+const errorBlockRef = document.querySelector('.hero-form__text');
+const ERR_CLASS = 'hidden-err';
+export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 
 // event Listener
 document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
@@ -48,7 +51,7 @@ gallery.addEventListener('click', onMovieClick);
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
 // functions
-function firstRenderPopularMovies(page) {
+export function firstRenderPopularMovies(page) {
   getPopularMovies(page).then(r => {
     makeMarkupGallery(r.results).then(r => {
       gallery.innerHTML = r;
@@ -57,7 +60,8 @@ function firstRenderPopularMovies(page) {
   });
 }
 
-function renderMoviesByKeyword(keyword, page) {
+export function renderMoviesByKeyword(keyword, page) {
+  sessionStorage.setItem(SESSION_STORAGE_USER_KEYWORD_KEY, keyword);
   getMoviesByKeyword(keyword, page).then(r => {
     makeMarkupGallery(r.results).then(r => (gallery.innerHTML = r));
     renderPaginationBar(r.total_pages, page);
@@ -68,8 +72,10 @@ function onFormSubmit(e) {
   e.preventDefault();
 
   const keyword = e.target.elements.text.value.trim();
+  errorBlockRef.classList.add(ERR_CLASS);
 
   if (!keyword) {
+    errorBlockRef.classList.remove(ERR_CLASS);
     return;
   }
 

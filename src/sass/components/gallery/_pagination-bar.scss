@@ -61,3 +61,7 @@ $gap: 16px;
 .pagination-bar__element--hidden {
   display: none;
 }
+
+.no-click {
+  pointer-events: none;
+}

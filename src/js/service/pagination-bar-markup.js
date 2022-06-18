@@ -17,7 +17,7 @@ export default markup = {
       data-page="${n}"
       data-type="number"
     >
-      <span>${n}</span>
+      <span class='no-click'>${n}</span>
     </li>`;
   },
   dots() {
