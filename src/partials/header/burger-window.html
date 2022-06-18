@@ -1,5 +1,6 @@
 <div class="mobile-menu-window">
-  <div class="header-modal" data-modal>
+  <div class="header-modal" data-modal-burger>
+    // видалити -burger//TODO
     <button type="button" class="header-modal-btn" data-close>
       <svg width="20" height="20" class="header-modal-btn__icon">
         <use href="../src/images/symbol-defs.svg#icon-cross"></use>
@@ -12,22 +13,22 @@
             <p class="modal-nav-list__text">Home</p>
           </a>
         </li>
-        <li class="modal-nav-list__item">
+        <li class="modal-nav-list__item library-mobile is-mobile-hidden">
           <a href="./my-library.html" class="modal-nav-list__link">
             <p class="modal-nav-list__text">my library</p>
           </a>
         </li>
-        <li class="modal-nav-list__item">
-          <button class="modal-nav-list__btn">
+        <li class="modal-nav-list__item log-out-mobile is-mobile-hidden">
+          <button class="modal-nav-list__btn" id="exit-btn-mobile">
             <p class="modal-nav-list__text">log out</p>
           </button>
         </li>
-        <li class="modal-nav-list__item">
+        <li class="modal-nav-list__item log-in-mobile">
           <button class="modal-nav-list__btn">
             <p class="modal-nav-list__text">log in</p>
           </button>
         </li>
-        <li class="modal-nav-list__item">
+        <li class="modal-nav-list__item sign-up-mobile">
           <button class="modal-nav-list__btn">
             <p class="modal-nav-list__text">sign up</p>
           </button>

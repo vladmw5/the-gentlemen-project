@@ -2,7 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { firebaseConfig } from '../settings/firebaseConfigFile';
 
-import { backdrop, signUpBtn, logInBtn, logOutItem, libraryItem } from '../../components/authentication-modal';
+import { backdropLog, backdropSign, signUpBtn, logInBtn, logOutItem, libraryItem } from '../../components/authentication-modal';
+import { signUpBtnMobile, logInBtnMobile, logOutItemMobile, libraryItemMobile } from '../../components/authentication-mobile';
 
 
 const app = initializeApp(firebaseConfig);
@@ -39,11 +40,21 @@ function signInUser(email, password) {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log(user)
-        backdrop.classList.add('is-bck-hidden');
+        backdropSign.classList.add('is-bck-hidden');
+        backdropLog.classList.add('is-bck-hidden');
+
         signUpBtn.classList.add('is-hidden-nav');
         logInBtn.classList.add('is-hidden-nav');
         libraryItem.classList.remove('is-hidden-nav');
         logOutItem.classList.remove('is-hidden-nav');
+    
+    // Мобільна версія
+       
+        signUpBtnMobile.classList.add('is-mobile-hidden');
+        logInBtnMobile.classList.add('is-mobile-hidden');
+        libraryItemMobile.classList.remove('is-mobile-hidden');
+        logOutItemMobile.classList.remove('is-mobile-hidden');
+
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
@@ -54,6 +65,14 @@ onAuthStateChanged(auth, (user) => {
         logInBtn.classList.remove('is-hidden-nav');
         libraryItem.classList.add('is-hidden-nav');
         logOutItem.classList.add('is-hidden-nav');
+
+        // Мобільна версія
+        
+        signUpBtnMobile.classList.remove('is-mobile-hidden');
+        logInBtnMobile.classList.remove('is-mobile-hidden');
+        libraryItemMobile.classList.add('is-mobile-hidden');
+        logOutItemMobile.classList.add('is-mobile-hidden');
+
     // User is signed out
     // ...
   }
@@ -68,8 +87,6 @@ signOut(auth)
 
     });
 };
-
-
 
 export { createUser, signInUser, exitUser};
 

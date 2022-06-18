@@ -81,3 +81,9 @@
 .modal-nav-list__btn {
   background-color: transparent;
 }
+
+// Добавив клас для зникаючих кнопок мобільного меню
+
+.is-mobile-hidden{
+  display: none;
+}
