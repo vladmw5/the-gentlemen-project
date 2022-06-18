@@ -1,6 +1,6 @@
 <!-- Модальне вікно авторизації-->
 
-<div class="backdrop">
+<div class="backdrop is-bck-hidden">
   <div class="modal">
     <button type="button" class="modal-button">
       <svg class="modal-btn__icon" width="14" height="14">
@@ -8,7 +8,8 @@
       </svg>
     </button>
     <div>
-      <form class="modal__form" id="registration">
+      <form class="modal__form registration-js" id="registration">
+        <p>registration</p>
         <label class="modal__form--label">
           Email
           <input class="modal__form--input" type="email" name="email" />
@@ -30,7 +31,8 @@
     </div>
 
     <div>
-      <form class="modal__form" id="authorization">
+      <form class="modal__form authorization-js" id="authorization">
+        <p>authorization</p>
         <label class="modal__form--label">
           Email
           <input class="modal__form--input" type="email" name="email" />

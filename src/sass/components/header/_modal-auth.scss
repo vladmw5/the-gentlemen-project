@@ -86,6 +86,17 @@
     width: 100%;
 }
 
+.modal__form p {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.16;
+    letter-spacing: 0.02em;
+    color:#FF6B01;
+    text-transform: uppercase;
+}
+
 .modal-button {
     position: absolute;
     top: 8px;
@@ -100,4 +111,10 @@
 .modal-btn__icon {
     fill: #000;
     border: 2px dashed #2a2a2a;
+}
+
+//Додавання та видалення реєстрації та авторизації на модалці
+
+.is-hidden-form {
+    display: none;
 }

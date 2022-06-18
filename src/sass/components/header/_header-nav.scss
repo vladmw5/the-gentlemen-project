@@ -75,11 +75,17 @@
 .nav__link--after {
   position: relative;
   &::after {
-    content: ' ';
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background-color: $warning-color;
-    display: block;
-  }
+      content: ' ';
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background-color: $warning-color;
+      display: block;
+    }
+}
+
+//Додавання та видалення кнопок реєстрації і авторизації
+
+.is-hidden-nav {
+  display: none;
 }
