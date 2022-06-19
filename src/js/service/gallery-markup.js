@@ -120,4 +120,22 @@ function makeMarkupMovie(array) {
         </div>`;
 }
 
-export { makeMarkupGallery, makeMarkupMovie };
+function makeMarkupMovieForSlider(array) {
+  let markup = '';
+
+  for (let i = 0; i < 5; i += 1) {
+    const { id, title, overview, backdrop_path } = array[i];
+    markup += `
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 3</div>
+          <img src="${
+            IMG_URL + backdrop_path
+          }" alt="${overview}" style="width: 100%" />
+          <div class="text">${title}</div>
+        </div>`;
+  }
+
+  return markup;
+}
+
+export { makeMarkupGallery, makeMarkupMovie, makeMarkupMovieForSlider };

@@ -2,16 +2,22 @@ import { Spinner } from 'spin.js';
 
 import { optsForSpinner } from '../service/spinner-options';
 import { renderPaginationBar } from './pagination-bar';
-import { makeMarkupGallery, makeMarkupMovie } from '../service/gallery-markup';
+import {
+  makeMarkupGallery,
+  makeMarkupMovie,
+  makeMarkupMovieForSlider,
+} from '../service/gallery-markup';
 import {
   getPopularMovies,
   getMoviesByKeyword,
   getMoviesByID,
+  getPopularMoviesOfDay,
 } from '../service/gallery-requests';
 
 // vars
 export let firstTime = true;
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
+var slideIndex = 1;
 
 // refs
 const gallery = document.querySelector('.gallery__list');
@@ -19,6 +25,7 @@ const movieCase = document.querySelector('.filmcard__case');
 const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
 const inputSearchMovie = document.querySelector('.hero-form__input');
 const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
+const slideImages = document.querySelector('.slideshow-container');
 
 // event Listener
 document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
@@ -39,6 +46,12 @@ export function firstRenderPopularMovies(page) {
       })
       .catch(console.log);
     renderPaginationBar(r.total_pages, page);
+  });
+
+  getPopularMoviesOfDay().then(r => {
+    slideImages.innerHTML = makeMarkupMovieForSlider(r.results);
+
+    showSlides(slideIndex);
   });
 }
 
@@ -115,4 +128,36 @@ function closeMovieModalByClickBackdrop(e) {
 function toggleModal() {
   document.body.classList.toggle('modal-open');
   modalBackdrop.classList.toggle('is-hidden');
+}
+
+// slider
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides((slideIndex += n));
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides((slideIndex = n));
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName('mySlides');
+  var dots = document.getElementsByClassName('dot');
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = 'none';
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(' active', '');
+  }
+  slides[slideIndex - 1].style.display = 'block';
+  dots[slideIndex - 1].className += ' active';
 }
