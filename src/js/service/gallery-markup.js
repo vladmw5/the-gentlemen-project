@@ -39,7 +39,9 @@ async function makeMarkupGallery(array) {
             } | ${release_date?.slice(0, 4) ?? 'No info about year!'}
             </p>
             <span class="card__vote">${
-              vote_average !== 0 ? vote_average : 'No votes'
+              vote_average !== 0
+                ? vote_average.toString().padEnd(3, '.0')
+                : 'No votes'
             }</span>
           </a>
         </li>`
@@ -60,16 +62,14 @@ function makeMarkupMovie(array) {
     popularity,
   } = array;
   return `
-        <svg class="filmcard-modal__close-icon">
-          <use href="./symbol-defs.a8b2e413.svg#icon-cross"></use>
-        </svg>
         <img
           data-id="${id}"
+          data-genre-ids="${genres.map(el => el.id).join('-')}"
           class="filmcard__poster"
-          src="https://image.tmdb.org/t/p/w400${
+          src="${
             poster_path !== null
               ? IMG_URL + poster_path
-              : './images/template-poster-movie.jpg'
+              : 'https://upload.wikimedia.org/wikipedia/commons/b/ba/No_image_available_400_x_600.svg'
           }"
           alt="${overview !== '' ? overview : 'No info!'}"
         />
@@ -80,7 +80,9 @@ function makeMarkupMovie(array) {
               <td class="stats__stat-name">Vote / Votes</td>
               <td class="stats__stat-value">
                 <span class="votes stats__stat-value--highlighted">${
-                  vote_average === '0' ? vote_average : 'No votes!'
+                  vote_average !== 0
+                    ? vote_average.toString().padEnd(3, '.0')
+                    : 'No votes!'
                 }</span> /
                 <span class="total-votes">${vote_count}</span>
               </td>
