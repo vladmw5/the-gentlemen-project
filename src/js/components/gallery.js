@@ -44,7 +44,7 @@ export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 // event Listener
 document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
 
-form.addEventListener('submit', onFormSubmit);
+form?.addEventListener('submit', onFormSubmit);
 gallery.addEventListener('click', onMovieClick);
 
 // init
