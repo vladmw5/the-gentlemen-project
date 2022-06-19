@@ -48,8 +48,6 @@ document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
 inputSearchMovie?.addEventListener('input', onFormInput);
 gallery.addEventListener('click', onMovieClick);
 
-
-
 // init
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
