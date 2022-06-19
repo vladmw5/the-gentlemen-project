@@ -48,14 +48,21 @@
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.filmcard-modal__close-icon {
+.filmcard-modal__close-btn {
   position: absolute;
-  fill: #000;
 
   top: 16px;
   right: 16px;
+
+  padding: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.filmcard-modal__close-icon {
   width: 20px;
   height: 20px;
+  fill: #000;
 }
 
 .filmcard__poster {
