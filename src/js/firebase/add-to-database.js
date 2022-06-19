@@ -1,5 +1,10 @@
 import { getMoviesByID } from '../service/gallery-requests';
 
+import {sendDataToFirebaseWatched, sendDataToFirebaseQueue} from '../firebase/service/index'
+
+
+let userId = null;
+
 const filmcardModal = document.querySelector('.filmcard-modal');
 
 filmcardModal.addEventListener('click', onFilmcardModalClick);
@@ -9,16 +14,32 @@ function onFilmcardModalClick(event) {
 
   const currentFilmId =
     filmcardModal.querySelector('.filmcard__poster')?.dataset.id;
-
-  const data = getMoviesByID(currentFilmId).then(console.log);
+  
+  // const data = getMoviesByID(currentFilmId).then(console.log);
+  const dataId = createData(currentFilmId);
+  // console.log(dataId);
 
   if (event.target.hasAttribute('data-add-to-watched-btn')) {
-    sendDataToFirebaseWatched(data);
+    sendDataToFirebaseWatched(dataId);
   } else if (event.target.hasAttribute('data-add-to-queue-btn')) {
-    sendDataToFirebaseQueue(data);
+    sendDataToFirebaseQueue(dataId);
   } else return;
 }
 
-function sendDataToFirebaseWatched(data) {}
+export function getUserId(id) {
+    userId = id;
+    // console.log(userId);
+};
 
-function sendDataToFirebaseQueue(data) {}
+function createData(dataId, type='id') {
+  return {
+    dataId,
+    id: userId,
+    type,
+  };
+};
+
+
+
+
+

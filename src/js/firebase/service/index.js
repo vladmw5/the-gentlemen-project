@@ -1,13 +1,20 @@
 import { initializeApp } from "firebase/app";
+
+import { getDatabase, ref, push } from "firebase/database";
+
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+
 import { firebaseConfig } from '../settings/firebaseConfigFile';
 
 import { backdropLog, backdropSign, signUpBtn, logInBtn, logOutItem, libraryItem } from '../../components/authentication-modal';
 import { signUpBtnMobile, logInBtnMobile, logOutItemMobile, libraryItemMobile } from '../../components/authentication-mobile';
-
+import { getUserId } from '../add-to-database';
+let userId = null;
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+
+const db = getDatabase();
 
 function createUser(email, password) {
     createUserWithEmailAndPassword(auth, email, password)
@@ -39,7 +46,7 @@ function signInUser(email, password) {
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        console.log(user)
+        // console.log(user)
         backdropSign.classList.add('is-bck-hidden');
         backdropLog.classList.add('is-bck-hidden');
 
@@ -57,8 +64,10 @@ onAuthStateChanged(auth, (user) => {
 
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
+        userId = user.uid;
+        getUserId(userId);
     // ...
+    
     } else {
         console.log(null)
         signUpBtn.classList.remove('is-hidden-nav');
@@ -75,6 +84,8 @@ onAuthStateChanged(auth, (user) => {
 
     // User is signed out
     // ...
+        getUserId(null);
+        userId = null;
   }
 });
 
@@ -88,5 +99,20 @@ signOut(auth)
     });
 };
 
-export { createUser, signInUser, exitUser};
+// Надсилання даних з Watched та Queue
+
+function sendDataToFirebaseWatched(data) { 
+    // console.log(data)
+    push(ref(db, 'dataWatched'), data);
+};
+
+function sendDataToFirebaseQueue(data) { 
+    //  console.log(data)
+   push(ref(db, 'dataQueue'), data);
+};
+
+
+
+
+export { createUser, signInUser, exitUser, sendDataToFirebaseWatched, sendDataToFirebaseQueue};
 
