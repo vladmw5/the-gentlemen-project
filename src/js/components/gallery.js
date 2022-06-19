@@ -23,7 +23,7 @@ const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
 // event Listener
 document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
 
-inputSearchMovie?.addEventListener('input', onFormInput);
+form.addEventListener('submit', onFormSubmit);
 gallery.addEventListener('click', onMovieClick);
 modalCloseBtn.addEventListener('click', toggleModal);
 
