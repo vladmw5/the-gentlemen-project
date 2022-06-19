@@ -84,3 +84,18 @@
 .hidden-err {
   display: none;
 }
+
+.notifycation__text {
+  margin: auto;
+  text-align: center;
+  font-size: 30px;
+  opacity: 0.5;
+
+  @include tablet {
+    font-size: 60px;
+  }
+
+  @include desktop {
+    font-size: 100px;
+  }
+}

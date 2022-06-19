@@ -1,3 +1,5 @@
+import './components/header-line';
+import './components/burger-line';
 import './components/mobile-menu';
 import './components/gallery';
 import './components/footer-modal';
@@ -6,3 +8,6 @@ import './components/authentication-modal';
 import './components/pagination-bar';
 import './components/authentication-mobile';
 import './firebase/add-to-database';
+import './components/my-library-btn';
+import './components/authentication-mobile';
+import './components/btn-to-top';

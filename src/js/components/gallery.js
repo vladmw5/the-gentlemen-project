@@ -1,5 +1,6 @@
 import { Spinner } from 'spin.js';
 
+import { optsForSpinner } from '../service/spinner-options';
 import { renderPaginationBar } from './pagination-bar';
 import { makeMarkupGallery, makeMarkupMovie } from '../service/gallery-markup';
 import {
@@ -8,45 +9,23 @@ import {
   getMoviesByID,
 } from '../service/gallery-requests';
 
-const optsForSpinner = {
-  lines: 8, // The number of lines to draw
-  length: 50, // The length of each line
-  width: 26, // The line thickness
-  radius: 63, // The radius of the inner circle
-  scale: 1.05, // Scales overall size of the spinner
-  corners: 0.5, // Corner roundness (0..1)
-  speed: 1.9, // Rounds per second
-  rotate: 0, // The rotation offset
-  animation: 'spinner-line-fade-default', // The CSS animation name for the lines
-  direction: 1, // 1: clockwise, -1: counterclockwise
-  color: '#000000', // CSS color or array of colors
-  fadeColor: 'transparent', // CSS color or array of colors
-  top: '50%', // Top position relative to parent
-  left: '50%', // Left position relative to parent
-  shadow: '0 0 1px transparent', // Box-shadow for the lines
-  zIndex: 2000000000, // The z-index (defaults to 2e9)
-  className: 'spinner', // The CSS class to assign to the spinner
-  position: 'absolute', // Element positioning
-};
-
 // vars
 export let firstTime = true;
-const ERR_CLASS = 'hidden-err';
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 
 // refs
-const form = document.querySelector('.hero-form');
 const gallery = document.querySelector('.gallery__list');
-const movieModal = document.querySelector('.filmcard-modal');
+const movieCase = document.querySelector('.filmcard__case');
 const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
-const errorBlockRef = document.querySelector('.hero-form__text');
 const inputSearchMovie = document.querySelector('.hero-form__input');
+const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
 
 // event Listener
 document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
 
 inputSearchMovie?.addEventListener('input', onFormInput);
 gallery.addEventListener('click', onMovieClick);
+modalCloseBtn.addEventListener('click', toggleModal);
 
 // init
 const spinner = new Spinner(optsForSpinner).spin(gallery);
@@ -54,9 +33,11 @@ const spinner = new Spinner(optsForSpinner).spin(gallery);
 // functions
 export function firstRenderPopularMovies(page) {
   getPopularMovies(page).then(r => {
-    makeMarkupGallery(r.results).then(r => {
-      gallery.innerHTML = r;
-    });
+    makeMarkupGallery(r.results)
+      .then(r => {
+        gallery.innerHTML = r;
+      })
+      .catch(console.log);
     renderPaginationBar(r.total_pages, page);
   });
 }
@@ -64,18 +45,36 @@ export function firstRenderPopularMovies(page) {
 export function renderMoviesByKeyword(keyword, page) {
   sessionStorage.setItem(SESSION_STORAGE_USER_KEYWORD_KEY, keyword);
   getMoviesByKeyword(keyword, page).then(r => {
-    makeMarkupGallery(r.results).then(r => (gallery.innerHTML = r));
+    makeMarkupGallery(r.results)
+      .then(r => {
+        if (r.length === 0) {
+          document.querySelector('.pagination-bar__list').innerHTML = '';
+          gallery.innerHTML =
+            '<p class="notifycation__text">No results! Sorry =(</p>';
+          return;
+        }
+
+        gallery.innerHTML = r;
+      })
+      .catch(console.log);
     renderPaginationBar(r.total_pages, page);
   });
 }
 
+function renderMoviesByID(movieId) {
+  getMoviesByID(movieId)
+    .then(r => {
+      movieCase.innerHTML = makeMarkupMovie(r);
+      toggleModal();
+    })
+    .catch(console.log);
+}
+
 function onFormInput(e) {
   const keyword = e.target.value.trim();
-  errorBlockRef.classList.add(ERR_CLASS);
 
   if (!keyword) {
     firstRenderPopularMovies(1);
-    // errorBlockRef.classList.remove(ERR_CLASS);
     return;
   }
 
@@ -95,8 +94,25 @@ function onMovieClick(e) {
 
   const movieId = e.target.parentElement.dataset.id;
 
-  getMoviesByID(movieId).then(r => {
-    movieModal.innerHTML = makeMarkupMovie(r);
-    modalBackdrop.classList.remove('is-hidden');
-  });
+  renderMoviesByID(movieId);
+  window.addEventListener('keydown', closeMovieModalByEsc, { once: true });
+  modalBackdrop.addEventListener('click', closeMovieModalByClickBackdrop);
+}
+
+function closeMovieModalByEsc(e) {
+  if (e.code === 'Escape') {
+    toggleModal();
+  }
+}
+
+function closeMovieModalByClickBackdrop(e) {
+  if (e.target === e.currentTarget) {
+    toggleModal();
+    modalBackdrop.removeEventListener('click', closeMovieModalByClickBackdrop);
+  }
+}
+
+function toggleModal() {
+  document.body.classList.toggle('modal-open');
+  modalBackdrop.classList.toggle('is-hidden');
 }

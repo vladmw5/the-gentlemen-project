@@ -48,14 +48,27 @@
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.filmcard-modal__close-icon {
+.filmcard__case {
+  @include tablet {
+    display: flex;
+  }
+}
+
+.filmcard-modal__close-btn {
   position: absolute;
-  fill: #000;
 
   top: 16px;
   right: 16px;
+
+  padding: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.filmcard-modal__close-icon {
   width: 20px;
   height: 20px;
+  fill: #000;
 }
 
 .filmcard__poster {
@@ -108,8 +121,7 @@
 .stats__stat-value--highlighted {
   display: inline-flex;
   background-color: $background-color-reting;
-  width: 36px;
-  height: 16px;
+  padding: 2px 12px;
   justify-content: center;
   align-items: center;
   line-height: 1.33;
