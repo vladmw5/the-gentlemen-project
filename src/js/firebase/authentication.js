@@ -4,11 +4,13 @@ import { createUser, signInUser, exitUser } from './service'
 export const registration = document.querySelector('#registration');
 export const authorization = document.querySelector('#authorization');
 const exitBtn = document.querySelector('#exit-btn');
+const exitBtnMobile = document.querySelector('#exit-btn-mobile');
 
 
 registration.addEventListener('submit', onSubmitRegistration);
 authorization.addEventListener('submit', onSubmitAuthorization);
 exitBtn.addEventListener('click', exitUser);
+exitBtnMobile.addEventListener('click', exitUser);
 
 function onSubmitRegistration(e) {
     e.preventDefault();
