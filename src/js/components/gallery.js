@@ -23,7 +23,7 @@ const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
 // event Listener
 document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
 
-form.addEventListener('submit', onFormSubmit);
+inputSearchMovie?.addEventListener('input', onFormInput);
 gallery.addEventListener('click', onMovieClick);
 modalCloseBtn.addEventListener('click', toggleModal);
 
@@ -115,5 +115,4 @@ function closeMovieModalByClickBackdrop(e) {
 function toggleModal() {
   document.body.classList.toggle('modal-open');
   modalBackdrop.classList.toggle('is-hidden');
-  console.log('ddd');
 }
