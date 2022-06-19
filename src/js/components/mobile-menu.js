@@ -12,3 +12,5 @@ function toggleMobileMenu() {
   backdrop.classList.toggle('backdrop-mobile');
   bodyEl.classList.toggle('body-mobile-window');
 }
+
+export { backdrop, mobileModal };

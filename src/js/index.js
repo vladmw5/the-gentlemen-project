@@ -5,3 +5,5 @@ import './firebase/authentication';
 import './components/authentication-modal';
 import './components/pagination-bar';
 import './components/my-library-btn';
+import './components/authentication-mobile';
+

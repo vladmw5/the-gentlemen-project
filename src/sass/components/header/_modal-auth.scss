@@ -1,4 +1,4 @@
-.backdrop {
+.backdrop-sign {
    position: fixed;
    top: 0;
    left: 0;
@@ -7,7 +7,21 @@
    background-color: rgba(0, 0, 0, 0.25);
 }
 
-.backdrop.is-bck-hidden{
+.backdrop-sign.is-bck-hidden{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.backdrop-log {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.backdrop-log.is-bck-hidden {
     opacity: 0;
     pointer-events: none;
 }
@@ -97,7 +111,18 @@
     text-transform: uppercase;
 }
 
-.modal-button {
+.modal-button-sign {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.modal-button-log {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -110,7 +135,14 @@
 
 .modal-btn__icon {
     fill: #000;
-    border: 2px dashed #2a2a2a;
+    background-color: #fff;
+
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    
+        &:hover,
+        &:focus {
+            fill: #FF6B01;
+        }
 }
 
 //Додавання та видалення реєстрації та авторизації на модалці

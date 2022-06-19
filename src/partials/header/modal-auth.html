@@ -1,8 +1,8 @@
-<!-- Модальне вікно авторизації-->
+<!-- Модальне вікно реєстрації-->
 
-<div class="backdrop is-bck-hidden">
+<div class="backdrop-sign is-bck-hidden">
   <div class="modal">
-    <button type="button" class="modal-button">
+    <button type="button" class="modal-button-sign">
       <svg class="modal-btn__icon" width="14" height="14">
         <use href="./images/symbol-defs.svg#icon-cross"></use>
       </svg>
@@ -29,7 +29,18 @@
         </div>
       </form>
     </div>
+  </div>
+</div>
 
+<!-- Модальне вікно авторизації-->
+
+<div class="backdrop-log is-bck-hidden">
+  <div class="modal">
+    <button type="button" class="modal-button-log">
+      <svg class="modal-btn__icon" width="14" height="14">
+        <use href="./images/symbol-defs.svg#icon-cross"></use>
+      </svg>
+    </button>
     <div>
       <form class="modal__form authorization-js" id="authorization">
         <p>authorization</p>
