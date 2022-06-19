@@ -4,8 +4,6 @@ const libraryEl = document.querySelector('.link-library-js');
 
 document.addEventListener('DOMContentLoaded', onCLickListNav);
 
-console.log(ulNavEl);
-
 function onCLickListNav() {
   homeEl.classList.add('nav__link--before');
   if (window.location.pathname === '/the-gentlemen-project/my-library.html') {
