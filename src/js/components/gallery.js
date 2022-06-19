@@ -11,14 +11,12 @@ import {
 
 // vars
 export let firstTime = true;
-const ERR_CLASS = 'hidden-err';
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 
 // refs
 const gallery = document.querySelector('.gallery__list');
 const movieCase = document.querySelector('.filmcard__case');
 const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
-const notifycation = document.querySelector('.hero-form__text');
 const inputSearchMovie = document.querySelector('.hero-form__input');
 const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
 
@@ -27,6 +25,7 @@ document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
 
 inputSearchMovie?.addEventListener('input', onFormInput);
 gallery.addEventListener('click', onMovieClick);
+modalCloseBtn.addEventListener('click', toggleModal);
 
 // init
 const spinner = new Spinner(optsForSpinner).spin(gallery);
@@ -37,9 +36,9 @@ export function firstRenderPopularMovies(page) {
     makeMarkupGallery(r.results)
       .then(r => {
         gallery.innerHTML = r;
-        renderPaginationBar(r.total_pages, page);
       })
       .catch(console.log);
+    renderPaginationBar(r.total_pages, page);
   });
 }
 
@@ -49,16 +48,16 @@ export function renderMoviesByKeyword(keyword, page) {
     makeMarkupGallery(r.results)
       .then(r => {
         if (r.length === 0) {
-          document.querySelector('.pagination-bar').innerHTML = '';
+          document.querySelector('.pagination-bar__list').innerHTML = '';
           gallery.innerHTML =
             '<p class="notifycation__text">No results! Sorry =(</p>';
           return;
         }
 
         gallery.innerHTML = r;
-        renderPaginationBar(r.total_pages, page);
       })
       .catch(console.log);
+    renderPaginationBar(r.total_pages, page);
   });
 }
 
@@ -73,7 +72,6 @@ function renderMoviesByID(movieId) {
 
 function onFormInput(e) {
   const keyword = e.target.value.trim();
-  notifycation.classList.add(ERR_CLASS);
 
   if (!keyword) {
     firstRenderPopularMovies(1);
@@ -97,7 +95,6 @@ function onMovieClick(e) {
   const movieId = e.target.parentElement.dataset.id;
 
   renderMoviesByID(movieId);
-  // modalCloseBtn.addEventListener('click', toggleModal(), { once: true });
   window.addEventListener('keydown', closeMovieModalByEsc, { once: true });
   modalBackdrop.addEventListener('click', closeMovieModalByClickBackdrop);
 }
@@ -118,4 +115,5 @@ function closeMovieModalByClickBackdrop(e) {
 function toggleModal() {
   document.body.classList.toggle('modal-open');
   modalBackdrop.classList.toggle('is-hidden');
+  console.log('ddd');
 }

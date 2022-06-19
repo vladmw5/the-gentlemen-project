@@ -121,8 +121,7 @@
 .stats__stat-value--highlighted {
   display: inline-flex;
   background-color: $background-color-reting;
-  width: 36px;
-  height: 16px;
+  padding: 2px 12px;
   justify-content: center;
   align-items: center;
   line-height: 1.33;
