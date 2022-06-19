@@ -8,4 +8,4 @@ import './components/authentication-modal';
 import './components/pagination-bar';
 import './components/my-library-btn';
 import './components/authentication-mobile';
-
+import './components/btn-to-top';
