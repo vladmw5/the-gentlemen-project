@@ -77,9 +77,21 @@
 .modal-nav-list__btn {
   background-color: transparent;
 }
+.nav__link--before {
+  position: relative;
+  &::before {
+    content: ' ';
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: $warning-color;
+    display: block;
+    bottom: -3px;
+  }
+}
 
 // Добавив клас для зникаючих кнопок мобільного меню
 
-.is-mobile-hidden{
+.is-mobile-hidden {
   display: none;
 }
