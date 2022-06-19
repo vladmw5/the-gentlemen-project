@@ -31,6 +31,8 @@ const optsForSpinner = {
 
 // vars
 export let firstTime = true;
+const ERR_CLASS = 'hidden-err';
+export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 
 // refs
 const form = document.querySelector('.hero-form');
@@ -38,13 +40,12 @@ const gallery = document.querySelector('.gallery__list');
 const movieModal = document.querySelector('.filmcard-modal');
 const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
 const errorBlockRef = document.querySelector('.hero-form__text');
-const ERR_CLASS = 'hidden-err';
-export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
+const inputSearchMovie = document.querySelector('.hero-form__input');
 
 // event Listener
 document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
 
-form.addEventListener('submit', onFormSubmit);
+inputSearchMovie?.addEventListener('input', onFormInput);
 gallery.addEventListener('click', onMovieClick);
 
 // init
@@ -68,14 +69,13 @@ export function renderMoviesByKeyword(keyword, page) {
   });
 }
 
-function onFormSubmit(e) {
-  e.preventDefault();
-
-  const keyword = e.target.elements.text.value.trim();
+function onFormInput(e) {
+  const keyword = e.target.value.trim();
   errorBlockRef.classList.add(ERR_CLASS);
 
   if (!keyword) {
-    errorBlockRef.classList.remove(ERR_CLASS);
+    firstRenderPopularMovies(1);
+    // errorBlockRef.classList.remove(ERR_CLASS);
     return;
   }
 
@@ -84,8 +84,6 @@ function onFormSubmit(e) {
   renderMoviesByKeyword(keyword, 1);
 
   firstTime = false;
-
-  // e.target.reset();
 }
 
 function onMovieClick(e) {
