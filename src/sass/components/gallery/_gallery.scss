@@ -30,7 +30,7 @@
 
   @include desktop {
     margin: 16px 8px;
-    width: calc((100% - 48px) / 3);
+    width: calc((100% - 64px) / 4);
   }
 }
 
@@ -51,8 +51,7 @@
   color: #000000;
 
   @include desktop {
-    font-size: 20px;
-    line-height: 1.2;
+    font-size: 16px;
   }
 }
 
@@ -65,8 +64,7 @@
   color: #ff6b08;
 
   @include desktop {
-    font-size: 20px;
-    line-height: 1.2;
+    font-size: 14px;
   }
 }
 
@@ -81,4 +79,8 @@
   text-transform: uppercase;
 
   color: #ffffff;
+}
+
+.hidden-err {
+  display: none;
 }
