@@ -1,3 +1,5 @@
+import './components/header-line';
+import './components/burger-line';
 import './components/mobile-menu';
 import './components/gallery';
 import './components/footer-modal';
