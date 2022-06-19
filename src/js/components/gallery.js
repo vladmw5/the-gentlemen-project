@@ -38,6 +38,8 @@ const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
 form.addEventListener('submit', onFormSubmit);
 gallery.addEventListener('click', onMovieClick);
 
+
+
 // init
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 

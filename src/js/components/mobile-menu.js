@@ -1,5 +1,5 @@
 const btnOpen = document.querySelector('[data-open]');
-const mobileModal = document.querySelector('[data-modal-burger]');// видалити-burger//TODO
+const mobileModal = document.querySelector('[data-modal]');
 const closeBtn = document.querySelector('[data-close]');
 const bodyEl = document.querySelector('body');
 const backdrop = document.querySelector('.mobile-menu-window');
