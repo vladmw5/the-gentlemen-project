@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const IMG_URL = 'https://image.tmdb.org/t/p/w400';
+
 async function makeMarkupGallery(array) {
   const genres = await axios
     .get(
@@ -21,14 +23,24 @@ async function makeMarkupGallery(array) {
         `
         <li class="card">
           <a class="card__link" href="" data-id="${id}">
-            <img class="card__img" src="https://image.tmdb.org/t/p/w400${poster_path}" alt="${overview}" />
-            <p class="card__name">${title}</p>
-            <p class="card__description">${genres
-              .filter(el => genre_ids.includes(el.id))
-              .map(el => el.name)
-              .join(', ')} | ${release_date.slice(0, 4)}
+            <img class="card__img" src="${
+              poster_path !== null
+                ? IMG_URL + poster_path
+                : './images/template-poster-movie.jpg'
+            }" alt="${overview !== '' ? overview : 'No info!'}" />
+            <p class="card__name">${title ?? 'No info about title!'}</p>
+            <p class="card__description">${
+              genre_ids != false
+                ? genres
+                    .filter(el => genre_ids.includes(el.id))
+                    .map(el => el.name)
+                    .join(', ')
+                : 'No info about genres!'
+            } | ${release_date?.slice(0, 4) ?? 'No info about year!'}
             </p>
-            <span class="card__vote">${vote_average}</span>
+            <span class="card__vote">${
+              vote_average !== 0 ? vote_average : 'No votes'
+            }</span>
           </a>
         </li>`
     )
@@ -54,16 +66,22 @@ function makeMarkupMovie(array) {
         <img
           data-id="${id}"
           class="filmcard__poster"
-          src="https://image.tmdb.org/t/p/w400${poster_path}"
-          alt="${overview}"
+          src="https://image.tmdb.org/t/p/w400${
+            poster_path !== null
+              ? IMG_URL + poster_path
+              : './images/template-poster-movie.jpg'
+          }"
+          alt="${overview !== '' ? overview : 'No info!'}"
         />
         <div class="filmcard__wrapper">
-          <p class="filmcard__title">${title}</p>
+          <p class="filmcard__title">${title ?? 'No info about title!'}</p>
           <table class="filmcard__stats">
             <tr class="stats__row">
               <td class="stats__stat-name">Vote / Votes</td>
               <td class="stats__stat-value">
-                <span class="votes stats__stat-value--highlighted">${vote_average}</span> /
+                <span class="votes stats__stat-value--highlighted">${
+                  vote_average === '0' ? vote_average : 'No votes!'
+                }</span> /
                 <span class="total-votes">${vote_count}</span>
               </td>
             </tr>
@@ -77,14 +95,16 @@ function makeMarkupMovie(array) {
             </tr>
             <tr class="stats__row">
               <td class="stats__stat-name">Genre</td>
-              <td class="stats__stat-value">${genres
-                .map(el => el.name)
-                .join(', ')}</td>
+              <td class="stats__stat-value">${
+                genres != false
+                  ? genres.map(el => el.name).join(', ')
+                  : 'No info about genres!'
+              }</td>
             </tr>
           </table>
           <p class="filmcard__header">About</p>
           <p class="filmcard__about">
-            ${overview}
+            ${overview ?? 'No info about movie!'}
           </p>
           <div class="button-wrapper">
             <button type="button" class="filmcard__btn" data-add-to-watched-btn>

@@ -9,19 +9,21 @@ export default markup = {
       </svg>
     </div>`;
   },
-  number(n, isActive = false) {
+  number(n, isActive = false, hideOnMobile = false) {
     return /*html*/ `<li
       class="pagination-bar__element pagination-bar__number ${
         isActive ? 'pagination-bar__element--active' : ''
-      }"
+      } ${hideOnMobile ? 'pagination-bar__element--mobile-hidden' : ''}"
       data-page="${n}"
       data-type="number"
     >
-      <span>${n}</span>
+      <span class='no-click'>${n}</span>
     </li>`;
   },
-  dots() {
-    return /*html*/ `<li class="pagination-bar__element pagination-bar__dots" data-type="dots"> 
+  dots(hideOnMobile = false) {
+    return /*html*/ `<li class="pagination-bar__element pagination-bar__dots ${
+      hideOnMobile ? 'pagination-bar__element--mobile-hidden' : ''
+    }" data-type="dots"> 
       <span>...</span>
     </li>`;
   },

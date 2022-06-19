@@ -1,11 +1,12 @@
 import { Spinner } from 'spin.js';
 
-import { makeMarkupGallery, makeMarkupMovie } from '../service/markup';
+import { renderPaginationBar } from './pagination-bar';
+import { makeMarkupGallery, makeMarkupMovie } from '../service/gallery-markup';
 import {
   getPopularMovies,
   getMoviesByKeyword,
   getMoviesByID,
-} from '../service/requests';
+} from '../service/gallery-requests';
 
 const optsForSpinner = {
   lines: 8, // The number of lines to draw
@@ -28,42 +29,63 @@ const optsForSpinner = {
   position: 'absolute', // Element positioning
 };
 
+// vars
+export let firstTime = true;
+
 // refs
 const form = document.querySelector('.hero-form');
 const gallery = document.querySelector('.gallery__list');
 const movieModal = document.querySelector('.filmcard-modal');
 const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
+const errorBlockRef = document.querySelector('.hero-form__text');
+const ERR_CLASS = 'hidden-err';
+export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 
 // event Listener
+document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
+
 form.addEventListener('submit', onFormSubmit);
 gallery.addEventListener('click', onMovieClick);
 
 // init
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
-getPopularMovies(1).then(r => {
-  makeMarkupGallery(r).then(r => {
-    gallery.innerHTML = r;
-  });
-});
-
 // functions
+export function firstRenderPopularMovies(page) {
+  getPopularMovies(page).then(r => {
+    makeMarkupGallery(r.results).then(r => {
+      gallery.innerHTML = r;
+    });
+    renderPaginationBar(r.total_pages, page);
+  });
+}
+
+export function renderMoviesByKeyword(keyword, page) {
+  sessionStorage.setItem(SESSION_STORAGE_USER_KEYWORD_KEY, keyword);
+  getMoviesByKeyword(keyword, page).then(r => {
+    makeMarkupGallery(r.results).then(r => (gallery.innerHTML = r));
+    renderPaginationBar(r.total_pages, page);
+  });
+}
+
 function onFormSubmit(e) {
   e.preventDefault();
 
   const keyword = e.target.elements.text.value.trim();
+  errorBlockRef.classList.add(ERR_CLASS);
 
   if (!keyword) {
+    errorBlockRef.classList.remove(ERR_CLASS);
     return;
   }
 
   const spinner = new Spinner(optsForSpinner).spin(gallery);
 
-  getMoviesByKeyword(keyword, 1).then(r => {
-    makeMarkupGallery(r).then(r => (gallery.innerHTML = r));
-  });
+  renderMoviesByKeyword(keyword, 1);
 
-  e.target.reset();
+  firstTime = false;
+
+  // e.target.reset();
 }
 
 function onMovieClick(e) {
