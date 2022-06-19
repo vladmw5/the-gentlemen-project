@@ -8,7 +8,7 @@ console.log(ulNavEl);
 
 function onCLickListNav() {
   homeEl.classList.add('nav__link--before');
-  if (window.location.pathname === '/my-library.html') {
+  if (window.location.pathname === '/the-gentlemen-project/my-library.html') {
     return addLineToListLibrary();
   }
 }
