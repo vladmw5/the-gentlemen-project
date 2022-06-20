@@ -21,6 +21,7 @@ import {
 // vars
 export let firstTime = true;
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
+let selectedIdGenre = '';
 
 // refs
 const gallery = document.querySelector('.gallery__list');
@@ -50,9 +51,8 @@ modalCloseBtn.addEventListener('click', toggleModal);
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
 // functions
-export function firstRenderPopularMovies(page) {
-  console.log('me');
-  getPopularMovies(page).then(r => {
+export function firstRenderPopularMovies(page, genreId) {
+  getPopularMovies(page, selectedIdGenre).then(r => {
     makeMarkupGallery(r.results)
       .then(r => {
         gallery.innerHTML = r;
@@ -145,6 +145,17 @@ function onSlidesMovieClick(e) {
 
   window.addEventListener('keydown', closeMovieModalByEsc, { once: true });
   modalBackdrop.addEventListener('click', closeMovieModalByClickBackdrop);
+}
+
+export function onGenreClick(e) {
+  e.preventDefault();
+
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
+
+  selectedIdGenre = Number(e.target.dataset.id);
+  firstRenderPopularMovies(1, selectedIdGenre);
 }
 
 function closeMovieModalByEsc(e) {

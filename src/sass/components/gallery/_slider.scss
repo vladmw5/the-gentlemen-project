@@ -22,15 +22,15 @@
 
 .swiper-container {
   position: relative;
-  width: 440px;
+  max-width: 440px;
   margin-bottom: 60px;
 
   @include tablet {
-    width: 700px;
+    max-width: 700px;
   }
 
   @include desktop {
-    width: 1215px;
+    max-width: 1215px;
   }
 }
 
