@@ -1,5 +1,5 @@
 import { getMoviesByID } from '../service/gallery-requests';
-
+import { Notify } from 'notiflix';
 import {
   sendDataToFirebase,
   watchedWay,
@@ -16,22 +16,40 @@ async function onFilmcardModalClick(event) {
   if (event.target.nodeName !== 'BUTTON') return;
 
   if (userId === null) {
-    alert('you are not authorized to perform this action');
+    return Notify.failure(
+      'You are not authorized to perform this action. Please, Sign Up or Log In'
+    );
   }
 
   const posterRef = filmcardModal.querySelector('.filmcard__poster');
 
   const currentFilmId = posterRef?.dataset.id;
-  const genre_ids = posterRef?.dataset.genreIds.split('-');
+  const genre_ids = posterRef?.dataset.genreIds
+    .split('-')
+    .map(id => Number(id));
 
   const data = await getMoviesByID(currentFilmId);
 
   const dataToSend = createData(data, genre_ids);
 
   if (event.target.hasAttribute('data-add-to-watched-btn')) {
-    sendDataToFirebase(dataToSend, watchedWay);
+    sendDataToFirebase(dataToSend, watchedWay)
+      .then(() => {
+        Notify.success(
+          'Your film has been successfully added to your Watched List!'
+        );
+      })
+      .catch(e => {
+        Notify.failure('Whoops, something went wrong');
+      });
   } else if (event.target.hasAttribute('data-add-to-queue-btn')) {
-    sendDataToFirebase(dataToSend, queueWay);
+    sendDataToFirebase(dataToSend, queueWay)
+      .then(() => {
+        Notify.success('Your film has been successfully added to your Queue!');
+      })
+      .catch(e => {
+        Notify.failure('Whoops, something went wrong');
+      });
   } else return;
 }
 
@@ -50,6 +68,7 @@ function createData(
     vote_average,
     vote_count,
     popularity,
+    release_date,
   },
   genre_ids,
   type = 'id'
@@ -65,6 +84,7 @@ function createData(
       vote_count,
       popularity,
       genre_ids,
+      release_date,
     },
     id: userId,
     type,
