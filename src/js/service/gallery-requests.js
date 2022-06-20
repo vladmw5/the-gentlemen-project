@@ -3,9 +3,11 @@ const axios = require('axios');
 const URL = 'https://api.themoviedb.org/3';
 const KEY = '83315ca553e38676f05e28ed10d08b23';
 
-async function getPopularMovies(page, genreId = '') {
+async function getPopularMovies(page, genreId = '', descByRating = false) {
   const response = await axios.get(
-    `${URL}/discover/movie?api_key=${KEY}&page=${page}&with_genres=${genreId}`
+    `${URL}/discover/movie?api_key=${KEY}&page=${page}&with_genres=${genreId}${
+      descByRating ? '&sort_by=vote_average.desc' : ''
+    }`
   );
   return response.data;
 }

@@ -22,6 +22,7 @@ import {
 export let firstTime = true;
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 let selectedIdGenre = '';
+let sortMovieDescendingByRatingStatus = false;
 
 // refs
 const gallery = document.querySelector('.gallery__list');

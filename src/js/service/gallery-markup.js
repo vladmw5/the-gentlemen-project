@@ -34,10 +34,12 @@ async function makeMarkupGallery(array) {
                     .map(el => el.name)
                     .join(', ')
                 : 'No info about genres!'
-            } | ${release_date?.slice(0, 4) ?? 'No info about year!'}
+            } | ${release_date?.slice(0, 4) || 'No info about year!'}
             </p>
             <span class="card__vote">${
-              vote_average !== 0
+              vote_average === 10
+                ? vote_average
+                : vote_average !== 0
                 ? vote_average.toString().padEnd(3, '.0')
                 : 'No votes'
             }</span>
@@ -78,9 +80,11 @@ function makeMarkupMovie(array) {
               <td class="stats__stat-name">Vote / Votes</td>
               <td class="stats__stat-value">
                 <span class="votes stats__stat-value--highlighted">${
-                  vote_average !== 0
+                  vote_average === 10
+                    ? vote_average
+                    : vote_average !== 0
                     ? vote_average.toString().padEnd(3, '.0')
-                    : 'No votes!'
+                    : 'No votes'
                 }</span> /
                 <span class="total-votes">${vote_count}</span>
               </td>
