@@ -1,16 +1,26 @@
-import { getDataFromFirebase, watchedWay, queueWay } from '../firebase/service';
+import {
+  getDataFromFirebase,
+  watchedWay,
+  queueWay,
+  parseDataBaseResponse,
+} from '../firebase/service';
 import { makeMarkupGallery } from '../service/gallery-markup';
 import { renderPaginationBar } from './pagination-bar';
+import { Notify } from 'notiflix';
+import { auth, onAuthStateChanged } from '../firebase/service/index';
 
 const refs = {
   watched: document.querySelector('[data-btn-watched]'),
   queue: document.querySelector('[data-btn-queue]'),
   gallery: document.querySelector('.gallery__list'),
+  note: document.querySelector('.notifycation__text'),
 };
 
 const toAdd = 'is-header-lib-active';
 
-document.addEventListener('libPageLoaded', whenLibraryPageIsLoaded);
+document.addEventListener('libPageLoaded', () => {
+  onAuthStateChanged(auth, whenLibraryPageIsLoaded);
+});
 refs.watched?.addEventListener('click', onWatchedBtnClick);
 refs.queue?.addEventListener('click', onQueueBtnClick);
 
@@ -19,7 +29,12 @@ function whenLibraryPageIsLoaded() {
     .then(parseDataBaseResponse)
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
-    .catch(console.error);
+    .catch(() => {
+      // Notify.info('Your Watched List is empty. You can add films on Home page');
+      refs.gallery.innerHTML =
+        '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
+      document.querySelector('.spinner').remove();
+    });
 }
 
 function onWatchedBtnClick() {
@@ -29,7 +44,11 @@ function onWatchedBtnClick() {
     .then(parseDataBaseResponse)
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
-    .catch(console.error);
+    .catch(() => {
+      refs.gallery.innerHTML =
+        '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
+      // Notify.info('Your Watched List is empty. You can add films on Home page');
+    });
 }
 
 function onQueueBtnClick() {
@@ -39,20 +58,15 @@ function onQueueBtnClick() {
     .then(parseDataBaseResponse)
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
-    .catch(console.error);
-}
-
-function parseDataBaseResponse(snapshot) {
-  if (!snapshot.exists()) {
-    throw new Error('Data base snapshot is empty');
-  }
-
-  return Promise.resolve(
-    Object.values(snapshot.val()).map(val => val.movieData)
-  );
+    .catch(() => {
+      refs.gallery.innerHTML =
+        '<p class="notifycation__text notifycation__text--library">Your Queue is empty. You can add films on Home page</p>';
+      // Notify.info('Your Watched List is empty. You can add films on Home page');
+    });
 }
 
 function renderRetrievedMarkup(markup) {
   refs.gallery.innerHTML = markup;
-  renderPaginationBar(1, 1);
 }
+
+export { renderRetrievedMarkup };

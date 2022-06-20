@@ -1,4 +1,4 @@
-import markupGenerator from '../service/pagination-bar-markup';
+// import { markup } from '../service/pagination-bar-markup';
 import {
   firstTime,
   firstRenderPopularMovies,
@@ -6,6 +6,46 @@ import {
   SESSION_STORAGE_USER_KEYWORD_KEY,
 } from './gallery';
 
+const markup = {
+  leftArrow() {
+    return /*html*/ `<div
+      class="pagination-bar__element pagination-bar__control pagination-bar__left"
+      data-type="left"
+    >
+      <svg class="arrow-icon arrow-left-icon">
+        <use href="./images/symbol-defs.svg#icon-arrow-left2"></use>
+      </svg>
+    </div>`;
+  },
+  number(n, isActive = false, hideOnMobile = false) {
+    return /*html*/ `<li
+      class="pagination-bar__element pagination-bar__number ${
+        isActive ? 'pagination-bar__element--active' : ''
+      } ${hideOnMobile ? 'pagination-bar__element--mobile-hidden' : ''}"
+      data-page="${n}"
+      data-type="number"
+    >
+      <span class='no-click'>${n}</span>
+    </li>`;
+  },
+  dots(hideOnMobile = false) {
+    return /*html*/ `<li class="pagination-bar__element pagination-bar__dots ${
+      hideOnMobile ? 'pagination-bar__element--mobile-hidden' : ''
+    }" data-type="dots"> 
+      <span>...</span>
+    </li>`;
+  },
+  rightArrow() {
+    return /*html*/ `<div
+      class="pagination-bar__element pagination-bar__control pagination-bar__right"
+      data-type="right"
+    >
+      <svg class="arrow-icon arrow-right-icon">
+        <use href="./images/symbol-defs.svg#icon-arrow-right2"></use>
+      </svg>
+    </div>`;
+  },
+};
 const BAR_HIDDEN_CLASS = 'pagination-bar__element--hidden';
 
 const paginationBarRef = document.querySelector('.pagination-bar__list');
@@ -62,6 +102,8 @@ export function renderPaginationBar(totalPages, currentPage) {
   let pageBefore = currentPage - 2;
   let pageAfter = currentPage + 2;
 
+  if (totalPages >= 500) totalPages = 500;
+
   leftArrowRef.classList.add(BAR_HIDDEN_CLASS);
   rightArrowRef.classList.add(BAR_HIDDEN_CLASS);
 
@@ -72,9 +114,9 @@ export function renderPaginationBar(totalPages, currentPage) {
 
   //Отрисовка числа 1 и ... после неё, если надо
   if (currentPage > 2) {
-    toInsert += markupGenerator.number(1, false, true);
+    toInsert += markup.number(1, false, true);
     if (currentPage > 4) {
-      toInsert += markupGenerator.dots(true);
+      toInsert += markup.dots(true);
     }
   }
 
@@ -102,18 +144,18 @@ export function renderPaginationBar(totalPages, currentPage) {
     }
 
     if (i != currentPage) {
-      toInsert += markupGenerator.number(i);
+      toInsert += markup.number(i);
     } else {
-      toInsert += markupGenerator.number(i, true);
+      toInsert += markup.number(i, true);
     }
   }
 
   //Отрисовка числа последней страницы и ... до, если надо
   if (currentPage < totalPages - 1) {
     if (currentPage < totalPages - 3) {
-      toInsert += markupGenerator.dots(true);
+      toInsert += markup.dots(true);
     }
-    toInsert += markupGenerator.number(totalPages, false, true);
+    toInsert += markup.number(totalPages, false, true);
   }
 
   //Если текущая страница меньше первой, то должна быть отрисована кнопка вперёд

@@ -1,13 +1,11 @@
 import axios from 'axios';
 
+import { getMoviesByGenres } from './gallery-requests';
+
 const IMG_URL = 'https://image.tmdb.org/t/p';
 
 async function makeMarkupGallery(array) {
-  const genres = await axios
-    .get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=83315ca553e38676f05e28ed10d08b23&language=en-US`
-    )
-    .then(r => r.data.genres);
+  const genres = await getMoviesByGenres();
 
   return array
     .map(
@@ -36,10 +34,12 @@ async function makeMarkupGallery(array) {
                     .map(el => el.name)
                     .join(', ')
                 : 'No info about genres!'
-            } | ${release_date?.slice(0, 4) ?? 'No info about year!'}
+            } | ${release_date?.slice(0, 4) || 'No info about year!'}
             </p>
             <span class="card__vote">${
-              vote_average !== 0
+              vote_average === 10
+                ? vote_average
+                : vote_average !== 0
                 ? vote_average.toString().padEnd(3, '.0')
                 : 'No votes'
             }</span>
@@ -50,6 +50,79 @@ async function makeMarkupGallery(array) {
 }
 
 function makeMarkupMovie(array) {
+  const {
+    id,
+    title,
+    original_title,
+    poster_path,
+    genres,
+    overview,
+    vote_average,
+    vote_count,
+    popularity,
+  } = array;
+  return `
+        <img
+          data-id="${id}"
+          data-genre-ids="${genres.map(el => el.id).join('-')}"
+          class="filmcard__poster"
+          src="${
+            poster_path !== null
+              ? IMG_URL + '/w400' + poster_path
+              : 'https://upload.wikimedia.org/wikipedia/commons/b/ba/No_image_available_400_x_600.svg'
+          }"
+          alt="${overview !== '' ? overview : 'No info!'}"
+        />
+        <div class="filmcard__wrapper">
+          <p class="filmcard__title">${title ?? 'No info about title!'}</p>
+          <table class="filmcard__stats">
+            <tr class="stats__row">
+              <td class="stats__stat-name">Vote / Votes</td>
+              <td class="stats__stat-value">
+                <span class="votes stats__stat-value--highlighted">${
+                  vote_average === 10
+                    ? vote_average
+                    : vote_average !== 0
+                    ? vote_average.toString().padEnd(3, '.0')
+                    : 'No votes'
+                }</span> /
+                <span class="total-votes">${vote_count}</span>
+              </td>
+            </tr>
+            <tr class="stats__row">
+              <td class="stats__stat-name">Popularity</td>
+              <td class="stats__stat-value">${popularity}</td>
+            </tr>
+            <tr class="stats__row">
+              <td class="stats__stat-name">Original Title</td>
+              <td class="original-title stats__stat-value">${original_title}</td>
+            </tr>
+            <tr class="stats__row">
+              <td class="stats__stat-name">Genre</td>
+              <td class="stats__stat-value">${
+                genres != false
+                  ? genres.map(el => el.name).join(', ')
+                  : 'No info about genres!'
+              }</td>
+            </tr>
+          </table>
+          <p class="filmcard__header">About</p>
+          <p class="filmcard__about">
+            ${overview ?? 'No info about movie!'}
+          </p>
+          <div class="button-wrapper">
+            <button type="button" class="filmcard__btn" data-add-to-watched-btn>
+              Add to<br />
+              Watched
+            </button>
+            <button type="button" class="filmcard__btn" data-add-to-queue-btn>
+              Add to Queue
+            </button>
+          </div>
+        </div>`;
+}
+
+function makeMarkupMovie2(array) {
   const {
     id,
     title,
@@ -109,12 +182,9 @@ function makeMarkupMovie(array) {
             ${overview ?? 'No info about movie!'}
           </p>
           <div class="button-wrapper">
-            <button type="button" class="filmcard__btn" data-add-to-watched-btn>
-              Add to<br />
-              Watched
-            </button>
-            <button type="button" class="filmcard__btn" data-add-to-queue-btn>
-              Add to Queue
+            <button type="button" class="filmcard__btn" data-remove-btn>
+              Remove from <br />
+              My Library
             </button>
           </div>
         </div>`;
@@ -123,7 +193,7 @@ function makeMarkupMovie(array) {
 function makeMarkupMovieForSlider(array) {
   let markup = '';
 
-  for (let i = 0; i < 9; i += 1) {
+  for (let i = 0; i < 15; i += 1) {
     const { id, overview, backdrop_path } = array[i];
     markup += `
         <div class="swiper-slide">
@@ -136,4 +206,9 @@ function makeMarkupMovieForSlider(array) {
   return markup;
 }
 
-export { makeMarkupGallery, makeMarkupMovie, makeMarkupMovieForSlider };
+export {
+  makeMarkupGallery,
+  makeMarkupMovie,
+  makeMarkupMovieForSlider,
+  makeMarkupMovie2,
+};

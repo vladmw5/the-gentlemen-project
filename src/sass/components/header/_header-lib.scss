@@ -104,14 +104,14 @@
     cursor: pointer;
     transition: transform 250ms $cubic, filter 250ms $cubic,
       border-color 250ms $cubic, color 250ms $cubic;
-    transform: scale(0.9);
+    transform: scale(1);
 
     color: $primary-color-text;
     background-color: transparent;
 
     &:hover,
     &:focus {
-      transform: scale(1);
+      transform: scale(1.1);
 
       border-color: #fff;
       color: #fff;

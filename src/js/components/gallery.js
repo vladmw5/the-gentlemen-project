@@ -1,4 +1,5 @@
 import { Spinner } from 'spin.js';
+import debounce from 'lodash.debounce';
 
 import Swiper from 'swiper/swiper-bundle.min.js';
 // import 'swiper/swiper-bundle.min.css';
@@ -9,6 +10,7 @@ import { renderPaginationBar } from './pagination-bar';
 import {
   makeMarkupGallery,
   makeMarkupMovie,
+  makeMarkupMovie2,
   makeMarkupMovieForSlider,
 } from '../service/gallery-markup';
 import {
@@ -21,6 +23,9 @@ import {
 // vars
 export let firstTime = true;
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
+let selectedIdGenre = '';
+let sortMovieDescendingByRatingStatus = false;
+let weAreOnLibPage = false;
 
 // refs
 const gallery = document.querySelector('.gallery__list');
@@ -32,11 +37,20 @@ const slideImages = document.querySelector('.swiper-wrapper');
 const swiperContainer = document.querySelector('.swiper-container');
 const swiperTitle = document.querySelector('.swiper-title');
 const swiper = document.querySelector('.swiper');
+const moviesFilter = document.querySelector('.hero-btn-list');
 
 // event Listener
-document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
+document.addEventListener('homePageLoaded', () => {
+  firstRenderPopularMovies(1);
+  weAreOnLibPage = false;
+});
 
-inputSearchMovie?.addEventListener('input', onFormInput);
+document.addEventListener('libPageLoaded', () => {
+  swiper.innerHTML = '';
+  weAreOnLibPage = true;
+});
+
+inputSearchMovie?.addEventListener('input', debounce(onFormInput, 350));
 gallery.addEventListener('click', onMovieClick);
 modalCloseBtn.addEventListener('click', toggleModal);
 
@@ -44,8 +58,8 @@ modalCloseBtn.addEventListener('click', toggleModal);
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
 // functions
-export function firstRenderPopularMovies(page) {
-  getPopularMovies(page).then(r => {
+export function firstRenderPopularMovies(page, genreId) {
+  getPopularMovies(page, selectedIdGenre).then(r => {
     makeMarkupGallery(r.results)
       .then(r => {
         gallery.innerHTML = r;
@@ -84,7 +98,12 @@ function renderMoviesByID(movieId) {
   const spinner = new Spinner(optsForSpinner).spin(gallery);
   getMoviesByID(movieId)
     .then(r => {
-      movieCase.innerHTML = makeMarkupMovie(r);
+      if (weAreOnLibPage) {
+        movieCase.innerHTML = makeMarkupMovie2(r);
+      } else {
+        movieCase.innerHTML = makeMarkupMovie(r);
+      }
+
       document.querySelector('.spinner').remove();
       toggleModal();
     })
@@ -94,12 +113,14 @@ function renderMoviesByID(movieId) {
 function onFormInput(e) {
   slideImages.innerHTML = '';
   swiper.style.display = 'none';
+  moviesFilter.style.display = 'none';
 
   const keyword = e.target.value.trim();
 
   if (!keyword) {
     firstRenderPopularMovies(1);
     swiper.style.display = 'block';
+    moviesFilter.style.display = 'flex';
     return;
   }
 
@@ -140,6 +161,17 @@ function onSlidesMovieClick(e) {
   modalBackdrop.addEventListener('click', closeMovieModalByClickBackdrop);
 }
 
+export function onGenreClick(e) {
+  e.preventDefault();
+
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
+
+  selectedIdGenre = Number(e.target.dataset.id);
+  firstRenderPopularMovies(1, selectedIdGenre);
+}
+
 function closeMovieModalByEsc(e) {
   if (e.code === 'Escape') {
     toggleModal();
@@ -157,3 +189,5 @@ function toggleModal() {
   document.body.classList.toggle('modal-open');
   modalBackdrop.classList.toggle('is-hidden');
 }
+
+export { toggleModal };
