@@ -9,6 +9,7 @@ import { renderPaginationBar } from './pagination-bar';
 import {
   makeMarkupGallery,
   makeMarkupMovie,
+  makeMarkupMovie2,
   makeMarkupMovieForSlider,
 } from '../service/gallery-markup';
 import {
@@ -22,6 +23,7 @@ import {
 export let firstTime = true;
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 let selectedIdGenre = '';
+let weAreOnLibPage = false;
 
 // refs
 const gallery = document.querySelector('.gallery__list');
@@ -37,10 +39,12 @@ const swiper = document.querySelector('.swiper');
 // event Listener
 document.addEventListener('homePageLoaded', () => {
   firstRenderPopularMovies(1);
+  weAreOnLibPage = false;
 });
 
 document.addEventListener('libPageLoaded', () => {
   swiper.innerHTML = '';
+  weAreOnLibPage = true;
 });
 
 inputSearchMovie?.addEventListener('input', onFormInput);
@@ -91,7 +95,12 @@ function renderMoviesByID(movieId) {
   const spinner = new Spinner(optsForSpinner).spin(gallery);
   getMoviesByID(movieId)
     .then(r => {
-      movieCase.innerHTML = makeMarkupMovie(r);
+      if (weAreOnLibPage) {
+        movieCase.innerHTML = makeMarkupMovie2(r);
+      } else {
+        movieCase.innerHTML = makeMarkupMovie(r);
+      }
+
       document.querySelector('.spinner').remove();
       toggleModal();
     })
@@ -175,3 +184,5 @@ function toggleModal() {
   document.body.classList.toggle('modal-open');
   modalBackdrop.classList.toggle('is-hidden');
 }
+
+export { toggleModal };

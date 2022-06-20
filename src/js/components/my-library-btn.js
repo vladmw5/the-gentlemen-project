@@ -60,3 +60,5 @@ function onQueueBtnClick() {
 function renderRetrievedMarkup(markup) {
   refs.gallery.innerHTML = markup;
 }
+
+export { renderRetrievedMarkup };
