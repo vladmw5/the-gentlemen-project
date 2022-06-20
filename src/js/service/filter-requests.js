@@ -1,4 +1,5 @@
 import { getMoviesByGenres } from './gallery-requests';
+import { onGenreClick } from '../components/gallery';
 
 const filterEl = document.querySelector('.filter');
 const listBtnMenu = document.querySelector('[data-list-filter]');
@@ -10,7 +11,7 @@ document.addEventListener('homePageLoaded', () => {
 async function getMarkupGenres() {
   const add = await getMoviesByGenres();
 
-  const array = add.data.genres
+  const array = add
     .map(
       ({ name, id }) => /*html*/ `
       <li class="menu-filter-list_item">
@@ -21,6 +22,5 @@ async function getMarkupGenres() {
 
   listBtnMenu.innerHTML = array;
 
-  document.querySelector('[data-list-filter]',renderMoviesByGenre);
-
+  listBtnMenu.addEventListener('click', onGenreClick);
 }

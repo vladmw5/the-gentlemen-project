@@ -1,13 +1,11 @@
 import axios from 'axios';
 
+import { getMoviesByGenres } from './gallery-requests';
+
 const IMG_URL = 'https://image.tmdb.org/t/p';
 
 async function makeMarkupGallery(array) {
-  const genres = await axios
-    .get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=83315ca553e38676f05e28ed10d08b23&language=en-US`
-    )
-    .then(r => r.data.genres);
+  const genres = await getMoviesByGenres();
 
   return array
     .map(
