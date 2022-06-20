@@ -13,6 +13,9 @@ const leftArrowRef = document.querySelector('.pagination-bar__left');
 const rightArrowRef = document.querySelector('.pagination-bar__right');
 let currentPage = 1;
 
+document.addEventListener('DOMContentLoaded', () => {
+  currentPage = 1;
+});
 paginationBarRef.addEventListener('click', onPaginationBarClick);
 leftArrowRef.addEventListener('click', onLeftArrowClick);
 rightArrowRef.addEventListener('click', onRightArrowClick);

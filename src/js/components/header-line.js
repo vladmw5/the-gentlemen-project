@@ -2,21 +2,15 @@ const navUlEl = document.querySelector('.nav-list-js');
 const homeEl = document.querySelector('.header-home-js');
 const libraryEl = document.querySelector('.header-library-js');
 
-document.addEventListener('DOMContentLoaded', onCLickListNav);
 
-function onCLickListNav() {
-  homeEl.classList.add('nav__link--after');
-  if (window.location.pathname === '/my-library.html') {
-    return addLineToListLibrary();
-  }
-}
+document.addEventListener('homePageLoaded', () => {
+  classListBurger(homeEl, libraryEl);
+});
+document.addEventListener('libPageLoaded', () => {
+  classListBurger(libraryEl, homeEl);
+});
 
-function addLineToListLibrary() {
-  const liEl = navUlEl.children;
-
-  for (const i of liEl) {
-    if (i.classList.contains('nav-list__library'))
-      libraryEl.classList.add('nav__link--after');
-    homeEl.classList.remove('nav__link--after');
-  }
+function classListBurger(add, remove) {
+  add.classList.add('nav__link--after');
+  remove.classList.remove('nav__link--after');
 }
