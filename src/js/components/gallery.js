@@ -140,6 +140,16 @@ function onSlidesMovieClick(e) {
   modalBackdrop.addEventListener('click', closeMovieModalByClickBackdrop);
 }
 
+export function onGenreClick(e) {
+  e.preventDefault();
+
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
+
+  const genreId = e.target.dataset.id;
+}
+
 function closeMovieModalByEsc(e) {
   if (e.code === 'Escape') {
     toggleModal();

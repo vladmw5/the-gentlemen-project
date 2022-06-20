@@ -28,7 +28,8 @@ async function getMoviesByGenres() {
   const response = await axios.get(
     `${URL}/genre/movie/list?api_key=${KEY}&language=en-US`
   );
-  return response;
+  return response.data.genres;
+}
 
 async function getPopularMoviesOfDay() {
   const response = await axios.get(
