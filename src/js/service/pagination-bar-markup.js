@@ -1,4 +1,4 @@
-export default markup = {
+const markup = {
   leftArrow() {
     return /*html*/ `<div
       class="pagination-bar__element pagination-bar__control pagination-bar__left"
@@ -38,3 +38,5 @@ export default markup = {
     </div>`;
   },
 };
+
+export default markup;
