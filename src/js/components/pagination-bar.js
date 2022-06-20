@@ -102,6 +102,8 @@ export function renderPaginationBar(totalPages, currentPage) {
   let pageBefore = currentPage - 2;
   let pageAfter = currentPage + 2;
 
+  if (totalPages >= 500) totalPages = 500;
+
   leftArrowRef.classList.add(BAR_HIDDEN_CLASS);
   rightArrowRef.classList.add(BAR_HIDDEN_CLASS);
 
