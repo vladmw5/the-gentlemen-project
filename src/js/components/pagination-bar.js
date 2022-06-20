@@ -1,4 +1,4 @@
-import markupGenerator from '../service/pagination-bar-markup';
+import { markup } from '../service/pagination-bar-markup';
 import {
   firstTime,
   firstRenderPopularMovies,
@@ -72,9 +72,9 @@ export function renderPaginationBar(totalPages, currentPage) {
 
   //Отрисовка числа 1 и ... после неё, если надо
   if (currentPage > 2) {
-    toInsert += markupGenerator.number(1, false, true);
+    toInsert += markup.number(1, false, true);
     if (currentPage > 4) {
-      toInsert += markupGenerator.dots(true);
+      toInsert += markup.dots(true);
     }
   }
 
@@ -102,18 +102,18 @@ export function renderPaginationBar(totalPages, currentPage) {
     }
 
     if (i != currentPage) {
-      toInsert += markupGenerator.number(i);
+      toInsert += markup.number(i);
     } else {
-      toInsert += markupGenerator.number(i, true);
+      toInsert += markup.number(i, true);
     }
   }
 
   //Отрисовка числа последней страницы и ... до, если надо
   if (currentPage < totalPages - 1) {
     if (currentPage < totalPages - 3) {
-      toInsert += markupGenerator.dots(true);
+      toInsert += markup.dots(true);
     }
-    toInsert += markupGenerator.number(totalPages, false, true);
+    toInsert += markup.number(totalPages, false, true);
   }
 
   //Если текущая страница меньше первой, то должна быть отрисована кнопка вперёд

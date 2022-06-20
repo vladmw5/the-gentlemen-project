@@ -39,4 +39,4 @@ const markup = {
   },
 };
 
-export default markup;
+export { markup };
