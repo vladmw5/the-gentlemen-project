@@ -22,6 +22,7 @@
 
 .card {
   margin-bottom: 20px;
+  transition: transform 500ms $cubic;
 
   @include tablet {
     margin: 16px;
@@ -31,6 +32,10 @@
   @include desktop {
     margin: 16px 8px;
     width: calc((100% - 64px) / 4);
+  }
+
+  &:hover {
+    transform: scale(1.03);
   }
 }
 
