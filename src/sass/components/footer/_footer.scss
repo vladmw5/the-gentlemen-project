@@ -2,7 +2,7 @@
   text-align: center;
   padding-top: 30px;
   padding-bottom: 30px;
-  //   min-width: 320px;
+  margin-top: auto;
 
   background-color: $background-color-footer;
 
@@ -19,6 +19,11 @@
     color: $primary-color-text-footer;
 
     @media screen and(min-width:768px) {
+      font-size: 16px;
+      line-height: 1.18;
+      min-width: 515px;
+    }
+    @media screen and(min-width:1200) {
       font-size: 16px;
       line-height: 1.18;
       min-width: 515px;
