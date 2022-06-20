@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const IMG_URL = 'https://image.tmdb.org/t/p/w400';
+const IMG_URL = 'https://image.tmdb.org/t/p';
 
 async function makeMarkupGallery(array) {
   const genres = await axios
@@ -25,7 +25,7 @@ async function makeMarkupGallery(array) {
           <a class="card__link" href="" data-id="${id}">
             <img class="card__img" src="${
               poster_path !== null
-                ? IMG_URL + poster_path
+                ? IMG_URL + '/w400' + poster_path
                 : 'https://upload.wikimedia.org/wikipedia/commons/b/ba/No_image_available_400_x_600.svg'
             }" alt="${overview !== '' ? overview : 'No info!'}" />
             <p class="card__name">${title ?? 'No info about title!'}</p>
@@ -68,7 +68,7 @@ function makeMarkupMovie(array) {
           class="filmcard__poster"
           src="${
             poster_path !== null
-              ? IMG_URL + poster_path
+              ? IMG_URL + '/w400' + poster_path
               : 'https://upload.wikimedia.org/wikipedia/commons/b/ba/No_image_available_400_x_600.svg'
           }"
           alt="${overview !== '' ? overview : 'No info!'}"
@@ -120,4 +120,20 @@ function makeMarkupMovie(array) {
         </div>`;
 }
 
-export { makeMarkupGallery, makeMarkupMovie };
+function makeMarkupMovieForSlider(array) {
+  let markup = '';
+
+  for (let i = 0; i < 9; i += 1) {
+    const { id, overview, backdrop_path } = array[i];
+    markup += `
+        <div class="swiper-slide">
+            <img class="swiper-img" data-id="${id}" src="${
+      IMG_URL + '/w500' + backdrop_path
+    }" alt="${overview}" style="width: 100%" />
+        </div>`;
+  }
+
+  return markup;
+}
+
+export { makeMarkupGallery, makeMarkupMovie, makeMarkupMovieForSlider };
