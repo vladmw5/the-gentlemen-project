@@ -41,9 +41,12 @@ $small-gap: 8px;
 
 .pagination-bar__number {
   cursor: pointer;
+  border: 2px solid transparent;
+
+  transition: border-color $transition-time $cubic;
 
   &:hover {
-    border: 2px solid $background-color-btn;
+    border-color: $background-color-btn;
   }
 }
 

@@ -9,5 +9,5 @@ import './components/pagination-bar';
 import './components/authentication-mobile';
 import './firebase/add-to-database';
 import './components/my-library-btn';
-import './components/authentication-mobile';
 import './components/btn-to-top';
+import './service/filter-requests';

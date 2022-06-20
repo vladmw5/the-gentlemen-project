@@ -24,4 +24,23 @@ async function getMoviesByID(id) {
   return response.data;
 }
 
-export { getPopularMovies, getMoviesByKeyword, getMoviesByID };
+async function getMoviesByGenres() {
+  const response = await axios.get(
+    `${URL}/genre/movie/list?api_key=${KEY}&language=en-US`
+  );
+  return response;
+}
+async function getPopularMoviesOfDay() {
+  const response = await axios.get(
+    `${URL}/trending/movie/day?api_key=${KEY}&page=1`
+  );
+  return response.data;
+}
+
+export {
+  getPopularMovies,
+  getMoviesByKeyword,
+  getMoviesByID,
+  getMoviesByGenres,
+  getPopularMoviesOfDay,
+};
