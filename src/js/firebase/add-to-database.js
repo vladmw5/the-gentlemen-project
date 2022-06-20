@@ -15,6 +15,7 @@ import { renderRetrievedMarkup } from '../components/my-library-btn';
 let userId = null;
 
 const filmcardModal = document.querySelector('.filmcard-modal');
+const gallery = document.querySelector('.gallery__list');
 
 filmcardModal.addEventListener('click', onFilmcardModalClick);
 
@@ -43,8 +44,9 @@ async function onFilmcardModalClick(event) {
           .then(renderRetrievedMarkup)
           .catch(() => {
             Notify.info(
-              'Your Watched List is empty. You can add films on Home page'
+              'Your Watched List is now empty. You can add films on Home page'
             );
+            gallery.innerHTML = '';
           });
       })
       .catch(() => {
