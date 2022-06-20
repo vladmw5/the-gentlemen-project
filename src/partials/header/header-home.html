@@ -1,18 +1,31 @@
 <section class="hero">
-  <form class="hero-form">
-    <input
-      type="text"
-      name="text"
-      placeholder="Movie search"
-      class="hero-form__input"
-    />
-    <button type="submit" class="hero-form__btn">
-      <svg width="12" height="12" class="hero-form__icon">
-        <use href="../src/images/symbol-defs.svg#icon-search"></use>
-      </svg>
-    </button>
-    <p class="hero-form__text hidden-err">
-      Search result not successful. Enter the correct movie name and try again
-    </p>
-  </form>
+  <div class="container">
+    <form class="hero-form">
+      <input
+        type="text"
+        name="text"
+        placeholder="Movie search"
+        class="hero-form__input"
+      />
+      <button type="submit" class="hero-form__btn">
+        <svg width="12" height="12" class="hero-form__icon">
+          <use href="../src/images/symbol-defs.svg#icon-search"></use>
+        </svg>
+      </button>
+      <p class="hero-form__text hidden-err">
+        Search result not successful. Enter the correct movie name and try again
+      </p>
+    </form>
+    <ul class="hero-btn-list">
+      <li class="hero-btn-list__item">
+        <button class="filter" type="button" data-filter>Filter genres</button>
+      </li>
+      <li class="hero-btn-list__item">
+        <button class="reset" type="button">Reset</button>
+      </li>
+    </ul>
+    <div class="menu-filter">
+      <ul class="menu-filter-list" data-list-filter></ul>
+    </div>
+  </div>
 </section>

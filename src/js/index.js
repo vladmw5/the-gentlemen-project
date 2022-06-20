@@ -10,3 +10,4 @@ import './components/authentication-mobile';
 import './firebase/add-to-database';
 import './components/my-library-btn';
 import './components/btn-to-top';
+import './service/filter-requests';
