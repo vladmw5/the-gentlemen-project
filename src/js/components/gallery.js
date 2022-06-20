@@ -34,7 +34,13 @@ const swiperTitle = document.querySelector('.swiper-title');
 const swiper = document.querySelector('.swiper');
 
 // event Listener
-document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
+document.addEventListener('homePageLoaded', () => {
+  firstRenderPopularMovies(1);
+});
+
+document.addEventListener('libPageLoaded', () => {
+  swiper.innerHTML = '';
+});
 
 inputSearchMovie?.addEventListener('input', onFormInput);
 gallery.addEventListener('click', onMovieClick);
@@ -45,6 +51,7 @@ const spinner = new Spinner(optsForSpinner).spin(gallery);
 
 // functions
 export function firstRenderPopularMovies(page) {
+  console.log('me');
   getPopularMovies(page).then(r => {
     makeMarkupGallery(r.results)
       .then(r => {
