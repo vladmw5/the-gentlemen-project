@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 
-import { getDatabase, ref, push, set, get, remove } from 'firebase/database';
+import { getDatabase, ref, set, get, remove } from 'firebase/database';
+import { Notify } from 'notiflix';
 
 import {
   getAuth,
@@ -40,11 +41,13 @@ function createUser(email, password) {
       // Signed in
       const user = userCredential.user;
       // ...
+      Notify.success('You have successfully signed up');
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
       // ..
+      Notify.failure('Failed to sign up');
     });
 }
 
@@ -54,11 +57,12 @@ function signInUser(email, password) {
       // Signed in
       const user = userCredential.user;
       // ...
-      console.log(user);
+      Notify.success('You have successfully logged in');
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      Notify.failure('Invalid Log In credentials provided ');
     });
 }
 
@@ -86,7 +90,6 @@ onAuthStateChanged(auth, user => {
     getUserId(userId);
     // ...
   } else {
-    console.log(null);
     signUpBtn.classList.remove('is-hidden-nav');
     logInBtn.classList.remove('is-hidden-nav');
     libraryItem.classList.add('is-hidden-nav');
@@ -108,7 +111,9 @@ onAuthStateChanged(auth, user => {
 
 function exitUser() {
   signOut(auth)
-    .then(() => {})
+    .then(() => {
+      window.location.href = './index.html';
+    })
     .catch(error => {});
 }
 
@@ -118,13 +123,20 @@ const queueWay = 'dataQueue';
 
 function sendDataToFirebase(data, way) {
   const movieId = data.movieData.id.toString();
-  set(ref(db, `${way}/${movieId}`), data);
+  return set(ref(db, `${userId}/${way}/${movieId}`), data);
 }
 
 // Отримання даних з Watched та Queue
 
 function getDataFromFirebase(way) {
-  return get(ref(db, `${way}`));
+  return get(ref(db, `${userId}/${way}`));
+}
+
+function parseDataBaseResponse(snapshot) {
+  if (!snapshot.exists()) {
+    throw new Error('Data base snapshot is empty');
+  }
+  return Promise.resolve(Object.values(snapshot.val()).map(el => el.movieData));
 }
 
 export {
@@ -135,4 +147,7 @@ export {
   getDataFromFirebase,
   watchedWay,
   queueWay,
+  parseDataBaseResponse,
+  auth,
+  onAuthStateChanged,
 };

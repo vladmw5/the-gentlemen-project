@@ -1,11 +1,11 @@
 //-- Реєстрація та авторизація
-import { createUser, signInUser, exitUser } from './service'
+import { createUser, signInUser, exitUser } from './service';
+import { Notify } from 'notiflix';
 
 export const registration = document.querySelector('#registration');
 export const authorization = document.querySelector('#authorization');
 const exitBtn = document.querySelector('#exit-btn');
 const exitBtnMobile = document.querySelector('#exit-btn-mobile');
-
 
 registration.addEventListener('submit', onSubmitRegistration);
 authorization.addEventListener('submit', onSubmitAuthorization);
@@ -13,22 +13,26 @@ exitBtn.addEventListener('click', exitUser);
 exitBtnMobile.addEventListener('click', exitUser);
 
 function onSubmitRegistration(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const { email, password } = e.currentTarget.elements;
-    if (email.value === '' || password.value === '') {
-       return alert('Всі поля повинні бути заповнені!')
-    }
+  const { email, password } = e.currentTarget.elements;
+  if (email.value === '' || password.value === '') {
+    return Notify.failure('Всі поля повинні бути заповнені!');
+  }
+  try {
     createUser(email.value, password.value);
-    registration.reset();
-};
+  } catch {}
+  registration.reset();
+}
 function onSubmitAuthorization(e) {
-    e.preventDefault();
-     
-    const { email, password } = e.currentTarget.elements;
-    if (email.value === '' || password.value === '') {
-       return alert('Всі поля повинні бути заповнені!')
-    }
+  e.preventDefault();
+
+  const { email, password } = e.currentTarget.elements;
+  if (email.value === '' || password.value === '') {
+    return Notify.failure('Всі поля повинні бути заповнені!');
+  }
+  try {
     signInUser(email.value, password.value);
-    authorization.reset();
-};
+  } catch {}
+  authorization.reset();
+}

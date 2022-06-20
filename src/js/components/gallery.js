@@ -35,7 +35,13 @@ const swiperTitle = document.querySelector('.swiper-title');
 const swiper = document.querySelector('.swiper');
 
 // event Listener
-document.addEventListener('DOMContentLoaded', firstRenderPopularMovies(1));
+document.addEventListener('homePageLoaded', () => {
+  firstRenderPopularMovies(1);
+});
+
+document.addEventListener('libPageLoaded', () => {
+  swiper.innerHTML = '';
+});
 
 inputSearchMovie?.addEventListener('input', onFormInput);
 gallery.addEventListener('click', onMovieClick);
