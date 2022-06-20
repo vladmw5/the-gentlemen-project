@@ -139,6 +139,11 @@ function parseDataBaseResponse(snapshot) {
   return Promise.resolve(Object.values(snapshot.val()).map(el => el.movieData));
 }
 
+// Вилучення даних з Watchedd та Queue
+function removeMovieFromFirebase(way, filmId) {
+  return remove(ref(db, `${userId}/${way}/${filmId}`));
+}
+
 export {
   createUser,
   signInUser,
@@ -150,4 +155,5 @@ export {
   parseDataBaseResponse,
   auth,
   onAuthStateChanged,
+  removeMovieFromFirebase,
 };

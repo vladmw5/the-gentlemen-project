@@ -30,6 +30,7 @@ function whenLibraryPageIsLoaded() {
     .then(renderRetrievedMarkup)
     .catch(() => {
       Notify.info('Your Watched List is empty. You can add films on Home page');
+      document.querySelector('.spinner').remove();
     });
 }
 
@@ -41,6 +42,7 @@ function onWatchedBtnClick() {
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
     .catch(() => {
+      refs.gallery.innerHTML = '';
       Notify.info('Your Watched List is empty. You can add films on Home page');
     });
 }
@@ -53,6 +55,7 @@ function onQueueBtnClick() {
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
     .catch(() => {
+      refs.gallery.innerHTML = '';
       Notify.info('Your Queue is empty. You can add films on Home page');
     });
 }
@@ -60,3 +63,5 @@ function onQueueBtnClick() {
 function renderRetrievedMarkup(markup) {
   refs.gallery.innerHTML = markup;
 }
+
+export { renderRetrievedMarkup };
