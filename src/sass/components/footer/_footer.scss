@@ -23,6 +23,11 @@
       line-height: 1.18;
       min-width: 515px;
     }
+    @media screen and(min-width:1200) {
+      font-size: 16px;
+      line-height: 1.18;
+      min-width: 515px;
+    }
   }
 
   &__svg {
