@@ -1,0 +1,1 @@
+{"mappings":"AAAAA,SAASC,iBAAiB,oBAAoB,WAC5CD,SAASE,cAAc,IAAIC,MAAM","sources":["src/js/events/home-events.js"],"sourcesContent":["document.addEventListener('DOMContentLoaded', () => {\n  document.dispatchEvent(new Event('homePageLoaded'));\n});\n"],"names":["document","addEventListener","dispatchEvent","Event"],"version":3,"file":"index.683e456b.js.map"}

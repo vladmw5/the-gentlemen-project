@@ -1,0 +1,1 @@
+{"mappings":"AAAAA,SAASC,iBAAiB,oBAAoB,KAC5CD,SAASE,cAAc,IAAIC,MAAM","sources":["src/js/events/lib-events.js"],"sourcesContent":["document.addEventListener('DOMContentLoaded', () => {\n  document.dispatchEvent(new Event('libPageLoaded'));\n});\n"],"names":["document","addEventListener","dispatchEvent","Event"],"version":3,"file":"my-library.0f4d9ce6.js.map"}
