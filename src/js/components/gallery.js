@@ -1,4 +1,5 @@
 import { Spinner } from 'spin.js';
+import debounce from 'lodash.debounce';
 
 import Swiper from 'swiper/swiper-bundle.min.js';
 // import 'swiper/swiper-bundle.min.css';
@@ -26,7 +27,6 @@ let selectedIdGenre = '';
 let sortMovieDescendingByRatingStatus = false;
 let weAreOnLibPage = false;
 
-
 // refs
 const gallery = document.querySelector('.gallery__list');
 const movieCase = document.querySelector('.filmcard__case');
@@ -50,7 +50,7 @@ document.addEventListener('libPageLoaded', () => {
   weAreOnLibPage = true;
 });
 
-inputSearchMovie?.addEventListener('input', onFormInput);
+inputSearchMovie?.addEventListener('input', debounce(onFormInput, 350));
 gallery.addEventListener('click', onMovieClick);
 modalCloseBtn.addEventListener('click', toggleModal);
 
