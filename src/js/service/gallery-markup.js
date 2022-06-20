@@ -193,7 +193,7 @@ function makeMarkupMovie2(array) {
 function makeMarkupMovieForSlider(array) {
   let markup = '';
 
-  for (let i = 0; i < 9; i += 1) {
+  for (let i = 0; i < 15; i += 1) {
     const { id, overview, backdrop_path } = array[i];
     markup += `
         <div class="swiper-slide">

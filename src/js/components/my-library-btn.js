@@ -13,6 +13,7 @@ const refs = {
   watched: document.querySelector('[data-btn-watched]'),
   queue: document.querySelector('[data-btn-queue]'),
   gallery: document.querySelector('.gallery__list'),
+  note: document.querySelector('.notifycation__text'),
 };
 
 const toAdd = 'is-header-lib-active';
@@ -29,7 +30,9 @@ function whenLibraryPageIsLoaded() {
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
     .catch(() => {
-      Notify.info('Your Watched List is empty. You can add films on Home page');
+      // Notify.info('Your Watched List is empty. You can add films on Home page');
+      refs.gallery.innerHTML =
+        '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
       document.querySelector('.spinner').remove();
     });
 }
@@ -42,8 +45,9 @@ function onWatchedBtnClick() {
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
     .catch(() => {
-      refs.gallery.innerHTML = '';
-      Notify.info('Your Watched List is empty. You can add films on Home page');
+      refs.gallery.innerHTML =
+        '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
+      // Notify.info('Your Watched List is empty. You can add films on Home page');
     });
 }
 
@@ -55,8 +59,9 @@ function onQueueBtnClick() {
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
     .catch(() => {
-      refs.gallery.innerHTML = '';
-      Notify.info('Your Queue is empty. You can add films on Home page');
+      refs.gallery.innerHTML =
+        '<p class="notifycation__text notifycation__text--library">Your Queue is empty. You can add films on Home page</p>';
+      // Notify.info('Your Watched List is empty. You can add films on Home page');
     });
 }
 
