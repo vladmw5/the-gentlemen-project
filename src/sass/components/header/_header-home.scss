@@ -1,8 +1,9 @@
 .hero {
+  
   min-width: 320px;
-  height: 230px;
+  min-height: 230px;
   padding-top: 118px;
-  padding-bottom: 92px;
+  padding-bottom: 10px;
   background-position: center;
   background-size: cover;
   background-image: url(../images/abstract-background-with-red-lines_mobile_1x-min.png);
@@ -114,7 +115,7 @@
   color: $warning-color;
   margin-top: 16px;
 
-  @include tablet{
+  @include tablet {
     margin-top: 20px;
   }
 }

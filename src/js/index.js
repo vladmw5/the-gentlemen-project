@@ -12,3 +12,4 @@ import './components/my-library-btn';
 import './components/authentication-mobile';
 import './components/btn-to-top';
 import './service/filter-requests';
+import './components/filter-menu';
