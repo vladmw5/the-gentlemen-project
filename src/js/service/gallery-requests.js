@@ -24,4 +24,17 @@ async function getMoviesByID(id) {
   return response.data;
 }
 
-export { getPopularMovies, getMoviesByKeyword, getMoviesByID };
+
+async function getMoviesByGenres() {
+  const response = await axios.get(
+    `${URL}/genre/movie/list?api_key=${KEY}&language=en-US`
+  );
+  return response;
+}
+
+export {
+  getPopularMovies,
+  getMoviesByKeyword,
+  getMoviesByID,
+  getMoviesByGenres,
+};  //TODO

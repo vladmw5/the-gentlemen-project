@@ -1,0 +1,10 @@
+.hero-btn-list {
+  display: flex;
+  margin-top: 35px;
+  justify-content: center;
+}
+
+.hero-btn-list__item:not(:last-child) {
+  margin-right: 15px;
+}
+
