@@ -1,0 +1,52 @@
+.swiper-img {
+  cursor: pointer;
+}
+
+.swiper-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #ff6b01;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+
+  @include tablet {
+    font-size: 24px;
+  }
+
+  @include desktop {
+    font-size: 30px;
+  }
+}
+
+.swiper-container {
+  position: relative;
+  width: 440px;
+  margin-bottom: 60px;
+
+  @include tablet {
+    width: 700px;
+  }
+
+  @include desktop {
+    width: 1215px;
+  }
+}
+
+.swiper-button-prev.prev {
+  color: #ff6b01;
+}
+
+.swiper-button-next.next {
+  color: #ff6b01;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ff6b01;
+}
+
+.swiper-slide {
+  border-radius: 5px;
+  overflow: hidden;
+}
