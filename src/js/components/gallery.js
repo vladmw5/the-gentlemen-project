@@ -33,6 +33,7 @@ const slideImages = document.querySelector('.swiper-wrapper');
 const swiperContainer = document.querySelector('.swiper-container');
 const swiperTitle = document.querySelector('.swiper-title');
 const swiper = document.querySelector('.swiper');
+const moviesFilter = document.querySelector('.hero-btn-list');
 
 // event Listener
 document.addEventListener('homePageLoaded', () => {
@@ -101,12 +102,14 @@ function renderMoviesByID(movieId) {
 function onFormInput(e) {
   slideImages.innerHTML = '';
   swiper.style.display = 'none';
+  moviesFilter.style.display = 'none';
 
   const keyword = e.target.value.trim();
 
   if (!keyword) {
     firstRenderPopularMovies(1);
     swiper.style.display = 'block';
+    moviesFilter.style.display = 'flex';
     return;
   }
 
