@@ -57,7 +57,8 @@
   }
 }
 
-.rating-active {
+.rating-active,
+.filter-active {
   border-color: #ff6b01;
   color: #fff;
   filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
@@ -70,42 +71,39 @@
 
 .menu-filter-list {
   position: absolute;
-  padding: 10px 15px 10px 15px;
-  z-index: 3;
-  opacity: 0;
-  transform: translateY(-40%);
-  transition: 300ms ease-in-out;
-  opacity: 0;
-  pointer-events: none;
-  background-color: #182025;
-  width: 300px;
   top: 0px;
-  right: 3%;
+  left: 50%;
+  z-index: 3;
+
+  width: 300px;
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 10px 15px 10px 15px;
+  background-color: #182025;
   border-radius: 10px;
 
+  opacity: 0;
+  transform: translate(-50%, 24%);
+  pointer-events: none;
+
+  transition: all 300ms $cubic;
+
   @include tablet {
-    top: -335px;
-    right: 15%;
     width: 600px;
+    transform: translate(-50%, 26%);
   }
 
   @include desktop {
     width: 1100px;
-    top: -20px;
-    right: 12%;
+    transform: translate(-50%, 42%);
   }
 }
+
 .is-open-filter {
   opacity: 1;
   pointer-events: all;
-  transform: translateY(62%);
-  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
-  @include tablet {
-    transform: translateY(165%);
-  }
 }
 
 .menu-filter-list__btn {

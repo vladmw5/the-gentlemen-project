@@ -56,8 +56,8 @@ modalCloseBtn.addEventListener('click', toggleModal);
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
 // functions
-export function firstRenderPopularMovies(page, genreId) {
-  getPopularMovies(page, selectedIdGenre).then(r => {
+export function firstRenderPopularMovies(page, genreId, sortByRating) {
+  getPopularMovies(page, selectedIdGenre, sortByRating).then(r => {
     makeMarkupGallery(r.results)
       .then(r => {
         gallery.innerHTML = r;
@@ -166,31 +166,31 @@ export function onGenreClick(e) {
     return;
   }
 
+  document.querySelector('.filter').classList.add('filter-active');
+  document
+    .querySelector('.menu-filter-list')
+    .classList.remove('is-open-filter');
+
   selectedIdGenre = Number(e.target.dataset.id);
   firstRenderPopularMovies(
     1,
     selectedIdGenre,
-    sortMovieDescendingByRatingStatus
+    document.querySelector('.rating').dataset.rating === 'false' ? false : true
   );
 }
 
 export function onSortClick(e) {
-  sortMovieDescendingByRatingStatus = true;
   firstRenderPopularMovies(
     1,
     selectedIdGenre,
-    sortMovieDescendingByRatingStatus
+    e.target.dataset.rating === 'false' ? false : true
   );
 }
 
 export function onResetSortAndFilterClick(e) {
   selectedIdGenre = '';
-  sortMovieDescendingByRatingStatus = false;
-  firstRenderPopularMovies(
-    1,
-    selectedIdGenre,
-    sortMovieDescendingByRatingStatus
-  );
+  firstRenderPopularMovies(1, selectedIdGenre);
+  document.querySelector('.filter').classList.remove('filter-active');
 }
 
 function closeMovieModalByEsc(e) {
