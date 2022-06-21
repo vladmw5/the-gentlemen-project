@@ -36,6 +36,10 @@ const slideImages = document.querySelector('.swiper-wrapper');
 const swiperContainer = document.querySelector('.swiper-container');
 const swiper = document.querySelector('.swiper');
 const moviesFilter = document.querySelector('.hero-btn-list');
+const filterBtn = document.querySelector('.filter');
+const sortBtn = document.querySelector('.rating');
+const genreBtns = document.querySelector('.menu-filter-list');
+const pagination = document.querySelector('.pagination-bar__list');
 
 // event Listener
 document.addEventListener('homePageLoaded', () => {
@@ -79,7 +83,7 @@ export function renderMoviesByKeyword(keyword, page) {
     makeMarkupGallery(r.results)
       .then(r => {
         if (r.length === 0) {
-          document.querySelector('.pagination-bar__list').innerHTML = '';
+          pagination.innerHTML = '';
           gallery.innerHTML =
             '<p class="notifycation__text">No results! Sorry =(</p>';
           return;
@@ -112,8 +116,7 @@ function onFormInput(e) {
   slideImages.innerHTML = '';
   swiper.style.display = 'none';
   moviesFilter.style.display = 'none';
-  const ref = document.querySelector('.menu-filter-list');
-  ref?.classList.remove('is-open-filter');
+  genreBtns?.classList.remove('is-open-filter');
 
   const keyword = e.target.value.trim();
   if (!keyword) {
@@ -163,12 +166,13 @@ function onSlidesMovieClick(e) {
 
 export function onGenreClick(e) {
   e.preventDefault();
+  slideImages.innerHTML = '';
 
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
 
-  document.querySelector('.filter').classList.add('filter-active');
+  filterBtn.classList.add('filter-active');
   document
     .querySelector('.menu-filter-list')
     .classList.remove('is-open-filter');
@@ -177,11 +181,13 @@ export function onGenreClick(e) {
   firstRenderPopularMovies(
     1,
     selectedIdGenre,
-    document.querySelector('.rating').dataset.rating === 'false' ? false : true
+    sortBtn.dataset.rating === 'false' ? false : true
   );
 }
 
 export function onSortClick(e) {
+  slideImages.innerHTML = '';
+
   firstRenderPopularMovies(
     1,
     selectedIdGenre,
@@ -190,9 +196,11 @@ export function onSortClick(e) {
 }
 
 export function onResetSortAndFilterClick(e) {
+  slideImages.innerHTML = '';
+
   selectedIdGenre = '';
   firstRenderPopularMovies(1, selectedIdGenre);
-  document.querySelector('.filter').classList.remove('filter-active');
+  filterBtn.classList.remove('filter-active');
 }
 
 function closeMovieModalByEsc(e) {
@@ -208,9 +216,7 @@ function closeMovieModalByClickBackdrop(e) {
   }
 }
 
-function toggleModal() {
+export function toggleModal() {
   document.body.classList.toggle('modal-open');
   modalBackdrop.classList.toggle('is-hidden');
 }
-
-export { toggleModal };
