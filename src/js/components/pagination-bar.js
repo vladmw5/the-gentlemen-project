@@ -70,6 +70,7 @@ leftArrowRef.addEventListener('click', onLeftArrowClick);
 rightArrowRef.addEventListener('click', onRightArrowClick);
 
 function onLeftArrowClick(event) {
+  document.querySelector('.swiper-wrapper').innerHTML = '';
   if (firstTime) {
     firstRenderPopularMovies(
       --currentPage,
@@ -84,9 +85,11 @@ function onLeftArrowClick(event) {
       --currentPage
     );
   }
+  scrollToTop(275);
 }
 
 function onRightArrowClick(event) {
+  document.querySelector('.swiper-wrapper').innerHTML = '';
   if (firstTime) {
     firstRenderPopularMovies(
       ++currentPage,
@@ -101,11 +104,12 @@ function onRightArrowClick(event) {
       ++currentPage
     );
   }
+  scrollToTop(275);
 }
 
 function onPaginationBarClick(event) {
   if (event.target.nodeName !== 'LI') return;
-
+  document.querySelector('.swiper-wrapper').innerHTML = '';
   if (firstTime) {
     currentPage = Number(event.target.dataset.page);
     firstRenderPopularMovies(
@@ -122,6 +126,7 @@ function onPaginationBarClick(event) {
       currentPage
     );
   }
+  scrollToTop(275);
 }
 
 export function renderPaginationBar(totalPages, cPage) {
@@ -205,3 +210,7 @@ function onFilterListClickResetCounter(event) {
 }
 
 export { currentPage };
+function scrollToTop(val = 0) {
+  document.body.scrollTop = val; // For Safari
+  document.documentElement.scrollTop = val; // For Chrome, Firefox, IE and Opera
+}
