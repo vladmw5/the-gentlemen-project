@@ -16,7 +16,7 @@ export { backdropLog, backdropSign, signUpBtn, logInBtn, logOutItem, libraryItem
 signUpBtn.addEventListener('click', onSignUpClick);
 
 function onSignUpClick() {
-    window.addEventListener('keydown', onEskKeyPress);
+    keydownWindow();
     backdropSign.classList.remove('is-bck-hidden');
 };
 
@@ -25,8 +25,8 @@ function onSignUpClick() {
 logInBtn.addEventListener('click', onLogInClick);
 
 function onLogInClick() {
-    window.addEventListener('keydown', onEskKeyPress);
-    backdropLog.classList.remove('is-bck-hidden')
+   keydownWindow();
+   backdropLog.classList.remove('is-bck-hidden')
 }
 
 //Закриття модального вікна по кнопці
@@ -34,34 +34,30 @@ function onLogInClick() {
 closeModalBtnSign.addEventListener('click', onCloseModalBtnSign);
 
 function onCloseModalBtnSign() {
-    window.removeEventListener('keydown', onEskKeyPress);
+    removeKeydownWindowListener();
     backdropSign.classList.add('is-bck-hidden');  
 };
 
 closeModalBtnLog.addEventListener('click', onCloseModalBtnLog);
 
 function onCloseModalBtnLog() {
-    window.removeEventListener('keydown', onEskKeyPress);
+    removeKeydownWindowListener();
     backdropLog.classList.add('is-bck-hidden');
 };
 
-//Закриття модального вікна кліком по бекдропу та натиском по кнопці ескейп
+//Закриття модального вікна кліком по бекдропу 
 
-backdropSign.addEventListener('click', onBackdropSignClick);
+backdropSign.addEventListener('click', onBackdropClick);
 
-function onBackdropSignClick(e) {
+backdropLog.addEventListener('click', onBackdropClick);
+
+function onBackdropClick(e) {
     if (e.currentTarget === e.target) {
-        onCloseModalBtnSign();
+        onCloseModalBtnSign() || onCloseModalBtnLog();
     };
 };
 
-backdropLog.addEventListener('click', onBackdropLogClick);
-
-function onBackdropLogClick(e) {
-    if (e.currentTarget === e.target) {
-        onCloseModalBtnLog();
-    };
-};
+//Закриття модального вікна натиском по кнопці Escape
 
 function onEskKeyPress(e) {
     const ESC_KEY_CODE = 'Escape';
@@ -70,4 +66,14 @@ function onEskKeyPress(e) {
         onCloseModalBtnSign();
         onCloseModalBtnLog();
     };
+};
+
+//Функції дублюючого коду
+
+function keydownWindow() {
+    window.addEventListener('keydown', onEskKeyPress);
+};
+
+function removeKeydownWindowListener() {
+    window.removeEventListener('keydown', onEskKeyPress);
 };
