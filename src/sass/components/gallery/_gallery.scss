@@ -94,7 +94,7 @@
   margin: auto;
   text-align: center;
   font-size: 30px;
-  opacity: 0.5;
+  opacity: 0.25;
 
   @include tablet {
     font-size: 60px;
@@ -102,5 +102,17 @@
 
   @include desktop {
     font-size: 100px;
+  }
+}
+
+.notifycation__text--library {
+  font-size: 24px;
+
+  @include tablet {
+    font-size: 48px;
+  }
+
+  @include desktop {
+    font-size: 80px;
   }
 }

@@ -2,13 +2,20 @@ import { getMoviesByID } from '../service/gallery-requests';
 import { Notify } from 'notiflix';
 import {
   sendDataToFirebase,
+  removeMovieFromFirebase,
+  getDataFromFirebase,
+  parseDataBaseResponse,
   watchedWay,
   queueWay,
 } from '../firebase/service/index';
+import { toggleModal } from '../components/gallery';
+import { makeMarkupGallery } from '../service/gallery-markup';
+import { renderRetrievedMarkup } from '../components/my-library-btn';
 
 let userId = null;
 
 const filmcardModal = document.querySelector('.filmcard-modal');
+const gallery = document.querySelector('.gallery__list');
 
 filmcardModal.addEventListener('click', onFilmcardModalClick);
 
@@ -24,6 +31,31 @@ async function onFilmcardModalClick(event) {
   const posterRef = filmcardModal.querySelector('.filmcard__poster');
 
   const currentFilmId = posterRef?.dataset.id;
+  if (event.target.hasAttribute('data-remove-btn')) {
+    const watchedBtn = document.querySelector('[data-btn-watched]');
+    const targetWay = watchedBtn.classList.contains('is-header-lib-active')
+      ? watchedWay
+      : queueWay;
+    removeMovieFromFirebase(targetWay, currentFilmId)
+      .then(() => {
+        getDataFromFirebase(watchedWay)
+          .then(parseDataBaseResponse)
+          .then(makeMarkupGallery)
+          .then(renderRetrievedMarkup)
+          .catch(() => {
+            Notify.info(
+              'Your Watched List is now empty. You can add films on Home page'
+            );
+            gallery.innerHTML = '';
+          });
+      })
+      .catch(() => {
+        Notify.failure('Failed to remove from Database');
+      });
+
+    toggleModal();
+    return;
+  }
   const genre_ids = posterRef?.dataset.genreIds
     .split('-')
     .map(id => Number(id));
