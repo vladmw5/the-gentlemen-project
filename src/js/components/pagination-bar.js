@@ -62,7 +62,13 @@ rightArrowRef.addEventListener('click', onRightArrowClick);
 
 function onLeftArrowClick(event) {
   if (firstTime) {
-    firstRenderPopularMovies(--currentPage);
+    firstRenderPopularMovies(
+      --currentPage,
+      0,
+      document.querySelector('button.rating').dataset.rating === 'false'
+        ? false
+        : true
+    );
   } else {
     renderMoviesByKeyword(
       sessionStorage.getItem(SESSION_STORAGE_USER_KEYWORD_KEY),
@@ -73,7 +79,13 @@ function onLeftArrowClick(event) {
 
 function onRightArrowClick(event) {
   if (firstTime) {
-    firstRenderPopularMovies(++currentPage);
+    firstRenderPopularMovies(
+      ++currentPage,
+      0,
+      document.querySelector('button.rating').dataset.rating === 'false'
+        ? false
+        : true
+    );
   } else {
     renderMoviesByKeyword(
       sessionStorage.getItem(SESSION_STORAGE_USER_KEYWORD_KEY),
@@ -87,7 +99,13 @@ function onPaginationBarClick(event) {
 
   if (firstTime) {
     currentPage = Number(event.target.dataset.page);
-    firstRenderPopularMovies(currentPage);
+    firstRenderPopularMovies(
+      currentPage,
+      0,
+      document.querySelector('button.rating').dataset.rating === 'false'
+        ? false
+        : true
+    );
   } else {
     currentPage = Number(event.target.dataset.page);
     renderMoviesByKeyword(
@@ -165,3 +183,5 @@ export function renderPaginationBar(totalPages, currentPage) {
 
   paginationBarRef.innerHTML = toInsert;
 }
+
+export { currentPage };

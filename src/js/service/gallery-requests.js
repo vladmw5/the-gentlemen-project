@@ -7,7 +7,7 @@ async function getPopularMovies(page, genreId = '', descByRating = false) {
   const response = await axios.get(
     `${URL}/discover/movie?api_key=${KEY}&page=${page}&with_genres=${genreId}${
       descByRating ? '&sort_by=vote_average.desc' : ''
-    }`
+    }&vote_count.gte=500`
   );
   return response.data;
 }

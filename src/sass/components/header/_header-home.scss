@@ -1,5 +1,4 @@
 .hero {
-  
   min-width: 320px;
   min-height: 230px;
   padding-top: 118px;
@@ -96,7 +95,6 @@
     position: absolute;
     right: 0;
     top: 1px;
-    cursor: pointer;
 
     @include tablet {
       right: 30px;

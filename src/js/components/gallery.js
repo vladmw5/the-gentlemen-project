@@ -112,13 +112,15 @@ function onFormInput(e) {
   slideImages.innerHTML = '';
   swiper.style.display = 'none';
   moviesFilter.style.display = 'none';
+  const ref = document.querySelector('.menu-filter-list');
+  ref.classList.remove('is-open-filter');
 
   const keyword = e.target.value.trim();
-
   if (!keyword) {
     firstRenderPopularMovies(1);
     swiper.style.display = 'block';
     moviesFilter.style.display = 'flex';
+    firstTime = true;
     return;
   }
 
