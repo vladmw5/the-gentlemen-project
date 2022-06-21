@@ -23,7 +23,7 @@ async function makeMarkupGallery(array) {
           <a class="card__link" href="" data-id="${id}">
             <img class="card__img" src="${
               poster_path !== null
-                ? IMG_URL + '/w400' + poster_path
+                ? IMG_URL + '/w500' + poster_path
                 : 'https://upload.wikimedia.org/wikipedia/commons/b/ba/No_image_available_400_x_600.svg'
             }" alt="${overview !== '' ? overview : 'No info!'}" />
             <p class="card__name">${title ?? 'No info about title!'}</p>
