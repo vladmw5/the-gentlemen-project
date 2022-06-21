@@ -49,12 +49,16 @@ const markup = {
 };
 const BAR_HIDDEN_CLASS = 'pagination-bar__element--hidden';
 
-const paginationBarRef = document.querySelector('.pagination-bar__list');
-const leftArrowRef = document.querySelector('.pagination-bar__left');
-const rightArrowRef = document.querySelector('.pagination-bar__right');
-const inputFormRef = document.querySelector('.hero-form__input');
-const sortBtnRef = document.querySelector('button.rating');
-const filterListRef = document.querySelector('.menu-filter-list');
+import { refs } from '../utils/refs';
+
+const {
+  leftArrowRef,
+  rightArrowRef,
+  inputFormRef,
+  sortBtnRef,
+  filterListRef,
+  paginationBarRef,
+} = refs;
 
 inputFormRef?.addEventListener('input', debounce(resetCounter, 350));
 sortBtnRef?.addEventListener('click', resetCounter);

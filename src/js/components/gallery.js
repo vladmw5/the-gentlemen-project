@@ -19,27 +19,30 @@ import {
   getPopularMoviesOfDay,
 } from '../service/gallery-requests';
 
+// refs
+import { refs } from '../utils/refs';
+
+const {
+  gallery,
+  movieCase,
+  modalBackdrop,
+  inputSearchMovie,
+  modalCloseBtn,
+  slideImages,
+  swiperContainer,
+  swiper,
+  moviesFilter,
+  filterBtn,
+  sortBtn,
+  genreBtns,
+  paginationBarRef,
+} = refs;
+
 // vars
 export let firstTime = true;
 export const SESSION_STORAGE_USER_KEYWORD_KEY = 'user-search-keyword';
 let selectedIdGenre = '';
-let sortMovieDescendingByRatingStatus = false;
 let weAreOnLibPage = false;
-
-// refs
-const gallery = document.querySelector('.gallery__list');
-const movieCase = document.querySelector('.filmcard__case');
-const modalBackdrop = document.querySelector('.filmcard-modal-backdrop');
-const inputSearchMovie = document.querySelector('.hero-form__input');
-const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
-const slideImages = document.querySelector('.swiper-wrapper');
-const swiperContainer = document.querySelector('.swiper-container');
-const swiper = document.querySelector('.swiper');
-const moviesFilter = document.querySelector('.hero-btn-list');
-const filterBtn = document.querySelector('.filter');
-const sortBtn = document.querySelector('.rating');
-const genreBtns = document.querySelector('.menu-filter-list');
-const pagination = document.querySelector('.pagination-bar__list');
 
 // event Listener
 document.addEventListener('homePageLoaded', () => {
@@ -83,7 +86,7 @@ export function renderMoviesByKeyword(keyword, page) {
     makeMarkupGallery(r.results)
       .then(r => {
         if (r.length === 0) {
-          pagination.innerHTML = '';
+          paginationBarRef.innerHTML = '';
           gallery.innerHTML =
             '<p class="notifycation__text">No results! Sorry =(</p>';
           return;

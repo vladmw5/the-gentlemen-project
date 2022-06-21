@@ -11,11 +11,11 @@ import {
 import { toggleModal } from '../components/gallery';
 import { makeMarkupGallery } from '../utils/gallery-markup';
 import { renderRetrievedMarkup } from '../components/my-library-btn';
+import { refs } from '../utils/refs';
 
 let userId = null;
 
-const filmcardModal = document.querySelector('.filmcard-modal');
-const gallery = document.querySelector('.gallery__list');
+const { filmcardModal, gallery } = refs;
 
 filmcardModal.addEventListener('click', onFilmcardModalClick);
 

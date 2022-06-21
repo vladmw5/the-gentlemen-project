@@ -8,21 +8,17 @@ import { makeMarkupGallery } from '../utils/gallery-markup';
 import { renderPaginationBar } from './pagination-bar';
 import { Notify } from 'notiflix';
 import { auth, onAuthStateChanged } from '../firebase/service/index';
+import { refs } from '../utils/refs';
 
-const refs = {
-  watched: document.querySelector('[data-btn-watched]'),
-  queue: document.querySelector('[data-btn-queue]'),
-  gallery: document.querySelector('.gallery__list'),
-  note: document.querySelector('.notifycation__text'),
-};
+const { watched, queue, gallery, note } = refs;
 
 const toAdd = 'is-header-lib-active';
 
 document.addEventListener('libPageLoaded', () => {
   onAuthStateChanged(auth, whenLibraryPageIsLoaded);
 });
-refs.watched?.addEventListener('click', onWatchedBtnClick);
-refs.queue?.addEventListener('click', onQueueBtnClick);
+watched?.addEventListener('click', onWatchedBtnClick);
+queue?.addEventListener('click', onQueueBtnClick);
 
 function whenLibraryPageIsLoaded() {
   getDataFromFirebase(watchedWay)
@@ -31,42 +27,42 @@ function whenLibraryPageIsLoaded() {
     .then(renderRetrievedMarkup)
     .catch(() => {
       // Notify.info('Your Watched List is empty. You can add films on Home page');
-      refs.gallery.innerHTML =
+      gallery.innerHTML =
         '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
       document.querySelector('.spinner')?.remove();
     });
 }
 
 function onWatchedBtnClick() {
-  refs.watched.classList.add(toAdd);
-  refs.queue.classList.remove(toAdd);
+  watched.classList.add(toAdd);
+  queue.classList.remove(toAdd);
   getDataFromFirebase(watchedWay)
     .then(parseDataBaseResponse)
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
     .catch(() => {
-      refs.gallery.innerHTML =
+      gallery.innerHTML =
         '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
       // Notify.info('Your Watched List is empty. You can add films on Home page');
     });
 }
 
 function onQueueBtnClick() {
-  refs.queue.classList.add(toAdd);
-  refs.watched.classList.remove(toAdd);
+  queue.classList.add(toAdd);
+  watched.classList.remove(toAdd);
   getDataFromFirebase(queueWay)
     .then(parseDataBaseResponse)
     .then(makeMarkupGallery)
     .then(renderRetrievedMarkup)
     .catch(() => {
-      refs.gallery.innerHTML =
+      gallery.innerHTML =
         '<p class="notifycation__text notifycation__text--library">Your Queue is empty. You can add films on Home page</p>';
       // Notify.info('Your Watched List is empty. You can add films on Home page');
     });
 }
 
 function renderRetrievedMarkup(markup) {
-  refs.gallery.innerHTML = markup;
+  gallery.innerHTML = markup;
 }
 
 export { renderRetrievedMarkup };
