@@ -9,7 +9,7 @@ import {
   queueWay,
 } from '../firebase/service/index';
 import { toggleModal } from '../components/gallery';
-import { makeMarkupGallery } from '../service/gallery-markup';
+import { makeMarkupGallery } from '../utils/gallery-markup';
 import { renderRetrievedMarkup } from '../components/my-library-btn';
 
 let userId = null;

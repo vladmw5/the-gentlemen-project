@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-import { getMoviesByGenres } from './gallery-requests';
+import { getMoviesByGenres } from '../service/gallery-requests';
 
 const IMG_URL = 'https://image.tmdb.org/t/p';
 
 async function makeMarkupGallery(array) {
   const genres = await getMoviesByGenres();
-  
 
   return array
     .map(

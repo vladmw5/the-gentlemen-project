@@ -11,7 +11,7 @@ import {
   makeMarkupMovie,
   makeMarkupMovie2,
   makeMarkupMovieForSlider,
-} from '../service/gallery-markup';
+} from '../utils/gallery-markup';
 import {
   getPopularMovies,
   getMoviesByKeyword,

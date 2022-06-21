@@ -4,7 +4,7 @@ import {
   queueWay,
   parseDataBaseResponse,
 } from '../firebase/service';
-import { makeMarkupGallery } from '../service/gallery-markup';
+import { makeMarkupGallery } from '../utils/gallery-markup';
 import { renderPaginationBar } from './pagination-bar';
 import { Notify } from 'notiflix';
 import { auth, onAuthStateChanged } from '../firebase/service/index';
