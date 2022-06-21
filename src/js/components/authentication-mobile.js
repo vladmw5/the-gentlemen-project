@@ -19,8 +19,8 @@ export { signUpBtnMobile, logInBtnMobile, logOutItemMobile, libraryItemMobile};
 signUpBtnMobile.addEventListener('click', onSignUpClick);
 
 function onSignUpClick() {
-    backdrop.classList.remove('backdrop-mobile');
-    mobileModal.classList.remove('is-open');
+    removeBackdropMobile();
+    removeMobileModal();
     backdropSign.classList.remove('is-bck-hidden');
 };
 
@@ -29,8 +29,8 @@ function onSignUpClick() {
 logInBtnMobile.addEventListener('click', onLogInClick);
 
 function onLogInClick() {
-    backdrop.classList.remove('backdrop-mobile');
-    mobileModal.classList.remove('is-open');
+    removeBackdropMobile();
+    removeMobileModal();
     backdropLog.classList.remove('is-bck-hidden')
 }
 
@@ -48,4 +48,12 @@ function onCloseModalBtnLog() {
     backdropLog.classList.add('is-bck-hidden')
 };
 
+// Функції дублюючого коду
 
+function removeBackdropMobile() {
+    backdrop.classList.remove('backdrop-mobile');
+};
+
+function removeMobileModal() {
+    mobileModal.classList.remove('is-open');
+};
