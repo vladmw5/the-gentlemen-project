@@ -33,7 +33,7 @@ function whenLibraryPageIsLoaded() {
       // Notify.info('Your Watched List is empty. You can add films on Home page');
       refs.gallery.innerHTML =
         '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
-      document.querySelector('.spinner').remove();
+      document.querySelector('.spinner')?.remove();
     });
 }
 
