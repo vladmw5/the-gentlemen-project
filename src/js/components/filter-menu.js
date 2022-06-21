@@ -15,9 +15,4 @@ document.addEventListener('homePageLoaded', () => {
     listFilter.classList.toggle('is-open-filter');
   }
 });
-//  if (e.target.hasAttribute('data-start')) {
-//    timerId = setInterval(() => {
-//      backgroundColorStyle();
-//    }, 1000);
-//    startBtn.disabled = true;
-//  }
+
