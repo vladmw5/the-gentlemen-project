@@ -6,7 +6,8 @@
   height: 100%;
   z-index: 9;
   overflow-y: scroll;
-  transition: opacity 250ms $cubic;
+  transition: opacity 500ms $cubic, transform 500ms $cubic,
+    visibility 500ms $cubic;
 
   background-color: rgba(0, 0, 0, 0.2);
 
@@ -16,7 +17,7 @@
     pointer-events: none;
 
     .backdrop-modal {
-      transform: translate(-50%, -50%) scale(0.1);
+      transform: translate(-50%, -150%);
     }
   }
 }
@@ -25,26 +26,33 @@
   position: absolute;
   top: 50%;
   left: 50%;
+
   z-index: 18;
   opacity: 1;
   overflow-y: scroll;
   overflow-x: hidden;
 
-  transform: translate(-50%, -50%) scale(1);
-  transition: transform 250ms $cubic, opacity 250ms $cubic,
-    box-shadow 250ms $cubic;
+  transform: translate(-50%, -50%);
+  transition: transform 500ms $cubic, opacity 500ms $cubic,
+    box-shadow 500ms $cubic;
   width: 300px;
-  height: 100%;
+  height: 92vh;
   border-radius: 4px;
+  box-shadow: 0 0 10px #c59025bd;
 
   background-color: #182025;
 
-  @media screen and(min-width: 768px) {
+  @include tablet {
     width: 740px;
+  }
+  @media screen and(min-width:1200px) {
+    width: 1200px;
+    height: 536px;
   }
 }
 
 .backdrop-container {
+  padding-bottom: 10px;
   &__title {
     margin-top: 15px;
     margin-bottom: 30px;
@@ -56,7 +64,7 @@
 
     // color: $background-color-btn;
     color: #c59025b0;
-    @media screen and(min-width: 768px) {
+    @include tablet {
       font-size: 32px;
       margin-left: 50px;
       margin-top: 30px;
@@ -65,20 +73,26 @@
 
   &__btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 30px;
-    height: 30px;
+    top: 18px;
+    right: 18px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transform: scale(1);
-    transition: color 250ms $cubic, transform 250ms $cubic;
+    transition: color 500ms $cubic, transform 500ms $cubic;
 
     background-color: transparent;
     // color: #afb1b8;
     color: #c59025b0;
+    @include tablet {
+      width: 35px;
+      height: 35px;
+      top: 33px;
+      right: 33px;
+    }
 
     &:hover,
     &:focus {
@@ -91,11 +105,6 @@
     height: 25px;
 
     fill: currentColor;
-
-    @media screen and(min-width:768px) {
-      width: 35px;
-      height: 35px;
-    }
   }
 }
 
@@ -103,22 +112,42 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 10px;
+
+  @media screen and(min-width:1200px) {
+    flex-wrap: nowrap;
+  }
   &__item {
+    margin: 10px;
     box-shadow: 0 0px 10px 0 rgba(219, 219, 219, 0.519);
     border-radius: 8px 8px 8px 8px;
     background-color: #fff;
-    transform: scale(0.9);
-    transition: transform 300ms $cubic, box-shadow 300ms $cubic;
+    transition: transform 500ms $cubic, box-shadow 500ms $cubic;
+
+    @include mobile {
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+    }
+    @include tablet {
+      width: calc((100% - 30px - 30px) / 2);
+      transform: scale(0.96);
+
+      &:hover,
+      &:focus {
+        box-shadow: 0px 0px 29px 5px #c59025b0;
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+      margin: 5px;
+    }
 
     &:hover,
     &:focus {
       transform: scale(1);
-      box-shadow: 0px 0px 29px 5px #c59025b0;
     }
     // rgb(0 0 0 / 19%)
-    @media screen and(min-width: 768px) {
-      width: calc((100% - 30px - 30px) / 2);
-    }
   }
   &__img {
     border-radius: 8px 8px 0 0;
@@ -136,6 +165,10 @@
     line-height: 1.18;
     color: $first-color-text;
     margin-bottom: 10px;
+
+    @media screen and (min-width: 1200px) {
+      font-size: 16px;
+    }
   }
 
   &__text {
@@ -145,6 +178,10 @@
 
     // color: $background-color-btn;
     color: #c59025b0;
+
+    @media screen and (min-width: 1200px) {
+      font-size: 16px;
+    }
   }
 }
 
@@ -152,6 +189,10 @@
   display: flex;
   justify-content: center;
   padding-bottom: 30px;
+
+  @media screen and (min-width: 1200px) {
+    padding-bottom: 20px;
+  }
   &__item:not(:last-child) {
     margin-right: 10px;
   }
@@ -163,13 +204,11 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    transform: scale(0.9);
-    transition: color 250ms $cubic, background-color 250ms $cubic,
-      transform 250ms $cubic;
+
+    transition: color 500ms $cubic, background-color 500ms $cubic;
     color: #afb1b8;
     &:hover,
     &:focus {
-      transform: scale(1);
       color: #ffffff;
       background-color: #c59025b0;
     }
@@ -177,5 +216,9 @@
 
   &__svg {
     fill: currentColor;
+
+    @media screen and (min-width: 1200px) {
+      height: 23px;
+    }
   }
 }
