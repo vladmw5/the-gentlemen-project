@@ -38,13 +38,15 @@ async function onFilmcardModalClick(event) {
       : queueWay;
     removeMovieFromFirebase(targetWay, currentFilmId)
       .then(() => {
-        getDataFromFirebase(watchedWay)
+        getDataFromFirebase(targetWay)
           .then(parseDataBaseResponse)
           .then(makeMarkupGallery)
           .then(renderRetrievedMarkup)
           .catch(() => {
             Notify.info(
-              'Your Watched List is now empty. You can add films on Home page'
+              `Your ${
+                targetWay === watchedWay ? 'Watched List' : 'Queue'
+              } is now empty. You can add films on Home page`
             );
             gallery.innerHTML =
               '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
