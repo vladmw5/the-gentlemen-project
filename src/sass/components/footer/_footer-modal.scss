@@ -6,7 +6,8 @@
   height: 100%;
   z-index: 9;
   overflow-y: scroll;
-  transition: opacity 500ms $cubic;
+  transition: opacity 500ms $cubic, transform 500ms $cubic,
+    visibility 500ms $cubic;
 
   background-color: rgba(0, 0, 0, 0.2);
 
@@ -16,7 +17,7 @@
     pointer-events: none;
 
     .backdrop-modal {
-      transform: translate(-50%, -50%) scale(0.1);
+      transform: translate(-50%, -150%);
     }
   }
 }
@@ -31,7 +32,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   transition: transform 500ms $cubic, opacity 500ms $cubic,
     box-shadow 500ms $cubic;
   width: 300px;
@@ -41,7 +42,7 @@
 
   background-color: #182025;
 
-  @media screen and(min-width: 768px) {
+  @include tablet {
     width: 740px;
   }
 }
@@ -59,7 +60,7 @@
 
     // color: $background-color-btn;
     color: #c59025b0;
-    @media screen and(min-width: 768px) {
+    @include tablet {
       font-size: 32px;
       margin-left: 50px;
       margin-top: 30px;
@@ -82,7 +83,7 @@
     background-color: transparent;
     // color: #afb1b8;
     color: #c59025b0;
-    @media screen and(min-width:768px) {
+    @include tablet {
       width: 35px;
       height: 35px;
       top: 33px;
@@ -107,18 +108,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 10px;
   &__item {
+    margin: 10px;
     box-shadow: 0 0px 10px 0 rgba(219, 219, 219, 0.519);
     border-radius: 8px 8px 8px 8px;
     background-color: #fff;
     transition: transform 500ms $cubic, box-shadow 500ms $cubic;
 
-    @media screen and (max-width: 767px) {
+    @include mobile {
       &:not(:last-child) {
         margin-bottom: 15px;
       }
     }
-    @media screen and(min-width: 768px) {
+    @include tablet {
       width: calc((100% - 30px - 30px) / 2);
       transform: scale(0.96);
 
