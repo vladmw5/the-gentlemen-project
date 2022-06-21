@@ -39,7 +39,6 @@ const moviesFilter = document.querySelector('.hero-btn-list');
 const filterBtn = document.querySelector('.filter');
 const sortBtn = document.querySelector('.rating');
 const genreBtns = document.querySelector('.menu-filter-list');
-const spinnerEl = document.querySelector('.spinner');
 const pagination = document.querySelector('.pagination-bar__list');
 
 // event Listener
@@ -107,7 +106,7 @@ function renderMoviesByID(movieId) {
         movieCase.innerHTML = makeMarkupMovie(r);
       }
 
-      spinnerEl.remove();
+      document.querySelector('.spinner').remove();
       toggleModal();
     })
     .catch(console.log);
