@@ -46,7 +46,8 @@ async function onFilmcardModalClick(event) {
             Notify.info(
               'Your Watched List is now empty. You can add films on Home page'
             );
-            gallery.innerHTML = '';
+            gallery.innerHTML =
+              '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
           });
       })
       .catch(() => {
