@@ -16,15 +16,22 @@
         Search result not successful. Enter the correct movie name and try again
       </p>
     </form>
-    <ul class="hero-btn-list">
-      <li class="hero-btn-list__item">
-        <button class="filter" type="button" data-filter>Filter genres</button>
-      </li>
-      <li class="hero-btn-list__item">
-        <button class="reset" type="button">Reset</button>
-      </li>
-    </ul>
-    <div class="menu-filter">
+    <div class="btn-menu">
+      <ul class="hero-btn-list">
+        <li class="hero-btn-list__item">
+          <button class="filter" type="button" data-filter>
+            Filter genres
+          </button>
+        </li>
+        <li class="hero-btn-list__item">
+          <button class="rating" type="button" data-rating>
+            Sorted by rating
+          </button>
+        </li>
+        <li class="hero-btn-list__item">
+          <button class="reset" type="button" disabled>Reset</button>
+        </li>
+      </ul>
       <ul class="menu-filter-list" data-list-filter></ul>
     </div>
   </div>

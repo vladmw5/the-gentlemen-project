@@ -11,3 +11,5 @@ import './firebase/add-to-database';
 import './components/my-library-btn';
 import './components/btn-to-top';
 import './service/filter-requests';
+import './components/filter-menu';
+import './components/ratting-sort';
