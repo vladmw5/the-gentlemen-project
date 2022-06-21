@@ -28,6 +28,7 @@ import {
   libraryItemMobile,
 } from '../../components/authentication-mobile';
 import { getUserId } from '../add-to-database';
+import { notifyOptions } from '../../service/notify-options';
 
 let userId = null;
 
@@ -42,7 +43,7 @@ function createUser(email, password) {
       // Signed in
       const user = userCredential.user;
       // ...
-      Notify.success('You have successfully signed up');
+      Notify.success('You have successfully signed up', notifyOptions);
     })
     .catch(error => {
       const errorCode = error.code;
@@ -58,12 +59,12 @@ function signInUser(email, password) {
       // Signed in
       const user = userCredential.user;
       // ...
-      Notify.success('You have successfully logged in');
+      Notify.success('You have successfully logged in', notifyOptions);
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      Notify.failure('Invalid Log In credentials provided ');
+      Notify.failure('Invalid Log In credentials provided', notifyOptions);
     });
 }
 

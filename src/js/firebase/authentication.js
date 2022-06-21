@@ -14,7 +14,7 @@ function onSubmitRegistration(e) {
   e.preventDefault();
 
   const { email, password } = e.currentTarget.elements;
-  if (email.value === '' || password.value === '') {
+  if (email.value.trim() === '' || password.value === '') {
     return Notify.failure('Всі поля повинні бути заповнені!');
   }
   try {
@@ -26,7 +26,7 @@ function onSubmitAuthorization(e) {
   e.preventDefault();
 
   const { email, password } = e.currentTarget.elements;
-  if (email.value === '' || password.value === '') {
+  if (email.value.trim() === '' || password.value === '') {
     return Notify.failure('Всі поля повинні бути заповнені!');
   }
   try {
