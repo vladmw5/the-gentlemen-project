@@ -2,7 +2,6 @@ import { Spinner } from 'spin.js';
 import debounce from 'lodash.debounce';
 
 import Swiper from 'swiper/swiper-bundle.min.js';
-// import 'swiper/swiper-bundle.min.css';
 
 import { swiperOptions } from '../service/swiper-options';
 import { optsForSpinner } from '../service/spinner-options';
@@ -35,7 +34,6 @@ const inputSearchMovie = document.querySelector('.hero-form__input');
 const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
 const slideImages = document.querySelector('.swiper-wrapper');
 const swiperContainer = document.querySelector('.swiper-container');
-const swiperTitle = document.querySelector('.swiper-title');
 const swiper = document.querySelector('.swiper');
 const moviesFilter = document.querySelector('.hero-btn-list');
 
@@ -58,8 +56,8 @@ modalCloseBtn.addEventListener('click', toggleModal);
 const spinner = new Spinner(optsForSpinner).spin(gallery);
 
 // functions
-export function firstRenderPopularMovies(page, genreId) {
-  getPopularMovies(page, selectedIdGenre).then(r => {
+export function firstRenderPopularMovies(page, genreId, sortByRating) {
+  getPopularMovies(page, selectedIdGenre, sortByRating).then(r => {
     makeMarkupGallery(r.results)
       .then(r => {
         gallery.innerHTML = r;
@@ -168,8 +166,31 @@ export function onGenreClick(e) {
     return;
   }
 
+  document.querySelector('.filter').classList.add('filter-active');
+  document
+    .querySelector('.menu-filter-list')
+    .classList.remove('is-open-filter');
+
   selectedIdGenre = Number(e.target.dataset.id);
+  firstRenderPopularMovies(
+    1,
+    selectedIdGenre,
+    document.querySelector('.rating').dataset.rating === 'false' ? false : true
+  );
+}
+
+export function onSortClick(e) {
+  firstRenderPopularMovies(
+    1,
+    selectedIdGenre,
+    e.target.dataset.rating === 'false' ? false : true
+  );
+}
+
+export function onResetSortAndFilterClick(e) {
+  selectedIdGenre = '';
   firstRenderPopularMovies(1, selectedIdGenre);
+  document.querySelector('.filter').classList.remove('filter-active');
 }
 
 function closeMovieModalByEsc(e) {

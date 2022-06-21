@@ -32,10 +32,9 @@
   @include desktop {
     margin: 16px 8px;
     width: calc((100% - 64px) / 4);
-  }
-
-  &:hover {
-    transform: scale(1.03);
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 }
 
