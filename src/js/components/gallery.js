@@ -2,7 +2,6 @@ import { Spinner } from 'spin.js';
 import debounce from 'lodash.debounce';
 
 import Swiper from 'swiper/swiper-bundle.min.js';
-// import 'swiper/swiper-bundle.min.css';
 
 import { swiperOptions } from '../service/swiper-options';
 import { optsForSpinner } from '../service/spinner-options';
@@ -35,7 +34,6 @@ const inputSearchMovie = document.querySelector('.hero-form__input');
 const modalCloseBtn = document.querySelector('.filmcard-modal__close-btn');
 const slideImages = document.querySelector('.swiper-wrapper');
 const swiperContainer = document.querySelector('.swiper-container');
-const swiperTitle = document.querySelector('.swiper-title');
 const swiper = document.querySelector('.swiper');
 const moviesFilter = document.querySelector('.hero-btn-list');
 
@@ -169,7 +167,30 @@ export function onGenreClick(e) {
   }
 
   selectedIdGenre = Number(e.target.dataset.id);
-  firstRenderPopularMovies(1, selectedIdGenre);
+  firstRenderPopularMovies(
+    1,
+    selectedIdGenre,
+    sortMovieDescendingByRatingStatus
+  );
+}
+
+export function onSortClick(e) {
+  sortMovieDescendingByRatingStatus = true;
+  firstRenderPopularMovies(
+    1,
+    selectedIdGenre,
+    sortMovieDescendingByRatingStatus
+  );
+}
+
+export function onResetSortAndFilterClick(e) {
+  selectedIdGenre = '';
+  sortMovieDescendingByRatingStatus = false;
+  firstRenderPopularMovies(
+    1,
+    selectedIdGenre,
+    sortMovieDescendingByRatingStatus
+  );
 }
 
 function closeMovieModalByEsc(e) {
