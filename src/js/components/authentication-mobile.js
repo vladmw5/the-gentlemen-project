@@ -11,9 +11,6 @@ const logOutItemMobile = document.querySelector('.log-out-mobile');
 const logInBtnMobile = document.querySelector('.log-in-mobile');
 const signUpBtnMobile = document.querySelector('.sign-up-mobile');
 
-const registrationForm = document.querySelector('.registration-js');
-const authorizationForm = document.querySelector('.authorization-js');
-
 export { signUpBtnMobile, logInBtnMobile, logOutItemMobile, libraryItemMobile};
 
 

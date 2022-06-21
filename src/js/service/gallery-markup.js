@@ -6,6 +6,7 @@ const IMG_URL = 'https://image.tmdb.org/t/p';
 
 async function makeMarkupGallery(array) {
   const genres = await getMoviesByGenres();
+  
 
   return array
     .map(
