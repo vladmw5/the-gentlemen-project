@@ -2,12 +2,12 @@ const filterBtn = document.querySelector('.filter');
 const listFilter = document.querySelector('.menu-filter-list');
 export const resetBtn = document.querySelector('.reset');
 
-document.addEventListener('homePageLoader', () => {
+document.addEventListener('homePageLoaded', () => {
   filterBtn.addEventListener('click', addClassOpen);
   resetBtn.addEventListener('click', () => {
-    console.log('ok');
+    listFilter.classList.remove('is-open-filter');
     resetBtn.setAttribute('disabled', 'disabled');
-    listFilter.classList.toggle('is-open-filter');
+    console.log('ok');
   });
 
   function addClassOpen() {
@@ -15,3 +15,9 @@ document.addEventListener('homePageLoader', () => {
     listFilter.classList.toggle('is-open-filter');
   }
 });
+//  if (e.target.hasAttribute('data-start')) {
+//    timerId = setInterval(() => {
+//      backgroundColorStyle();
+//    }, 1000);
+//    startBtn.disabled = true;
+//  }

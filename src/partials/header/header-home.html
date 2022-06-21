@@ -16,37 +16,23 @@
         Search result not successful. Enter the correct movie name and try again
       </p>
     </form>
-    <ul class="hero-btn-list">
-      <li class="hero-btn-list__item">
-        <button class="filter" type="button" data-filter>Filter genres</button>
-      </li>
-      <li class="hero-btn-list__item">
-        <button class="ratting" type="button">Ratting</button>
-      </li>
-      <li class="hero-btn-list__item">
-        <button class="reset" type="button" disabled>Reset</button>
-      </li>
-    </ul>
-    <div class="menu-filter">
+    <div class="btn-menu">
+      <ul class="hero-btn-list">
+        <li class="hero-btn-list__item">
+          <button class="filter" type="button" data-filter>
+            Filter genres
+          </button>
+        </li>
+        <li class="hero-btn-list__item">
+          <button class="rating" type="button" data-rating>
+            Sorted by rating
+          </button>
+        </li>
+        <li class="hero-btn-list__item">
+          <button class="reset" type="button" disabled>Reset</button>
+        </li>
+      </ul>
       <ul class="menu-filter-list" data-list-filter></ul>
     </div>
-  </div>
-  <div class="hero-ratting">
-    <form class="ratting-form">
-    <label class="ratting-form__label">
-      <input type="radio" name="radio" class="ratting-form__input"/>
-      Відсортувати за спаданням &#129047;
-      <svg class="ratting-form__svg" width="15" height="15">
-        <use href="../src/images/symbol-defs.svg#icon-gentlemen"></use>
-      </svg>
-    </label>
-    <label class="ratting-form__label .ratting-form__label--checked ">
-      <input type="radio" name="radio" class="ratting-form__input"/>
-      Відсортувати за зростанням &#129045;
-      <svg class="ratting-form__svg" width="15" height="15">
-        <use href="../src/images/symbol-defs.svg#icon-gentlemen"></use>
-      </svg>
-    </label>
-  </form>
   </div>
 </section>

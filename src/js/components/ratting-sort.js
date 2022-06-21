@@ -1,18 +1,17 @@
-import { resetBtn } from "./filter-menu";
+import { resetBtn } from './filter-menu';
+const ratingBtn = document.querySelector('.rating');
 
-const formEl = document.querySelector('.ratting-form');
-const rattingBtn = document.querySelector('.ratting');
+console.log(ratingBtn);
 
-document.addEventListener('homePageLoader', () => {
-  rattingBtn.addEventListener('click', addClassOpen);
+document.addEventListener('homePageLoaded', () => {
+  ratingBtn.addEventListener('click', addClassOpen);
   resetBtn.addEventListener('click', () => {
-    console.log('ok');
     resetBtn.setAttribute('disabled', 'disabled');
-    formEl.classList.toggle('is-open-ratting');
+    ratingBtn.classList.remove('rating-active');
   });
 
   function addClassOpen() {
     resetBtn.removeAttribute('disabled');
-    formEl.classList.toggle('is-open-ratting');
+    ratingBtn.classList.toggle('rating-active');
   }
 });
