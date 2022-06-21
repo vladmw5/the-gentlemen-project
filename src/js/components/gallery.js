@@ -113,7 +113,7 @@ function onFormInput(e) {
   swiper.style.display = 'none';
   moviesFilter.style.display = 'none';
   const ref = document.querySelector('.menu-filter-list');
-  ref.classList.remove('is-open-filter');
+  ref?.classList.remove('is-open-filter');
 
   const keyword = e.target.value.trim();
   if (!keyword) {

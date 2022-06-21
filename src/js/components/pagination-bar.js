@@ -5,6 +5,7 @@ import {
   renderMoviesByKeyword,
   SESSION_STORAGE_USER_KEYWORD_KEY,
 } from './gallery';
+import debounce from 'lodash.debounce';
 
 const markup = {
   leftArrow() {
@@ -51,6 +52,14 @@ const BAR_HIDDEN_CLASS = 'pagination-bar__element--hidden';
 const paginationBarRef = document.querySelector('.pagination-bar__list');
 const leftArrowRef = document.querySelector('.pagination-bar__left');
 const rightArrowRef = document.querySelector('.pagination-bar__right');
+const inputFormRef = document.querySelector('.hero-form__input');
+const sortBtnRef = document.querySelector('button.rating');
+const filterListRef = document.querySelector('.menu-filter-list');
+
+inputFormRef?.addEventListener('input', debounce(resetCounter, 350));
+sortBtnRef?.addEventListener('click', resetCounter);
+filterListRef?.addEventListener('click', onFilterListClickResetCounter);
+
 let currentPage = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -115,10 +124,10 @@ function onPaginationBarClick(event) {
   }
 }
 
-export function renderPaginationBar(totalPages, currentPage) {
+export function renderPaginationBar(totalPages, cPage) {
   let toInsert = '';
-  let pageBefore = currentPage - 2;
-  let pageAfter = currentPage + 2;
+  let pageBefore = cPage - 2;
+  let pageAfter = cPage + 2;
 
   if (totalPages >= 500) totalPages = 500;
 
@@ -126,14 +135,14 @@ export function renderPaginationBar(totalPages, currentPage) {
   rightArrowRef.classList.add(BAR_HIDDEN_CLASS);
 
   //Если текущая страница больше первой, то должна быть отрисована кнопка назад
-  if (currentPage > 1) {
+  if (cPage > 1) {
     leftArrowRef.classList.remove(BAR_HIDDEN_CLASS);
   }
 
   //Отрисовка числа 1 и ... после неё, если надо
-  if (currentPage > 2) {
+  if (cPage > 2) {
     toInsert += markup.number(1, false, true);
-    if (currentPage > 4) {
+    if (cPage > 4) {
       toInsert += markup.dots(true);
     }
   }
@@ -150,18 +159,18 @@ export function renderPaginationBar(totalPages, currentPage) {
     }
     //Insane hardcoding
     if (i === 1) {
-      if (currentPage === 3) {
+      if (cPage === 3) {
         i++;
       }
     }
     //Insane hardcoding
     if (i === totalPages) {
-      if (currentPage === totalPages - 2) {
+      if (cPage === totalPages - 2) {
         continue;
       }
     }
 
-    if (i != currentPage) {
+    if (i != cPage) {
       toInsert += markup.number(i);
     } else {
       toInsert += markup.number(i, true);
@@ -169,19 +178,30 @@ export function renderPaginationBar(totalPages, currentPage) {
   }
 
   //Отрисовка числа последней страницы и ... до, если надо
-  if (currentPage < totalPages - 1) {
-    if (currentPage < totalPages - 3) {
+  if (cPage < totalPages - 1) {
+    if (cPage < totalPages - 3) {
       toInsert += markup.dots(true);
     }
     toInsert += markup.number(totalPages, false, true);
   }
 
   //Если текущая страница меньше первой, то должна быть отрисована кнопка вперёд
-  if (currentPage < totalPages) {
+  if (cPage < totalPages) {
     rightArrowRef.classList.remove(BAR_HIDDEN_CLASS);
   }
 
   paginationBarRef.innerHTML = toInsert;
+}
+
+function resetCounter() {
+  currentPage = 1;
+}
+
+function onFilterListClickResetCounter(event) {
+  if (event.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  resetCounter();
 }
 
 export { currentPage };
