@@ -28,6 +28,7 @@ import {
   libraryItemMobile,
 } from '../../components/authentication-mobile';
 import { getUserId } from '../add-to-database';
+
 let userId = null;
 
 const app = initializeApp(firebaseConfig);

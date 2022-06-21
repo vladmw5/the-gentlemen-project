@@ -1,7 +1,6 @@
-const ulNavEl = document.querySelector('.modal-nav-list');
-const homeEl = document.querySelector('.link-home-js');
-const libraryEl = document.querySelector('.link-library-js');
+import { refs } from '../utils/refs';
 
+const { homeEl, libraryEl } = refs;
 
 document.addEventListener('homePageLoaded', () => {
   classListBurger(homeEl, libraryEl);

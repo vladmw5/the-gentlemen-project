@@ -1,7 +1,6 @@
-const navUlEl = document.querySelector('.nav-list-js');
-const homeEl = document.querySelector('.header-home-js');
-const libraryEl = document.querySelector('.header-library-js');
+import { refs } from '../utils/refs';
 
+const { homeEl, libraryEl } = refs;
 
 document.addEventListener('homePageLoaded', () => {
   classListBurger(homeEl, libraryEl);

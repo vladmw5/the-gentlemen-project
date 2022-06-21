@@ -1,11 +1,11 @@
 import { getMoviesByGenres } from './gallery-requests';
 import { onGenreClick } from '../components/gallery';
+import { refs } from '../utils/refs';
 
-const filterEl = document.querySelector('.filter');
-const listBtnMenu = document.querySelector('[data-list-filter]');
+const { filterBtn, listBtnMenu } = refs;
 
 document.addEventListener('homePageLoaded', () => {
-  filterEl.addEventListener('click', getMarkupGenres);
+  filterBtn.addEventListener('click', getMarkupGenres);
 });
 
 async function getMarkupGenres(e) {
