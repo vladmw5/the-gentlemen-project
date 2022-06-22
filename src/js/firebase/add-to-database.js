@@ -28,6 +28,13 @@ async function onFilmcardModalClick(event) {
   if (event.target.nodeName !== 'BUTTON') return;
   if (event.target.classList.contains('filmcard-modal__close-btn')) return;
 
+  if (
+    event.target.classList.contains('card-open-film') ||
+    event.target.classList.contains('card-span-unicode')
+  ) {
+    return;
+  }
+
   if (userId === null) {
     return Notify.failure(
       'You are not authorized to perform this action. Please, Sign Up or Log In',

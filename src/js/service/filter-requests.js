@@ -8,7 +8,7 @@ document.addEventListener('homePageLoaded', () => {
   filterBtn.addEventListener('click', getMarkupGenres);
 });
 
-async function getMarkupGenres(e) {
+async function getMarkupGenres() {
   const add = await getMoviesByGenres();
 
   const array = add
