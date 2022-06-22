@@ -1,32 +1,41 @@
-.card-open-film {
-  position: fixed;
-  top: 24%;
-  right: 41%;
-  width: 50px;
-  height: 50px;
-  padding: 15px;
-  background-color: #7e5b5bc4;
-  border-radius: 50%;
-  font-size: 40px;
-  cursor: pointer;
-  transform: scale(1);
+.modal-film-centrelizer {
+  position: relative;
   @include tablet {
-    top: 45%;
-    right: 73%;
+    margin-right: 68px;
+  }
+  @include desktop {
+    margin-right: 16px;
+    &:hover .card-open-film {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
-.card-open-film:hover,
-.card-open-film:focus {
-  transform: scale(1.2);
-  background-color: #3e2c2cc4;
+.card-open-film {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  padding: 15px;
+  background-color: $background-color-btn;
+  border-radius: 50%;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  @include desktop {
+    display: none;
+  }
 }
 
 .card-span-unicode {
   pointer-events: none;
-  position: absolute;
-  top: 8%;
-  left: 17px;
+  color: #fff;
 }
 
 .modal-video {

@@ -1,7 +1,6 @@
 import { refs } from './refs';
 import { getMoviesByVideo } from '../service/gallery-requests';
 
-
 const { movieCase } = refs;
 const modalVideo = document.querySelector('.modal-video');
 const closeVideo = document.querySelector('[data-close-video]');
@@ -43,7 +42,6 @@ export function closeMovieModal() {
 function renderMovieToMovieModal(result) {
   const data = result[0];
   const { key, name } = data;
-  console.log(data);
   const markup = `<iframe
   class="youtube"
   width="560"
@@ -55,8 +53,9 @@ function renderMovieToMovieModal(result) {
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen
 ></iframe>`;
-  console.log(result);
-  renderVideo.innerHTML = markup;
+  try {
+    renderVideo.innerHTML = markup;
+  } catch {}
 }
 
 {
