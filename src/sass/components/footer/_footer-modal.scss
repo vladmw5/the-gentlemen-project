@@ -17,6 +17,8 @@
     pointer-events: none;
 
     .backdrop-modal {
+      top: -999px;
+        left: -999px;
       transform: translate(-50%, -150%);
     }
   }
