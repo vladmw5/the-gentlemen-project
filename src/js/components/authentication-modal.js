@@ -25,17 +25,17 @@ export {
 signUpBtn.addEventListener('click', onSignUpClick);
 
 function onSignUpClick() {
-  window.addEventListener('keydown', onEskKeyPress);
-  backdropSign.classList.remove('is-bck-hidden');
-}
+    keydownWindow();
+    backdropSign.classList.remove('is-bck-hidden');
+};
 
 //Клік по кнопці LOG IN відкриття модального вікна з формою авторизації
 
 logInBtn.addEventListener('click', onLogInClick);
 
 function onLogInClick() {
-  window.addEventListener('keydown', onEskKeyPress);
-  backdropLog.classList.remove('is-bck-hidden');
+   keydownWindow();
+   backdropLog.classList.remove('is-bck-hidden')
 }
 
 //Закриття модального вікна по кнопці
@@ -43,40 +43,50 @@ function onLogInClick() {
 closeModalBtnSign.addEventListener('click', onCloseModalBtnSign);
 
 function onCloseModalBtnSign() {
-  window.removeEventListener('keydown', onEskKeyPress);
-  backdropSign.classList.add('is-bck-hidden');
-}
+    removeKeydownWindowListener();
+    backdropSign.classList.add('is-bck-hidden');  
+};
+
 
 closeModalBtnLog.addEventListener('click', onCloseModalBtnLog);
 
 function onCloseModalBtnLog() {
-  window.removeEventListener('keydown', onEskKeyPress);
-  backdropLog.classList.add('is-bck-hidden');
-}
+    removeKeydownWindowListener();
+    backdropLog.classList.add('is-bck-hidden');
+};
 
-//Закриття модального вікна кліком по бекдропу та натиском по кнопці ескейп
 
-backdropSign.addEventListener('click', onBackdropSignClick);
+//Закриття модального вікна кліком по бекдропу 
 
-function onBackdropSignClick(e) {
-  if (e.currentTarget === e.target) {
-    onCloseModalBtnSign();
-  }
-}
+backdropSign.addEventListener('click', onBackdropClick);
 
-backdropLog.addEventListener('click', onBackdropLogClick);
 
-function onBackdropLogClick(e) {
-  if (e.currentTarget === e.target) {
-    onCloseModalBtnLog();
-  }
-}
+backdropLog.addEventListener('click', onBackdropClick);
+
+function onBackdropClick(e) {
+    if (e.currentTarget === e.target) {
+        onCloseModalBtnSign() || onCloseModalBtnLog();
+    };
+};
+
+
+//Закриття модального вікна натиском по кнопці Escape
 
 function onEskKeyPress(e) {
   const ESC_KEY_CODE = 'Escape';
+    if (e.code === ESC_KEY_CODE) {
+        onCloseModalBtnSign();
+        onCloseModalBtnLog();
+    };
+};
 
-  if (e.code === ESC_KEY_CODE) {
-    onCloseModalBtnSign();
-    onCloseModalBtnLog();
-  }
-}
+//Функції дублюючого коду
+
+function keydownWindow() {
+    window.addEventListener('keydown', onEskKeyPress);
+};
+
+function removeKeydownWindowListener() {
+    window.removeEventListener('keydown', onEskKeyPress);
+};
+
