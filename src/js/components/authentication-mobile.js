@@ -20,20 +20,19 @@ export { signUpBtnMobile, logInBtnMobile, logOutItemMobile, libraryItemMobile };
 signUpBtnMobile.addEventListener('click', onSignUpClick);
 
 function onSignUpClick() {
-    removeBackdropMobile();
-    removeMobileModal();
-    backdropSign.classList.remove('is-bck-hidden');
-};
-
+  removeBackdropMobile();
+  removeMobileModal();
+  backdropSign.classList.remove('is-bck-hidden');
+}
 
 //Клік по кнопці LOG IN відкриття модального вікна з формою авторизації
 
 logInBtnMobile.addEventListener('click', onLogInClick);
 
 function onLogInClick() {
-    removeBackdropMobile();
-    removeMobileModal();
-    backdropLog.classList.remove('is-bck-hidden')
+  removeBackdropMobile();
+  removeMobileModal();
+  backdropLog.classList.remove('is-bck-hidden');
 }
 
 //Закриття модального вікна
@@ -47,16 +46,16 @@ function onCloseModalBtnSign() {
 closeModalBtnLog.addEventListener('click', onCloseModalBtnLog);
 
 function onCloseModalBtnLog() {
-    backdropLog.classList.add('is-bck-hidden')
-};
+  backdropLog.classList.add('is-bck-hidden');
+}
 
 // Функції дублюючого коду
 
 function removeBackdropMobile() {
-    backdrop.classList.remove('backdrop-mobile');
-};
+  backdrop.classList.remove('backdrop-mobile');
+}
 
 function removeMobileModal() {
-    mobileModal.classList.remove('is-open');
-};
-
+  mobileModal.classList.remove('is-open');
+  document.body.classList.remove('body-mobile-window');
+}
