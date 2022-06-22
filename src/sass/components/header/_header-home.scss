@@ -58,15 +58,6 @@
     @include desktop {
       width: 394px;
     }
-
-    // &::after {
-    //   content: 'Search result not successful. Enter the correct movie name and';
-    //   font-weight: 400;
-    //   font-size: 14px;
-    //   line-height: 1.14;
-    //   color: $warning-color;
-    //   margin-top: 16px;
-    // }
   }
   &-form__input {
     outline: none;

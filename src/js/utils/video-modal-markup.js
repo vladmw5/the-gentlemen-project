@@ -23,7 +23,7 @@ function getMovie(e) {
   const posterRef = movieCase.querySelector('.filmcard__poster');
 
   const idMovie = posterRef.dataset.id;
-  console.log(idMovie);
+  
   getMoviesByVideo(idMovie)
     .then(openMovieModal)
     .then(renderMovieToMovieModal)

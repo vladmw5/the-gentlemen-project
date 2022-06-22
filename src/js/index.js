@@ -14,4 +14,3 @@ import './service/filter-requests';
 import './components/filter-menu';
 import './components/ratting-sort';
 import './utils/video-modal-markup';
-import './components/modal-video';
