@@ -82,6 +82,7 @@
 
 .filmcard__poster {
   width: 100%;
+  height: auto;
   @include mobile {
     margin-bottom: 20px;
   }
