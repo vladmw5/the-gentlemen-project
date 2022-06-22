@@ -12,12 +12,14 @@
   background-color: rgba(0, 0, 0, 0.2);
 
   &__is-hidden {
-    visibility: hidden;
     opacity: 0;
     pointer-events: none;
 
     .backdrop-modal {
-      transform: translate(-50%, -150%);
+      transform: translate(-50%, -170%);
+      top: -999px;
+      left: -999px;
+      visibility: hidden;
     }
   }
 }
@@ -26,15 +28,13 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
 
-  z-index: 18;
   opacity: 1;
   overflow-y: scroll;
-  overflow-x: hidden;
 
-  transform: translate(-50%, -50%);
   transition: transform 500ms $cubic, opacity 500ms $cubic,
-    box-shadow 500ms $cubic;
+    box-shadow 500ms $cubic, visibility 500ms $cubic;
   width: 300px;
   height: 92vh;
   border-radius: 4px;

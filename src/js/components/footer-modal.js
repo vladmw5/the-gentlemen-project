@@ -47,19 +47,3 @@ function closeFooterModalClickBackdrop(event) {
     toggleModal();
   }
 }
-
-// window.addEventListener('keydown', closeMovieModalByEsc, { once: true });
-// modalBackdrop.addEventListener('click', closeMovieModalByClickBackdrop);
-
-// function closeMovieModalByEsc(e) {
-//   if (e.code === 'Escape') {
-//     toggleModal();
-//   }
-// }
-
-// function closeMovieModalByClickBackdrop(e) {
-//   if (e.target === e.currentTarget) {
-//     toggleModal();
-//     modalBackdrop.removeEventListener('click', closeMovieModalByClickBackdrop);
-//   }
-// }
