@@ -2,6 +2,8 @@ import { refs } from '../utils/refs';
 
 const { btnToTop } = refs;
 
+const magicNumber = 300;
+
 btnToTop.addEventListener('click', topFunction);
 
 window.onscroll = function () {
@@ -10,8 +12,8 @@ window.onscroll = function () {
 
 function scrollFunction() {
   if (
-    document.body.scrollTop > 300 ||
-    document.documentElement.scrollTop > 300
+    document.body.scrollTop > magicNumber ||
+    document.documentElement.scrollTop > magicNumber
   ) {
     btnToTop.style.display = 'block';
   } else {

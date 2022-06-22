@@ -22,7 +22,7 @@ let userId = null;
 
 const { filmcardModal, gallery } = refs;
 
-filmcardModal.addEventListener('click', throttle(onFilmcardModalClick, 2000));
+filmcardModal.addEventListener('click', throttle(onFilmcardModalClick, 550));
 
 async function onFilmcardModalClick(event) {
   if (event.target.nodeName !== 'BUTTON') return;
