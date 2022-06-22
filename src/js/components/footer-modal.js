@@ -5,9 +5,13 @@ const { openModalBtn, closeModalBtn, modalFooter } = refs;
 openModalBtn.addEventListener('click', openFooterModal);
 closeModalBtn.addEventListener('click', closeFooterModal);
 
-function closeFooterModal() {
+function windowModalFooterRemoveKeydownClick() {
   window.removeEventListener('keydown', closeFooterModalEscape);
   modalFooter.removeEventListener('click', closeFooterModalClickBackdrop);
+}
+
+function closeFooterModal() {
+  windowModalFooterRemoveKeydownClick();
   toggleModal();
 }
 
@@ -27,31 +31,13 @@ function toggleModal() {
 function closeFooterModalEscape(event) {
   if (event.code === 'Escape') {
     toggleModal();
-    window.removeEventListener('keydown', closeFooterModalEscape);
-    modalFooter.removeEventListener('click', closeFooterModalClickBackdrop);
+    windowModalFooterRemoveKeydownClick();
   }
 }
 
 function closeFooterModalClickBackdrop(event) {
   if (event.target === event.currentTarget) {
-    window.removeEventListener('keydown', closeFooterModalEscape);
-    modalFooter.removeEventListener('click', closeFooterModalClickBackdrop);
+    windowModalFooterRemoveKeydownClick();
     toggleModal();
   }
 }
-
-// window.addEventListener('keydown', closeMovieModalByEsc, { once: true });
-// modalBackdrop.addEventListener('click', closeMovieModalByClickBackdrop);
-
-// function closeMovieModalByEsc(e) {
-//   if (e.code === 'Escape') {
-//     toggleModal();
-//   }
-// }
-
-// function closeMovieModalByClickBackdrop(e) {
-//   if (e.target === e.currentTarget) {
-//     toggleModal();
-//     modalBackdrop.removeEventListener('click', closeMovieModalByClickBackdrop);
-//   }
-// }
