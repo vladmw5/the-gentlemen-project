@@ -1,8 +1,6 @@
-const btnOpen = document.querySelector('[data-open]');
-const mobileModal = document.querySelector('[data-modal-burger]');
-const closeBtn = document.querySelector('[data-close]');
-const bodyEl = document.querySelector('body');
-const backdrop = document.querySelector('.mobile-menu-window');
+import { refs } from '../utils/refs';
+
+const { btnOpen, mobileModal, closeBtn, bodyEl, backdrop } = refs;
 
 closeBtn.addEventListener('click', toggleMobileMenu);
 btnOpen.addEventListener('click', toggleMobileMenu);
@@ -12,5 +10,3 @@ function toggleMobileMenu() {
   backdrop.classList.toggle('backdrop-mobile');
   bodyEl.classList.toggle('body-mobile-window');
 }
-
-export { backdrop, mobileModal };

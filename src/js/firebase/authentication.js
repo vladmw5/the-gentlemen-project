@@ -1,11 +1,9 @@
 //-- Реєстрація та авторизація
 import { createUser, signInUser, exitUser } from './service';
 import { Notify } from 'notiflix';
+import { refs } from '../utils/refs';
 
-export const registration = document.querySelector('#registration');
-export const authorization = document.querySelector('#authorization');
-const exitBtn = document.querySelector('#exit-btn');
-const exitBtnMobile = document.querySelector('#exit-btn-mobile');
+const { registration, authorization, exitBtn, exitBtnMobile } = refs;
 
 registration.addEventListener('submit', onSubmitRegistration);
 authorization.addEventListener('submit', onSubmitAuthorization);

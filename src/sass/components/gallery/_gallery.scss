@@ -1,6 +1,6 @@
 .gallery {
-  margin-top: 20px;
-  margin-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 40px;
 
   @include tablet {
     margin-top: 60px;
@@ -42,8 +42,6 @@
 }
 
 .card__img {
-  width: 100%;
-  height: auto;
   border-radius: 5px;
   margin-bottom: 10px;
 }

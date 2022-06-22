@@ -1,15 +1,24 @@
-const backdropSign = document.querySelector('.backdrop-sign');
-const backdropLog = document.querySelector('.backdrop-log');
+import { refs } from '../utils/refs';
 
-const closeModalBtnSign = document.querySelector('.modal-button-sign');
-const closeModalBtnLog = document.querySelector('.modal-button-log');
+const {
+  backdropSign,
+  backdropLog,
+  closeModalBtnSign,
+  closeModalBtnLog,
+  signUpBtn,
+  logInBtn,
+  logOutItem,
+  libraryItem,
+} = refs;
 
-const signUpBtn = document.querySelector('.sign-up-js');
-const logInBtn = document.querySelector('.log-in-js');
-const logOutItem = document.querySelector('.nav-list__item--exit');
-const libraryItem = document.querySelector('.nav-list__item--library');
-
-export { backdropLog, backdropSign, signUpBtn, logInBtn, logOutItem, libraryItem};
+export {
+  backdropLog,
+  backdropSign,
+  signUpBtn,
+  logInBtn,
+  logOutItem,
+  libraryItem,
+};
 
 //Клік по кнопці SIGN UP і відкриття модального вікна з формою реєстрації
 
@@ -38,6 +47,7 @@ function onCloseModalBtnSign() {
     backdropSign.classList.add('is-bck-hidden');  
 };
 
+
 closeModalBtnLog.addEventListener('click', onCloseModalBtnLog);
 
 function onCloseModalBtnLog() {
@@ -45,9 +55,11 @@ function onCloseModalBtnLog() {
     backdropLog.classList.add('is-bck-hidden');
 };
 
+
 //Закриття модального вікна кліком по бекдропу 
 
 backdropSign.addEventListener('click', onBackdropClick);
+
 
 backdropLog.addEventListener('click', onBackdropClick);
 
@@ -57,11 +69,11 @@ function onBackdropClick(e) {
     };
 };
 
+
 //Закриття модального вікна натиском по кнопці Escape
 
 function onEskKeyPress(e) {
-    const ESC_KEY_CODE = 'Escape';
-
+  const ESC_KEY_CODE = 'Escape';
     if (e.code === ESC_KEY_CODE) {
         onCloseModalBtnSign();
         onCloseModalBtnLog();
@@ -77,3 +89,4 @@ function keydownWindow() {
 function removeKeydownWindowListener() {
     window.removeEventListener('keydown', onEskKeyPress);
 };
+
