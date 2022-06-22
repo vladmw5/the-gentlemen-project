@@ -40,10 +40,18 @@ async function getPopularMoviesOfDay() {
   return response.data;
 }
 
+async function getMoviesByVideo(id) {
+  const response = await axios.get(
+    `${URL}/movie/${id}/videos?api_key=${KEY}&language=en-US`
+  );
+  return response;
+}
+
 export {
   getPopularMovies,
   getMoviesByKeyword,
   getMoviesByID,
   getMoviesByGenres,
   getPopularMoviesOfDay,
+  getMoviesByVideo,
 };

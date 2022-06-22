@@ -61,7 +61,7 @@ function makeMarkupMovie(array) {
     vote_count,
     popularity,
   } = array;
-  return `
+  return /*html*/ `
         <img
           data-id="${id}"
           data-genre-ids="${genres.map(el => el.id).join('-')}"
@@ -73,6 +73,7 @@ function makeMarkupMovie(array) {
           }"
           alt="${overview !== '' ? overview : 'No info!'}"
         />
+          <button type="button" class="card-open-film" data-open-video><span class="card-span-unicode">&#10095;</span></button>
         <div class="filmcard__wrapper">
           <p class="filmcard__title">${title ?? 'No info about title!'}</p>
           <table class="filmcard__stats">
@@ -146,6 +147,7 @@ function makeMarkupMovie2(array) {
           }"
           alt="${overview !== '' ? overview : 'No info!'}"
         />
+        <button type="button" class="card-open-film" data-open-video><span class="card-span-unicode">&#10095;</span></button>
         <div class="filmcard__wrapper">
           <p class="filmcard__title">${title ?? 'No info about title!'}</p>
           <table class="filmcard__stats">

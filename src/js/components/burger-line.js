@@ -1,12 +1,11 @@
 import { refs } from '../utils/refs';
 
-const { homeEl, libraryEl } = refs;
-
+const { homeElMenu, libraryElMenu } = refs;
 document.addEventListener('homePageLoaded', () => {
-  classListBurger(homeEl, libraryEl);
+  classListBurger(homeElMenu, libraryElMenu);
 });
 document.addEventListener('libPageLoaded', () => {
-  classListBurger(libraryEl, homeEl);
+  classListBurger(libraryElMenu, homeElMenu);
 });
 
 function classListBurger(add, remove) {

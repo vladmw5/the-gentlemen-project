@@ -18,7 +18,7 @@ import {
   getMoviesByID,
   getPopularMoviesOfDay,
 } from '../service/gallery-requests';
-
+import { closeMovieModal, renderVideo } from './../utils/video-modal-markup';
 // refs
 import { refs } from '../utils/refs';
 
@@ -222,4 +222,6 @@ function closeMovieModalByClickBackdrop(e) {
 export function toggleModal() {
   document.body.classList.toggle('modal-open');
   modalBackdrop.classList.toggle('is-hidden');
+   renderVideo.innerHTML = '';
+   closeMovieModal();
 }

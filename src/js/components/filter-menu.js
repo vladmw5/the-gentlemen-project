@@ -7,7 +7,6 @@ document.addEventListener('homePageLoaded', () => {
   resetBtn.addEventListener('click', () => {
     genreBtns.classList.remove('is-open-filter');
     resetBtn.setAttribute('disabled', 'disabled');
-    console.log('ok');
   });
 
   function addClassOpen() {
