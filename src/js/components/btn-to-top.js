@@ -1,4 +1,7 @@
-const btnToTop = document.querySelector('.btn-to-top');
+import { refs } from '../utils/refs';
+
+const { btnToTop } = refs;
+
 btnToTop.addEventListener('click', topFunction);
 
 window.onscroll = function () {

@@ -1,5 +1,6 @@
 import { getMoviesByID } from '../service/gallery-requests';
 import { Notify } from 'notiflix';
+import throttle from 'lodash.throttle';
 import {
   sendDataToFirebase,
   removeMovieFromFirebase,
@@ -9,22 +10,28 @@ import {
   queueWay,
 } from '../firebase/service/index';
 import { toggleModal } from '../components/gallery';
-import { makeMarkupGallery } from '../service/gallery-markup';
+import { makeMarkupGallery } from '../utils/gallery-markup';
 import { renderRetrievedMarkup } from '../components/my-library-btn';
+import { refs } from '../utils/refs';
+import { notifyOptions } from '../service/notify-options';
+
+const wathcedList = 'Watched List';
+const queue = 'Queue';
 
 let userId = null;
 
-const filmcardModal = document.querySelector('.filmcard-modal');
-const gallery = document.querySelector('.gallery__list');
+const { filmcardModal, gallery } = refs;
 
-filmcardModal.addEventListener('click', onFilmcardModalClick);
+filmcardModal.addEventListener('click', throttle(onFilmcardModalClick, 2000));
 
 async function onFilmcardModalClick(event) {
   if (event.target.nodeName !== 'BUTTON') return;
+  if (event.target.classList.contains('filmcard-modal__close-btn')) return;
 
   if (userId === null) {
     return Notify.failure(
-      'You are not authorized to perform this action. Please, Sign Up or Log In'
+      'You are not authorized to perform this action. Please, Sign Up or Log In',
+      notifyOptions
     );
   }
 
@@ -44,16 +51,18 @@ async function onFilmcardModalClick(event) {
           .then(renderRetrievedMarkup)
           .catch(() => {
             Notify.info(
-              `Your ${
+              infoEmptyMessage(
                 targetWay === watchedWay ? 'Watched List' : 'Queue'
-              } is now empty. You can add films on Home page`
+              ),
+              notifyOptions
             );
-            gallery.innerHTML =
-              '<p class="notifycation__text notifycation__text--library">Your Watched List is empty. You can add films on Home page</p>';
+            gallery.innerHTML = infoEmptyParagraph(
+              targetWay === watchedWay ? 'Watched List' : 'Queue'
+            );
           });
       })
       .catch(() => {
-        Notify.failure('Failed to remove from Database');
+        Notify.failure('Failed to remove from Database', notifyOptions);
       });
 
     toggleModal();
@@ -70,27 +79,24 @@ async function onFilmcardModalClick(event) {
   if (event.target.hasAttribute('data-add-to-watched-btn')) {
     sendDataToFirebase(dataToSend, watchedWay)
       .then(() => {
-        Notify.success(
-          'Your film has been successfully added to your Watched List!'
-        );
+        Notify.success(successAddMessage(wathcedList), notifyOptions);
       })
       .catch(e => {
-        Notify.failure('Whoops, something went wrong');
+        Notify.failure('Whoops, something went wrong', notifyOptions);
       });
   } else if (event.target.hasAttribute('data-add-to-queue-btn')) {
     sendDataToFirebase(dataToSend, queueWay)
       .then(() => {
-        Notify.success('Your film has been successfully added to your Queue!');
+        Notify.success(successAddMessage(queue), notifyOptions);
       })
       .catch(e => {
-        Notify.failure('Whoops, something went wrong');
+        Notify.failure('Whoops, something went wrong', notifyOptions);
       });
   } else return;
 }
 
 export function getUserId(id) {
   userId = id;
-  // console.log(userId);
 }
 
 function createData(
@@ -124,4 +130,16 @@ function createData(
     id: userId,
     type,
   };
+}
+
+function successAddMessage(target) {
+  return `Your film has been successfully added to your ${target}!`;
+}
+
+function infoEmptyMessage(target) {
+  return `Your ${target} is now empty. You can add films on Home page`;
+}
+
+function infoEmptyParagraph(target) {
+  return `<p class="notifycation__text notifycation__text--library">Your ${target} is empty. You can add films on Home page</p>`;
 }

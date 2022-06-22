@@ -1,11 +1,9 @@
 //-- Реєстрація та авторизація
 import { createUser, signInUser, exitUser } from './service';
 import { Notify } from 'notiflix';
+import { refs } from '../utils/refs';
 
-export const registration = document.querySelector('#registration');
-export const authorization = document.querySelector('#authorization');
-const exitBtn = document.querySelector('#exit-btn');
-const exitBtnMobile = document.querySelector('#exit-btn-mobile');
+const { registration, authorization, exitBtn, exitBtnMobile } = refs;
 
 registration.addEventListener('submit', onSubmitRegistration);
 authorization.addEventListener('submit', onSubmitAuthorization);
@@ -16,7 +14,7 @@ function onSubmitRegistration(e) {
   e.preventDefault();
 
   const { email, password } = e.currentTarget.elements;
-  if (email.value === '' || password.value === '') {
+  if (email.value.trim() === '' || password.value === '') {
     return Notify.failure('Всі поля повинні бути заповнені!');
   }
   try {
@@ -28,7 +26,7 @@ function onSubmitAuthorization(e) {
   e.preventDefault();
 
   const { email, password } = e.currentTarget.elements;
-  if (email.value === '' || password.value === '') {
+  if (email.value.trim() === '' || password.value === '') {
     return Notify.failure('Всі поля повинні бути заповнені!');
   }
   try {
