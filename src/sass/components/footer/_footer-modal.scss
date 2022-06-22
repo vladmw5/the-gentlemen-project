@@ -6,8 +6,7 @@
   height: 100%;
   z-index: 9;
   overflow-y: scroll;
-  transition: opacity 500ms $cubic, transform 500ms $cubic,
-    visibility 500ms $cubic;
+  transition: all 500ms $cubic;
 
   background-color: rgba(0, 0, 0, 0.2);
 
@@ -18,13 +17,10 @@
     .backdrop-modal {
       transform: translate(-50%, -170%);
       top: -999px;
-      left: -999px;
-      visibility: hidden;
     }
   }
 }
-
-.backdrop-modal {
+тщ .backdrop-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -33,8 +29,7 @@
   opacity: 1;
   overflow-y: scroll;
 
-  transition: transform 500ms $cubic, opacity 500ms $cubic,
-    box-shadow 500ms $cubic, visibility 500ms $cubic;
+  transition: all 500ms $cubic;
   width: 300px;
   height: 92vh;
   border-radius: 4px;
