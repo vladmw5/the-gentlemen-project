@@ -47,12 +47,13 @@
     padding: 50px 16px 50px 16px;
   }
 
-  transition: transform 500ms $cubic, opacity 500ms $cubic;
+  transition: transform 500ms $cubic, opacity 500ms $cubic, top 500ms $cubic;
 
   .filmcard-modal-backdrop.is-hidden & {
     opacity: 0;
     @include tablet {
       transform: translate(-50%, -170%);
+      top: -999px;
     }
   }
 }
@@ -81,16 +82,9 @@
 }
 
 .filmcard__poster {
-  width: 100%;
   height: auto;
   @include mobile {
     margin-bottom: 20px;
-  }
-  @include tablet {
-    width: 264px;
-  }
-  @include desktop {
-    width: 375px;
   }
 }
 
